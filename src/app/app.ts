@@ -4,7 +4,7 @@ import {PlayerTag} from './components/player-tag/player-tag';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, PlayerTag],
+  imports: [PlayerTag],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
