@@ -7,9 +7,9 @@
 }
 
 #player_cont {
-  height: 9em;
-  width: 100em;
-  border-radius: 1.5em;
+  height: 9vw;
+  width: 100vw;
+  border-radius: 1.5vw;
   background-image: url("/sheet.png");
   background-size: 120% 160%;
   justify-content: center;
@@ -57,11 +57,11 @@
 }
 #player_options{
   position: relative;
-  top: -7em;
-  min-height: 9em;
-  min-width: 80em;
-  border-radius: 1.5em;
-  margin-bottom: -6em;
+  top: -7vw;
+  min-height: 9vw;
+  min-width: 80vw;
+  border-radius: 1.5vw;
+  margin-bottom: -6vw;
   background-image: url("/bottom.jpg");
   background-size: 200% 100%;
   background-repeat: no-repeat;
@@ -75,8 +75,8 @@
   z-index: 0;
 }
 #player_options:hover {
-  top: -2.5em;
-  margin-bottom: -1.5em;
+  top: -2.5vw;
+  margin-bottom: -1.5vw;
 }
 
 
