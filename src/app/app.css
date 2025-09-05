@@ -1,3 +1,5 @@
 main{
-  transform: scale(0.6);
+  /* start with a comfortable default on desktops */
+  transform: scale(0.5);
+  transform-origin: top center;
 }
