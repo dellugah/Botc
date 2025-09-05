@@ -4,6 +4,6 @@ main{
   align-items: center;
   display: flex;
   flex-direction: column;
-  transform: scale(0.75);
+  transform: scale(0.95);
   transform-origin: top center;
 }
