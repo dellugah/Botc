@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   transition: top 0.4s;
-  margin-bottom: 1em;
 }
 
 #player_cont {
