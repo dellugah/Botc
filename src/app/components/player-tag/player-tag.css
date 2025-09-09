@@ -1,7 +1,7 @@
 .player_list{
   container-type: inline-size;
   max-height: 100vh;
-  width: 70vw;
+  width: 80vw;
   padding-top: 5vh;
   overflow-y: scroll;
 }

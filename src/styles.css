@@ -2,12 +2,13 @@ select{
   padding: 1cqw;
   margin-right: 1cqw;
   margin-left: 1cqw;
-  height: 3cqw;
+  height: 4cqw;
   width: 12cqw;
   border-radius: 1cqw;
   border: 1px solid #ccc;
   background-color: #ffffff;
   font-size: 1cqw;
+  text-align: center;
 }
 option{
   font-size: 1cqw;
@@ -51,6 +52,7 @@ body{
   background-repeat: no-repeat;
   background-position: center;
   justify-content: center;
+  justify-items: center;
   align-items: center;
   display: grid;
   flex-direction: column;
