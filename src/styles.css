@@ -48,9 +48,9 @@ h3{
 }
 body{
   background-image: url("/background.webp");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   justify-content: center;
   justify-items: center;
   align-items: center;

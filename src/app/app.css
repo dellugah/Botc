@@ -1,4 +1,4 @@
-main{
+.main{
   /* start with a comfortable default on desktops */
   justify-content: center;
   align-items: center;
@@ -7,3 +7,5 @@ main{
   transform: scale(0.95);
   transform-origin: top center;
 }
+
+

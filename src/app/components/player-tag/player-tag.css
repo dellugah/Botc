@@ -1,10 +1,13 @@
 .player_list{
   container-type: inline-size;
-  max-height: 100vh;
+  max-height: 80vh;
   width: 80vw;
   max-width: 150vh;
   padding: 5vh;
   overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
 }
 .death_token{
   visibility: hidden;
