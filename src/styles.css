@@ -7,6 +7,10 @@ select{
   border-radius: 1cqw;
   border: 1px solid #ccc;
   background-color: #ffffff;
+  font-size: 1cqw;
+}
+option{
+  font-size: 1cqw;
 }
 button{
   font-size: .9cqw;
@@ -23,7 +27,6 @@ button{
   display: flex;
   border: none;
 }
-
 button:hover{
   background-color: #f8f3e9;
 }
