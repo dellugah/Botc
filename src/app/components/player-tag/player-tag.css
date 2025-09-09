@@ -2,7 +2,8 @@
   container-type: inline-size;
   max-height: 100vh;
   width: 80vw;
-  padding-top: 5vh;
+  max-width: 150vh;
+  padding: 5vh;
   overflow-y: scroll;
 }
 .death_token{
@@ -20,7 +21,7 @@
 }
 .player_class_pic:hover ~ .death_token{
   visibility: visible;
-  opacity: 1;
+  opacity: .8;
   transition: visibility 0.4s ease 0.02s, opacity 0.2s ease 0.02s;
 }
 
