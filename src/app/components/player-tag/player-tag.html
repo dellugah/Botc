@@ -1,219 +1,263 @@
 <div class="player_list">
-  <div class="player_tag">
-    <div class="player_cont">
-      <div class="player_profile">
-        <img class="player_class_pic" src="/poisoner.webp" alt="poisoner" width="45%" height="auto">
-        <img class="death_token" src="/death_Token.png" alt="dead">
-        <div class="player_info">
-          <h2 class="player_class"><span class="evil">POISONER</span></h2>
-          <div class="player_status"></div>
-          <h3 class="player_name">Player: First N.</h3>
-        </div>
-      </div>
-      <div class="player_ability">
-        <h2>Chose:</h2>
-        <select>
-          <option value="1"></option>
-          <option value="2">First N.</option>
-          <option value="3">First N.</option>
-          <option value="4">First N.</option>
-          <option value="5">First N.</option>
-          <option value="6">First N.</option>
-          <option value="7">First N.</option>
-        </select>
-      </div>
-      <div class="player_conditions">
-      </div>
-    </div>
-    <div class="player_options">
-      <button><h2>Change Role</h2></button>
-      <button><h2>Change Alignment </h2></button>
-      <button><h2>Comments</h2></button>
-    </div>
-  </div>
-  <div class="player_tag">
-    <div class="player_cont">
-      <div class="player_profile">
-        <img class="player_class_pic" src="/monk.webp" alt="monk" width="45%" height="auto">
-        <img class="death_token" src="/death_Token.png" alt="dead">
-        <div class="player_info">
-          <h2 class="player_class"><span class="good">MONK</span></h2>
-          <div class="player_status"></div>
-          <h3 class="player_name">Player: First N.</h3>
-        </div>
-      </div>
-      <div class="player_ability">
-        <h2>Chose:</h2>
-        <select>
-          <option value="1"></option>
-          <option value="2">First N.</option>
-          <option value="3">First N.</option>
-          <option value="4">First N.</option>
-          <option value="5">First N.</option>
-          <option value="6">First N.</option>
-          <option value="7">First N.</option>
-        </select>
-      </div>
-      <div class="player_conditions">
-      </div>
-    </div>
-    <div class="player_options">
-      <button><h2>Change Role</h2></button>
-      <button><h2>Change Alignment </h2></button>
-      <button><h2>Comments</h2></button>
-    </div>
-  </div>
-  <div class="player_tag">
-    <div class="player_cont">
-      <div class="player_profile">
-        <img class="player_class_pic" src="/imp.webp" alt="fortune teller" width="45%" height="auto">
-        <img class="death_token" src="/death_Token.png" alt="dead">
-        <div class="player_info">
-          <h2 class="player_class"><span class="evil">IMP</span></h2>
-          <div class="player_status"></div>
-          <h3 class="player_name">Player: First N.</h3>
-        </div>
-      </div>
-      <div class="player_ability">
-        <h2>Chose:</h2>
-        <select>
-          <option value="1"></option>
-          <option value="2">First N.</option>
-          <option value="3">First N.</option>
-          <option value="4">First N.</option>
-          <option value="5">First N.</option>
-          <option value="6">First N.</option>
-          <option value="7">First N.</option>
-        </select>
-      </div>
-      <div class="player_conditions">
-      </div>
-    </div>
-    <div class="player_options">
-      <button><h2>Change Role</h2></button>
-      <button><h2>Change Alignment </h2></button>
-      <button><h2>Comments</h2></button>
-    </div>
-  </div>
-  <div class="player_tag">
-    <div class="player_cont">
-      <div class="player_profile">
-        <img class="player_class_pic" src="/fortuneteller.webp" alt="fortune teller" width="45%" height="auto">
-        <img class="death_token" src="/death_Token.png" alt="dead">
-        <div class="player_info">
-          <h2 class="player_class"><span class="good">FORTUNE TELLER</span></h2>
-          <div class="player_status"></div>
-          <h3 class="player_name">Player: First N.</h3>
-        </div>
-      </div>
-      <div class="player_ability">
-        <h2>Chose:</h2>
-        <select>
-          <option value="1"></option>
-          <option value="2">First N.</option>
-          <option value="3">First N.</option>
-          <option value="4">First N.</option>
-          <option value="5">First N.</option>
-          <option value="6">First N.</option>
-          <option value="7">First N.</option>
-        </select>
-        <h2>and</h2>
-        <select>
-          <option value="1"></option>
-          <option value="2">First N.</option>
-          <option value="3">First N.</option>
-          <option value="4">First N.</option>
-          <option value="5">First N.</option>
-          <option value="6">First N.</option>
-          <option value="7">First N.</option>
-        </select>
+  @for( player of players.players; track player){
+    <div class="player_tag">
+      <div class="player_cont">
+        <div class="player_profile">
 
-        <h2>Learn:</h2>
-        <select name="" id="">
-          <option value="1">NO</option>
-          <option value="2">YES</option>
-        </select>
-      </div>
-      <div class="player_conditions">
-        <img class="condition" src="/poisoner.webp" alt="poisoned">
-      </div>
-    </div>
-    <div class="player_options">
-      <button><h2>Change Role</h2></button>
-      <button><h2>Change Alignment </h2></button>
-      <button><h2>Comments</h2></button>
-    </div>
-  </div>
-  <div class="player_tag">
-    <div class="player_cont">
-      <div class="player_profile">
-        <img class="player_class_pic" src="/empath.webp" alt="empath" width="45%" height="auto">
-        <img class="death_token" src="/death_Token.png" alt="dead">
-        <div class="player_info">
-          <h2 class="player_class"><span class="good">EMPATH</span></h2>
-          <div class="player_status"><img src="/drunk.webp" alt="" width="auto" height="200%"></div>
-          <h3 class="player_name">Player: First N.</h3>
-        </div>
-      </div>
-      <div class="player_ability">
-        <h2>See:</h2>
-        <select>
-          <option value="1"></option>
-          <option value="2">First N.</option>
-          <option value="3">First N.</option>
-          <option value="4">First N.</option>
-          <option value="5">First N.</option>
-          <option value="6">First N.</option>
-          <option value="7">First N.</option>
-        </select>
-        <h2>and</h2>
-        <select>
-          <option value="1"></option>
-          <option value="2">First N.</option>
-          <option value="3">First N.</option>
-          <option value="4">First N.</option>
-          <option value="5">First N.</option>
-          <option value="6">First N.</option>
-          <option value="7">First N.</option>
-        </select>
+          <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="poisoner" (click)="(player.isDead = true)">
 
-        <h2>Learn:</h2>
-        <select name="" id="">
-          <option value="1">NO</option>
-          <option value="2">YES</option>
-        </select>
-      </div>
-      <div class="player_conditions">
-      </div>
-    </div>
-    <div class="player_options">
-      <button><h2>Change Role</h2></button>
-      <button><h2>Change Alignment </h2></button>
-      <button><h2>Comments</h2></button>
-    </div>
-  </div>
-  <div class="player_tag">
-    <div class="player_cont">
-      <div class="player_profile">
-        <img class="player_class_pic" src="/recluse.webp" alt="empath" width="45%" height="auto">
-        <img class="death_token" src="/death_Token.png" alt="dead">
-        <div class="player_info">
-          <h2 class="player_class"><span class="good">RECLUSE</span></h2>
-          <div class="player_status"><img src="/imp.webp" alt="" width="auto" height="200%"></div>
-          <h3 class="player_name">Player: First N.</h3>
+          @if(player.isDead){
+            <img class="death_token active" src="/death_Token.png" alt="dead" (click)="(player.isDead = false)">
+          }
+          @else{
+            <img class="death_token" src="/death_Token.png" alt="dead">
+          }
+
+          <div class="player_info">
+            <h2 class="player_class"><span class="{{player.playerAlignment}}">{{player.playerRole.roleName.toUpperCase()}}</span></h2>
+            <div class="player_status">
+              @if(player.isDrunk){
+                <img src="/drunk.webp" alt="" width="auto" height="200%">
+              }
+            </div>
+            <h3 class="player_name">Player: {{player.playerName}}</h3>
+          </div>
+        </div>
+        <div class="player_ability">
+
+          @if ([Roles.MONK, Roles.POISONER, Roles.IMP].includes(player.playerRole.roleName)) {
+            @if(player.hasAbility){
+              <h2>choose:</h2>
+              <select>
+                <option value="1"></option>
+                @for (player of players.players; track player) {
+                  <option [value]="player">{{ player.playerName }}</option>
+                }
+              </select>
+            }
+          } @else if ([Roles.FORTUNE_TELLER, Roles.EMPATH].includes(player.playerRole.roleName)) {
+            @if(player.hasAbility){
+              <h2>choose:</h2>
+              <select>
+                <option value="1"></option>
+                @for (player of players.players; track player) {
+                  <option [value]="player">{{ player.playerName }}</option>
+                }
+              </select>
+              <h2>and</h2>
+              <select>
+                <option value="1"></option>
+                  @for (player of players.players; track player) {
+                    <option [value]="player">{{ player.playerName }}</option>
+                  }
+              </select>
+            }
+          } @else if ([Roles.UNDERTAKER].includes(player.playerRole.roleName)) {
+            <h2>See:</h2>
+            <select>
+              <option value="1"></option>
+              @for (player of players.players; track player) {
+                @if(player.isDead){
+                <option [value]="player">{{ player.playerName }}</option>
+                }
+              }
+            </select>
+          }
+
+        </div>
+        <div class="player_conditions">
+          @if(player.isProtected){
+            <img class="condition" src="/monk.webp" alt="protected">
+          }
+          @if(player.isPoisoned){
+            <img class="condition" src="/poisoner.webp" alt="poisoned">
+          }
+          @if(player.isRedHearing){
+            <img class="condition" src="/fortuneteller.webp" alt="Red Hearing">
+          }
         </div>
       </div>
-      <div class="player_ability">
-      </div>
-      <div class="player_conditions">
-        <img class="condition" src="/monk.webp" alt="protected">
+      <div class="player_options">
+        <button><h2>Change Role</h2></button>
+        <button><h2>Change Alignment </h2></button>
+        <button><h2>Comments</h2></button>
       </div>
     </div>
-    <div class="player_options">
-      <button><h2>Change Role</h2></button>
-      <button><h2>Change Alignment </h2></button>
-      <button><h2>Comments</h2></button>
-    </div>
-  </div>
+  }
+
+
+<!--  <div class="player_tag">-->
+<!--    <div class="player_cont">-->
+<!--      <div class="player_profile">-->
+<!--        <img class="player_class_pic" src="/monk.webp" alt="monk" width="45%" height="auto">-->
+<!--        <img class="death_token" src="/death_Token.png" alt="dead">-->
+<!--        <div class="player_info">-->
+<!--          <h2 class="player_class"><span class="good">MONK</span></h2>-->
+<!--          <div class="player_status">-->
+<!--            <div class="player_status"></div>-->
+<!--          </div>-->
+<!--          <h3 class="player_name">Player: First N.</h3>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="player_ability">-->
+<!--        <h2>Chose:</h2>-->
+<!--        <select>-->
+<!--          <option value="1"></option>-->
+<!--          <option value="2">First N.</option>-->
+<!--          <option value="3">First N.</option>-->
+<!--          <option value="4">First N.</option>-->
+<!--          <option value="5">First N.</option>-->
+<!--          <option value="6">First N.</option>-->
+<!--          <option value="7">First N.</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--      <div class="player_conditions">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="player_options">-->
+<!--      <button><h2>Change Role</h2></button>-->
+<!--      <button><h2>Change Alignment </h2></button>-->
+<!--      <button><h2>Comments</h2></button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="player_tag">-->
+<!--    <div class="player_cont">-->
+<!--      <div class="player_profile">-->
+<!--        <img class="player_class_pic" src="/imp.webp" alt="fortune teller" width="45%" height="auto">-->
+<!--        <img class="death_token" src="/death_Token.png" alt="dead">-->
+<!--        <div class="player_info">-->
+<!--          <h2 class="player_class"><span class="evil">IMP</span></h2>-->
+<!--          <div class="player_status"></div>-->
+<!--          <h3 class="player_name">Player: First N.</h3>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="player_ability">-->
+<!--        <h2>Chose:</h2>-->
+<!--        <select>-->
+<!--          <option value="1"></option>-->
+<!--          <option value="2">First N.</option>-->
+<!--          <option value="3">First N.</option>-->
+<!--          <option value="4">First N.</option>-->
+<!--          <option value="5">First N.</option>-->
+<!--          <option value="6">First N.</option>-->
+<!--          <option value="7">First N.</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--      <div class="player_conditions">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="player_options">-->
+<!--      <button><h2>Change Role</h2></button>-->
+<!--      <button><h2>Change Alignment </h2></button>-->
+<!--      <button><h2>Comments</h2></button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="player_tag">-->
+<!--    <div class="player_cont">-->
+<!--      <div class="player_profile">-->
+<!--        <img class="player_class_pic" src="/fortuneteller.webp" alt="fortune teller" width="45%" height="auto">-->
+<!--        <img class="death_token" src="/death_Token.png" alt="dead">-->
+<!--        <div class="player_info">-->
+<!--          <h2 class="player_class"><span class="good">FORTUNE TELLER</span></h2>-->
+<!--          <div class="player_status"></div>-->
+<!--          <h3 class="player_name">Player: First N.</h3>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="player_ability">-->
+<!--        <h2>Chose:</h2>-->
+<!--        <select>-->
+<!--          <option value="1"></option>-->
+<!--        </select>-->
+<!--        <h2>and</h2>-->
+<!--        <select>-->
+<!--          <option value="1"></option>-->
+<!--        </select>-->
+
+<!--        <h2>Learn:</h2>-->
+<!--        <select name="" id="">-->
+<!--          <option value="1">NO</option>-->
+<!--          <option value="2">YES</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--      <div class="player_conditions">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="player_options">-->
+<!--      <button><h2>Change Role</h2></button>-->
+<!--      <button><h2>Change Alignment </h2></button>-->
+<!--      <button><h2>Comments</h2></button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="player_tag">-->
+<!--    <div class="player_cont">-->
+<!--      <div class="player_profile">-->
+<!--        <img class="player_class_pic" src="/empath.webp" alt="empath" width="45%" height="auto">-->
+<!--        <img class="death_token" src="/death_Token.png" alt="dead">-->
+<!--        <div class="player_info">-->
+<!--          <h2 class="player_class"><span class="good">EMPATH</span></h2>-->
+<!--          <div class="player_status"><img src="/drunk.webp" alt="" width="auto" height="200%"></div>-->
+<!--          <h3 class="player_name">Player: First N.</h3>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="player_ability">-->
+<!--        <h2>See:</h2>-->
+<!--        <select>-->
+<!--          <option value="1"></option>-->
+<!--          <option value="2">First N.</option>-->
+<!--          <option value="3">First N.</option>-->
+<!--          <option value="4">First N.</option>-->
+<!--          <option value="5">First N.</option>-->
+<!--          <option value="6">First N.</option>-->
+<!--          <option value="7">First N.</option>-->
+<!--        </select>-->
+<!--        <h2>and</h2>-->
+<!--        <select>-->
+<!--          <option value="1"></option>-->
+<!--          <option value="2">First N.</option>-->
+<!--          <option value="3">First N.</option>-->
+<!--          <option value="4">First N.</option>-->
+<!--          <option value="5">First N.</option>-->
+<!--          <option value="6">First N.</option>-->
+<!--          <option value="7">First N.</option>-->
+<!--        </select>-->
+
+<!--        <h2>Learn:</h2>-->
+<!--        <select name="" id="">-->
+<!--          <option value="1">NO</option>-->
+<!--          <option value="2">YES</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--      <div class="player_conditions">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="player_options">-->
+<!--      <button><h2>Change Role</h2></button>-->
+<!--      <button><h2>Change Alignment </h2></button>-->
+<!--      <button><h2>Comments</h2></button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="player_tag">-->
+<!--    <div class="player_cont">-->
+<!--      <div class="player_profile">-->
+<!--        <img class="player_class_pic" src="/recluse.webp" alt="empath" width="45%" height="auto">-->
+<!--        <img class="death_token" src="/death_Token.png" alt="dead">-->
+<!--        <div class="player_info">-->
+<!--          <h2 class="player_class"><span class="good">RECLUSE</span></h2>-->
+<!--          <div class="player_status"><img src="/imp.webp" alt="" width="auto" height="200%"></div>-->
+<!--          <h3 class="player_name">Player: First N.</h3>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="player_ability">-->
+<!--      </div>-->
+<!--      <div class="player_conditions">-->
+<!--        <img class="condition" src="/monk.webp" alt="protected">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="player_options">-->
+<!--      <button><h2>Change Role</h2></button>-->
+<!--      <button><h2>Change Alignment </h2></button>-->
+<!--      <button><h2>Comments</h2></button>-->
+<!--    </div>-->
+<!--  </div>-->
   <div id="ghost_tag"></div>
 </div>
