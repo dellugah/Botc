@@ -39,6 +39,7 @@ export class PlayerTag implements OnInit{
     let player: Player;
     Object.values(Roles).forEach(role => {
       player = new Player(role);
+      player.playerName = role + " Player";
       this.players.players.push(player);
     })
   }

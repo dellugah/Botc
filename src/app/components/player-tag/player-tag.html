@@ -24,7 +24,7 @@
                 <img src="/drunk.webp" alt="" width="auto" height="200%">
               }
             </div>
-            <h3 class="player_name">Player: {{player.playerName}}</h3>
+            <h3 class="player_name">Name: {{player.playerName}}</h3>
           </div>
         </div>
         <div class="player_ability">
@@ -34,7 +34,7 @@
             <select [(ngModel)]="protectedPlayer" (ngModelChange)="monkTarget(player, $event)">
               <option [ngValue]=""></option>
               @for (p of players.players; track p) {
-                <option [ngValue]="p">{{ p.playerRole.roleName }}</option>
+                <option [ngValue]="p">{{ p.playerName }}</option>
               }
             </select>
             <!-- POISONER ABILITY -->
@@ -43,7 +43,7 @@
             <select [(ngModel)]="poisonedPlayer" (ngModelChange)="poisonerTarget($event)">
               <option [ngValue]=""></option>
               @for (p of players.players; track p) {
-                <option [ngValue]="p">{{ p.playerRole.roleName }}</option>
+                <option [ngValue]="p">{{ p.playerName }}</option>
               }
             </select>
             <!-- FORTUNE TELLER / EMPATH ABILITY -->
@@ -53,14 +53,14 @@
               <select>
                 <option value="1"></option>
                 @for (player of players.players; track player) {
-                  <option [ngValue]="player">{{ player.playerRole.roleName }}</option>
+                  <option [ngValue]="player">{{ player.playerName }}</option>
                 }
               </select>
               <h2>and</h2>
               <select>
                 <option value="1"></option>
                   @for (player of players.players; track player) {
-                    <option [ngValue]="player">{{ player.playerRole.roleName }}</option>
+                    <option [ngValue]="player">{{ player.playerName }}</option>
                   }
               </select>
               <h2>Learn:</h2>
@@ -112,7 +112,7 @@
             <select [(ngModel)]="markedForDeathPlayer" (ngModelChange)="markForDeath(player, $event)">
               <option [ngValue]="null"></option>
               @for (p of players.players; track p) {
-                <option [ngValue]="p">{{ p.playerRole.roleName }}</option>
+                <option [ngValue]="p">{{ p.playerName }}</option>
               }
             </select>
             <!-- RAVEN KEEPER ABILITY -->
