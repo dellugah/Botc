@@ -2,6 +2,7 @@
   @for( player of players.players; track player){
     <div class="player_tag">
       <div class="player_cont">
+
         <div class="player_profile">
           <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="poisoner" (click)="(player.isDead = true)">
 
@@ -25,10 +26,11 @@
             <h3 class="player_name">Player: {{player.playerName}}</h3>
           </div>
         </div>
+
         <div class="player_ability">
           @if (player.playerRole.roleName === Roles.MONK) {
             <h2>Protects:</h2>
-            <select [(ngModel)]="this.protectedPlayer" (ngModelChange)="monkTarget(player, $event)">
+            <select [(ngModel)]="protectedPlayer" (ngModelChange)="monkTarget(player, $event)">
               <option [ngValue]=""></option>
               @for (p of players.players; track p) {
                 <option [ngValue]="p">{{ p.playerRole.roleName }}</option>
@@ -36,7 +38,7 @@
             </select>
           } @else if (player.playerRole.roleName === Roles.POISONER) {
             <h2>Poisons:</h2>
-            <select [(ngModel)]="this.poisonedPlayer" (ngModelChange)="poisonerTarget($event)">
+            <select [(ngModel)]="poisonedPlayer" (ngModelChange)="poisonerTarget($event)">
               <option [ngValue]=""></option>
               @for (p of players.players; track p) {
                 <option [ngValue]="p">{{ p.playerRole.roleName }}</option>
@@ -48,14 +50,14 @@
               <select>
                 <option value="1"></option>
                 @for (player of players.players; track player) {
-                  <option [value]="player">{{ player.playerRole.roleName }}</option>
+                  <option [ngValue]="player">{{ player.playerRole.roleName }}</option>
                 }
               </select>
               <h2>and</h2>
               <select>
                 <option value="1"></option>
                   @for (player of players.players; track player) {
-                    <option [value]="player">{{ player.playerRole.roleName }}</option>
+                    <option [ngValue]="player">{{ player.playerRole.roleName }}</option>
                   }
               </select>
               <h2>Learn:</h2>
@@ -71,7 +73,7 @@
               <option value="1"></option>
               @for (player of players.players; track player) {
                 @if(player.isDead){
-                <option [value]="player">{{ player.playerRole.roleName }}</option>
+                <option [ngValue]="player">{{ player.playerRole.roleName }}</option>
                 }
               }
             </select>
@@ -80,21 +82,21 @@
               <select [(ngModel)]="player.registeredAs.roleName" (ngModelChange)="registerAs(player, $event)">
                 <option value=""></option>
                 @for (role of Object.values(Roles); track role) {
-                  <option [value]="role">{{ role }}</option>
+                  <option [ngValue]="role">{{ role }}</option>
                 }
               </select>
           } @else if (player.playerRole.roleName === Roles.IMP) {
             <h2>Kills:</h2>
-            <select>
-              <option value=""></option>
-              @for (player of players.players; track player) {
-                @for (player of players.players; track player) {
-                  <option [value]="player">{{ player.playerRole.roleName }}</option>
-                }
+            <select [(ngModel)]="markedForDeathPlayer" (ngModelChange)="markForDeath(player, $event)">
+              <option [ngValue]="null"></option>
+              @for (p of players.players; track p) {
+                <option [ngValue]="p">{{ p.playerRole.roleName }}</option>
               }
             </select>
           }
+
         </div>
+
         <div class="player_conditions">
           @if(player.isProtected){
             <img class="condition" src="/monk.webp" alt="protected">
@@ -105,7 +107,11 @@
           @if(player.isRedHearing){
             <img class="condition" src="/fortuneteller.webp" alt="Red Hearing">
           }
+          @if(player.isMarkedForDeath){
+            <img class="condition" src="/imp.webp" alt="Marked for Death">
+          }
         </div>
+
       </div>
       <div class="player_options">
         <button><h2>Change Role</h2></button>

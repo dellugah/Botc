@@ -1,6 +1,12 @@
 import {Role, Roles} from './Role';
 
 export class Player {
+  get isMarkedForDeath(): boolean {
+    return this._isMarkedForDeath;
+  }
+  set isMarkedForDeath(value: boolean) {
+    this._isMarkedForDeath = value;
+  }
   get hasAbility(): boolean {
     return this._hasAbility;
   }
@@ -77,6 +83,7 @@ export class Player {
   private _isPoisoned: boolean = false;
   private _isProtected: boolean = false;
   private _isRedHearing: boolean = false;
+  private _isMarkedForDeath: boolean = false;
 
   private _registeredAs: Role | undefined;
   private _playerRole: Role | undefined;

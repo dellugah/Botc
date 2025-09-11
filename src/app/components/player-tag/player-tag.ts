@@ -19,10 +19,7 @@ export class PlayerTag implements OnInit{
 
   protectedPlayer: Player | null = null;
   poisonedPlayer: Player | null = null;
-
-  spyRegistration:  null = null;
-
-  murderedPlayer: Player | null = null;
+  markedForDeathPlayer: Player | null = null;
 
 
   constructor(players: Players) {
@@ -50,7 +47,6 @@ export class PlayerTag implements OnInit{
       })
       player.isProtected = true;
     }
-
   }
 
   poisonerTarget(player: Player): void {
@@ -72,6 +68,20 @@ export class PlayerTag implements OnInit{
 
     console.log(self.playerRole.roleName);
   }
+
+  markForDeath(self: Player, player: Player | null): void {
+    if(!self.isPoisoned && !self.isDrunk){
+      Object.values(this.players.players).forEach(p => {
+        if(p.isMarkedForDeath){
+          p.isMarkedForDeath = false;
+        }
+      })
+      if (player) { //test for null
+        player.isMarkedForDeath = true;
+      }
+    }
+  }
+
 
   protected readonly Object = Object;
 }
