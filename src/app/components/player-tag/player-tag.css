@@ -9,16 +9,20 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  transform-origin: top center;
   background-image: url("/flag.png");
   background-repeat: no-repeat;
   background-position: top;
-  background-size: 100%;
+  background-size: 92%;
   filter: drop-shadow(0px 3cqh 1.5cqh rgba(0, 0, 0, 0.89));
+  animation: flap 3.4s ease-in-out infinite;
+  will-change: transform;
 }
 
 .round_info::after{
   content: "";
   position: absolute;
+  z-index: 10;
   inset: 0;
   background: linear-gradient(180deg, rgb(0, 0, 0) -10%, rgba(0, 0, 0, 0) 20%);
   pointer-events: none;/* let clicks pass through */
@@ -34,23 +38,35 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  transform-origin: top center;
   background-image: url("/flag.png");
   background-repeat: no-repeat;
   background-position: top;
-  background-size: 100%;
+  background-size: 92%;
   filter: drop-shadow(0px 3cqh 1.5cqh #000000);
+  animation: flap 3.4s ease-in-out infinite;
+  will-change: transform;
+
 }
 .classes_info::after{
   content: "";
   position: absolute;
+  z-index: 10;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0, 0, 0) -10%, rgba(0, 0, 0, 0) 10%);
+  background: linear-gradient(180deg, rgb(0, 0, 0) -10%, rgba(0, 0, 0, 0) 20%);
   pointer-events: none;/* let clicks pass through */
 }
+@keyframes flap {
+  0%,100% { transform: perspective(200cqw) rotateX(0deg) skewY(-1deg) translateX(0); }
+  50%     { transform: perspective(200cqw) rotateX(10deg) skewY(1deg) translateX(4px); }
+}
+
+
 .player_list{
   container-type: inline-size;
   height: 100%;
   width: 73%;
+  z-index: 3;
   margin-top: 1.5cqw;
   padding: 1cqw;
   overflow-y: scroll;
