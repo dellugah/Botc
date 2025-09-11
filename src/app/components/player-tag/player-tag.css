@@ -32,12 +32,15 @@ h1{
   pointer-events: none;/* let clicks pass through */
 }
 .classes_info{
+  padding-top: 5cqh;
   position: absolute;
+  font-family: verdana, sans-serif;
+  font-size: 1.2cqw;
   right: 0;
   top: 0;
+  width: 13%;
   z-index: 10;
   height: 100vh;
-  width: 13%;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -47,7 +50,7 @@ h1{
   background-position: top;
   background-size: 92%;
   filter: drop-shadow(0px 4cqh 1.5cqh rgba(0, 0, 0, 0.89));
-
+  will-change: transform;
 }
 .classes_info::after{
   content: "";

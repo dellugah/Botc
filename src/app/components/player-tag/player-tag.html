@@ -1,12 +1,9 @@
 <div class="round_info">
-  <h1>Round</h1>
-  <h1>2</h1>
 </div>
 <div class="player_list">
   @for( player of players.players; track player){
     <div class="player_tag">
       <div class="player_cont">
-
         <div class="player_profile">
           <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="poisoner" (click)="(player.isDead = true)">
 
@@ -241,7 +238,6 @@
             <img class="condition" src="/imp.webp" alt="Marked for Death">
           }
         </div>
-
       </div>
       <div class="player_options">
         <button><h2>Change Role</h2></button>
@@ -252,4 +248,5 @@
   }
   <div id="ghost_tag"></div>
 </div>
-<div class="classes_info"></div>
+<div class="classes_info">
+</div>
