@@ -1,12 +1,43 @@
+.round_info{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-image: url("/flag.png");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 70%;
+  filter: drop-shadow(0px 0px 10px #000000);
+}
+.classes_info{
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 18%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-image: url("/flag.png");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 70%;
+  filter: drop-shadow(0px 0px 10px #000000);
+}
 .player_list{
-  padding: 1vw;
   container-type: inline-size;
-  height: 105vh;
-  width: 80vw;
-  max-width: 180vh;
+  height: 100%;
+  width: 60%;
+  margin-top: 1.5cqw;
+  padding: 1cqw;
   overflow-y: scroll;
   scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 .death_token{
   visibility: hidden;
@@ -20,24 +51,21 @@
   pointer-events: none;
   filter: drop-shadow(0px 1cqw .4cqw rgba(0, 0, 0, 0.82));
 }
-
 .active{
   visibility: visible;
   opacity: 1;
   pointer-events: all;
   cursor: pointer;
 }
-
 .active:hover{
   opacity: .8;
 }
-
 .player_class_pic:hover ~ .death_token{
   visibility: visible;
   opacity: .8;
 }
-
 .player_tag{
+  container-type: inline-size;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -54,14 +82,14 @@
   display: flex;
 }
 .player_cont {
-  height: 9cqw;
+  height: 10cqw;
   width: 100%;
   border-radius: 1.5cqw;
   background-image: url("/sheet.png");
   background-size: 120% 160%;
   justify-content: center;
-  align-items: center;
   display: flex;
+  flex-direction: row;
   filter: drop-shadow(0px 10px 10px #000);
   z-index: 1;
 }
@@ -103,7 +131,6 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
-
 .condition{
   height: 50%;
 }
@@ -134,14 +161,6 @@
 .ghost_tag{
   height: 9cqw;
   width: 100%;
-}
-
-.evil{
-  color: #c50000;
-}
-
-.good{
-  color: #0077ff;
 }
 
 

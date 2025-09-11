@@ -1,11 +1,7 @@
 .main{
   /* start with a comfortable default on desktops */
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  transform: scale(0.95);
-  transform-origin: top center;
+  height: 100%;
+  width: 100%;
 }
 
 

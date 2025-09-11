@@ -9,6 +9,5 @@ export class Players {
   set players(value: Player[]) {
     this._players = value;
   }
-
   private _players: Player[] = [];
 }

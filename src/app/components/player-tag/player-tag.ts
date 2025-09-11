@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Players} from '../../classes/Players';
-import {Role, Roles} from '../../classes/Role';
+import {Minions, Outsiders, Role, Roles, Townsfolk} from '../../classes/Role';
 import {Player} from '../../classes/Player';
 import {NgOptimizedImage} from '@angular/common';
 import {FormsModule} from '@angular/forms';
@@ -15,20 +15,27 @@ import {FormsModule} from '@angular/forms';
 })
 
 export class PlayerTag implements OnInit{
-  players: Players = new Players();
+  roundCounter: number = 0;
+  isDay: boolean = false;
+
+  protected readonly Roles = Roles;
+  protected readonly Object = Object;
+  protected readonly Townsfolk = Townsfolk;
+  protected readonly Outsider = Outsiders;
+  protected readonly Minion = Minions;
 
   protectedPlayer: Player | null = null;
   poisonedPlayer: Player | null = null;
   markedForDeathPlayer: Player | null = null;
 
 
-  constructor(players: Players) {
+  constructor(protected players: Players) {
     this.players = players;
   }
 
   ngOnInit() {
 
-    //CHANGE ONCE CHARACTER MUSTER IS IMPLEMENTED
+    //CHANGE ONCE GATHER PLAYERS IS DONE
     let player: Player;
     Object.values(Roles).forEach(role => {
       player = new Player(role);
@@ -36,7 +43,12 @@ export class PlayerTag implements OnInit{
     })
   }
 
-  protected readonly Roles = Roles;
+
+
+  increaseRoundCounter(): void {
+    this.roundCounter++;
+    this.isDay = false;
+  }
 
   monkTarget(self: Player, player: Player): void {
     if(!self.isPoisoned && !self.isDrunk){
@@ -82,6 +94,5 @@ export class PlayerTag implements OnInit{
     }
   }
 
-
-  protected readonly Object = Object;
+  protected readonly Outsiders = Outsiders;
 }

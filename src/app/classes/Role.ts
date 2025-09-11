@@ -40,3 +40,33 @@ export enum Roles {
   // MINIONS not in night order
   BARON = "Baron",
 }
+
+export enum Townsfolk{
+  WASHERWOMAN = "Washerwoman",
+  LIBRARIAN = "Librarian",
+  INVESTIGATOR = "Investigator",
+  CHEF = "Chef",
+  VIRGIN = "Virgin",
+  SLAYER = "Slayer",
+  SOLDIER = "Soldier",
+  MAYOR = "Mayor",
+  RAVEN_KEEPER = "Raven Keeper",
+  UNDERTAKER = "Undertaker",
+  EMPATH = "Empath",
+  FORTUNE_TELLER = "Fortune Teller",
+  MONK = "Monk",
+}
+
+export enum Outsiders{
+  RECLUSE = "Recluse",
+  SAINT = "Saint",
+  BUTLER = "Butler",
+  DRUNK = "Drunk"
+}
+
+export enum Minions{
+  BARON = "Baron",
+  SPY = "Spy",
+  SCARLET_WOMAN = "Scarlet Woman",
+  POISONER = "Poisoner"
+}
