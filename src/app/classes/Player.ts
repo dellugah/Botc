@@ -4,7 +4,6 @@ export class Player {
   get hasAbility(): boolean {
     return this._hasAbility;
   }
-
   set hasAbility(value: boolean) {
     this._hasAbility = value;
   }
@@ -72,10 +71,10 @@ export class Player {
   private _playerName: string = "Player Name";
   private _playerAlignment: string = "good";
   private _comments: string = "";
-
-  private _isPoisoned: boolean = false;
   private _isDead: boolean = false;
   private _isDrunk: boolean = false;
+
+  private _isPoisoned: boolean = false;
   private _isProtected: boolean = false;
   private _isRedHearing: boolean = false;
 
@@ -85,6 +84,7 @@ export class Player {
 
   constructor(role: Roles) {
     this.playerRole = new Role(role);
+    this.registeredAs = new Role(role);
     switch (role) {
       case Roles.SPY:
       case Roles.POISONER:
@@ -98,4 +98,5 @@ export class Player {
         break;
     }
   }
+
 }

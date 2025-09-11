@@ -9,39 +9,34 @@ export class Role {
   }
 }
 
-export enum Roles{
+export enum Roles {
+  // ---- NIGHT START ----
+  POISONER = "Poisoner",     // Chooses a player
+  MONK = "Monk",             // Chooses a player
+  SPY = "Spy",               // Sees the Grimoire
+  SCARLET_WOMAN = "Scarlet Woman", // If Demon changed
+  IMP = "Imp",               // Demon acts
+  RAVEN_KEEPER = "Raven Keeper",   // If died tonight, learns a role
+  UNDERTAKER = "Undertaker", // Sees executed player's role
+  EMPATH = "Empath",         // Learns neighbors' alignments
+  FORTUNE_TELLER = "Fortune Teller", // Chooses 2 players
+  BUTLER = "Butler",         // Chooses a player
+  // ---- NIGHT END ----
 
-  //TOWNSFOLK
-
+  // TOWNSFOLK not in night order (daytime or passive abilities)
   WASHERWOMAN = "Washerwoman",
   LIBRARIAN = "Librarian",
   INVESTIGATOR = "Investigator",
   CHEF = "Chef",
-  EMPATH = "Empath",
-  FORTUNE_TELLER = "Fortune Teller",
-  UNDERTAKER = "Undertaker",
-  MONK = "Monk",
-  RAVEN_KEEPER = "Raven Keeper",
   VIRGIN = "Virgin",
   SLAYER = "Slayer",
   SOLDIER = "Soldier",
   MAYOR = "Mayor",
 
-  //OUTSIDERS
-
-  BUTLER = "Butler",
+  // OUTSIDERS
   RECLUSE = "Recluse",
   SAINT = "Saint",
 
-  //MINIONS
-
-  POISONER = "Poisoner",
-  SPY = "Spy",
-  SCARLET_WOMAN = "Scarlet Woman",
+  // MINIONS not in night order
   BARON = "Baron",
-
-  //DEMONS
-
-  IMP = "Imp"
-
 }

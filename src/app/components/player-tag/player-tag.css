@@ -1,13 +1,12 @@
 .player_list{
+  padding: 1vw;
   container-type: inline-size;
-  max-height: 80vh;
+  height: 105vh;
   width: 80vw;
-  max-width: 150vh;
-  padding: 5vh;
+  max-width: 180vh;
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-
 }
 .death_token{
   visibility: hidden;
@@ -27,6 +26,10 @@
   opacity: 1;
   pointer-events: all;
   cursor: pointer;
+}
+
+.active:hover{
+  opacity: .8;
 }
 
 .player_class_pic:hover ~ .death_token{
@@ -93,6 +96,7 @@
 .player_conditions{
   width: 20%;
   height: 100%;
+  margin-right: 1.5cqw;
   justify-content: right;
   align-items: center;
   display: flex;
