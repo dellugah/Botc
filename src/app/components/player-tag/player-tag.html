@@ -1,4 +1,7 @@
-<div class="round_info"></div>
+<div class="round_info">
+  <h1>Round</h1>
+  <h1>2</h1>
+</div>
 <div class="player_list">
   @for( player of players.players; track player){
     <div class="player_tag">
@@ -96,7 +99,13 @@
             <h2>Registers as:</h2>
               <select [(ngModel)]="player.registeredAs.roleName" (ngModelChange)="registerAs(player, $event)">
                 <option value=""></option>
-                @for (role of Object.values(Roles); track role) {
+                @for (role of Object.values(Townsfolk); track role) {
+                  <option [ngValue]="role">{{ role }}</option>
+                }
+                @for (role of Object.values(Outsiders); track role) {
+                  <option [ngValue]="role">{{ role }}</option>
+                }
+                @for (role of Object.values(Minion); track role) {
                   <option [ngValue]="role">{{ role }}</option>
                 }
               </select>

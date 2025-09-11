@@ -1,11 +1,13 @@
 .round_info{
+  padding-top: 5cqh;
   position: absolute;
+  font-family: verdana, sans-serif;
+  font-size: 1.2cqw;
   left: 0;
   top: 0;
   width: 13%;
   z-index: 10;
   height: 100vh;
-  justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -14,9 +16,11 @@
   background-repeat: no-repeat;
   background-position: top;
   background-size: 92%;
-  filter: drop-shadow(0px 3cqh 1.5cqh rgba(0, 0, 0, 0.89));
-  animation: flap 3.4s ease-in-out infinite;
+  filter: drop-shadow(0px 4cqh 1.5cqh rgba(0, 0, 0, 0.89));
   will-change: transform;
+}
+h1{
+  margin: 0;
 }
 
 .round_info::after{
@@ -24,7 +28,7 @@
   position: absolute;
   z-index: 10;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0, 0, 0) -10%, rgba(0, 0, 0, 0) 20%);
+  background: linear-gradient(180deg, rgb(0, 0, 0) 1%, rgba(0, 0, 0, 0) 10%);
   pointer-events: none;/* let clicks pass through */
 }
 .classes_info{
@@ -34,7 +38,6 @@
   z-index: 10;
   height: 100vh;
   width: 13%;
-  justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -43,9 +46,7 @@
   background-repeat: no-repeat;
   background-position: top;
   background-size: 92%;
-  filter: drop-shadow(0px 3cqh 1.5cqh #000000);
-  animation: flap 3.4s ease-in-out infinite;
-  will-change: transform;
+  filter: drop-shadow(0px 4cqh 1.5cqh rgba(0, 0, 0, 0.89));
 
 }
 .classes_info::after{
@@ -53,12 +54,8 @@
   position: absolute;
   z-index: 10;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0, 0, 0) -10%, rgba(0, 0, 0, 0) 20%);
+  background: linear-gradient(180deg, rgb(0, 0, 0) 1%, rgba(0, 0, 0, 0) 10%);
   pointer-events: none;/* let clicks pass through */
-}
-@keyframes flap {
-  0%,100% { transform: perspective(200cqw) rotateX(0deg) skewY(-1deg) translateX(0); }
-  50%     { transform: perspective(200cqw) rotateX(10deg) skewY(1deg) translateX(4px); }
 }
 
 
@@ -75,20 +72,22 @@
 .player_list::after{
   content: "";
   position: absolute;
-  z-index: 3;
+  z-index: 0;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0, 0, 0) -10%, rgba(0, 0, 0, 0) 20%);
+  background: linear-gradient(180deg, rgb(0, 0, 0) 1%, rgba(0, 0, 0, 0) 10%);
   pointer-events: none;/* let clicks pass through */
 }
 
 .death_token{
+  border-top-left-radius: .5cqw;
+  border-top-right-radius: .5cqw;
   visibility: hidden;
   opacity: 0;
   position: absolute;
   z-index: 2;
   top: -.8cqw;
   left: 1.6cqw;
-  height: 8cqw;
+  height: 10cqw;
   width: auto;
   pointer-events: none;
   filter: drop-shadow(0px 1cqw .4cqw rgba(0, 0, 0, 0.82));
