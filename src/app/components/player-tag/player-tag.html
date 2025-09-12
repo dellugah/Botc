@@ -1,4 +1,9 @@
 <div class="round_info">
+  <img class="background_flag" src="/{{roundCycle}}.png" alt="">
+  <img class="top_flag" src="/topFlag.png" alt="">
+  <img class="bottom_flag" src="{{opposite}}" alt="" (click)="cycleDay()">
+  <h1>Round</h1>
+  <h1>{{roundCounter}}</h1>
 </div>
 <div class="player_list">
   @for( player of players.players; track player){
@@ -6,14 +11,12 @@
       <div class="player_cont">
         <div class="player_profile">
           <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="poisoner" (click)="(player.isDead = true)">
-
           @if(player.isDead){
             <img class="death_token active" src="/death_Token.png" alt="dead" (click)="(player.isDead = false)">
           }
           @else{
             <img class="death_token" src="/death_Token.png" alt="dead">
           }
-
           <div class="player_info">
             <h2 class="player_class"><span class="{{player.playerAlignment}}">{{player.playerRole.roleName.toUpperCase()}}</span></h2>
             <div class="player_status">
@@ -26,71 +29,75 @@
         </div>
         <div class="player_ability">
           <!-- MONK ABILITY -->
-          @if (player.playerRole.roleName === Roles.MONK) {
-            <h2>Protects:</h2>
-            <select [(ngModel)]="protectedPlayer" (ngModelChange)="monkTarget(player, $event)">
-              <option [ngValue]=""></option>
-              @for (p of players.players; track p) {
-                <option [ngValue]="p">{{ p.playerName }}</option>
-              }
-            </select>
-            <!-- POISONER ABILITY -->
-          } @else if (player.playerRole.roleName === Roles.POISONER) {
-            <h2>Poisons:</h2>
-            <select [(ngModel)]="poisonedPlayer" (ngModelChange)="poisonerTarget($event)">
-              <option [ngValue]=""></option>
-              @for (p of players.players; track p) {
-                <option [ngValue]="p">{{ p.playerName }}</option>
-              }
-            </select>
-            <!-- FORTUNE TELLER / EMPATH ABILITY -->
-          } @else if ([Roles.FORTUNE_TELLER, Roles.EMPATH].includes(player.playerRole.roleName)) {
-            @if(player.hasAbility){
-              <h2>Choose:</h2>
-              <select>
-                <option value="1"></option>
-                @for (player of players.players; track player) {
-                  <option [ngValue]="player">{{ player.playerName }}</option>
+          @if (isDay) {
+            <div class="nomination">{{player.canNominate}}</div>
+            <div class="indicated">{{player.wasIndicated}}</div>
+          } @else{
+            @if (player.playerRole.roleName === Roles.MONK) {
+              <h2>Protects:</h2>
+              <select [(ngModel)]="protectedPlayer" (ngModelChange)="monkTarget(player, $event)">
+                <option [ngValue]=""></option>
+                @for (p of players.players; track p) {
+                  <option [ngValue]="p">{{ p.playerName }}</option>
                 }
               </select>
-              <h2>and</h2>
-              <select>
-                <option value="1"></option>
+              <!-- POISONER ABILITY -->
+            } @else if (player.playerRole.roleName === Roles.POISONER) {
+              <h2>Poisons:</h2>
+              <select [(ngModel)]="poisonedPlayer" (ngModelChange)="poisonerTarget($event)">
+                <option [ngValue]=""></option>
+                @for (p of players.players; track p) {
+                  <option [ngValue]="p">{{ p.playerName }}</option>
+                }
+              </select>
+              <!-- FORTUNE TELLER / EMPATH ABILITY -->
+            } @else if ([Roles.FORTUNE_TELLER, Roles.EMPATH].includes(player.playerRole.roleName)) {
+              @if(player.hasAbility){
+                <h2>Choose:</h2>
+                <select>
+                  <option value="1"></option>
                   @for (player of players.players; track player) {
                     <option [ngValue]="player">{{ player.playerName }}</option>
                   }
-              </select>
-              <h2>Learn:</h2>
-              <select name="" id="">
-                <option value=""></option>
-                <option value="no">NO</option>
-                <option value="yes">YES</option>
-              </select>
-            }
-            <!-- UNDERTAKER ABILITY -->
-          } @else if ([Roles.UNDERTAKER].includes(player.playerRole.roleName)) {
-            <h2>See:</h2>
-            @if (player.isPoisoned || player.isDrunk) {
-              <select>
-                <option value=" "></option>
-              @for (role of Object.values(Roles); track role){
-                <option [ngValue]="role">{{ role }}</option>
-              }
-              </select>
-            } @else{
-              <select>
-                <option value=" "></option>
-                @for (player of players.players; track player) {
-                  @if(player.isDead){
-                    <option [ngValue]="player">{{ player.playerRole.roleName }}</option>
+                </select>
+                <h2>and</h2>
+                <select>
+                  <option value="1"></option>
+                  @for (player of players.players; track player) {
+                    <option [ngValue]="player">{{ player.playerName }}</option>
                   }
-                }
-              </select>
-            }
+                </select>
+                <h2>Learn:</h2>
+                <select name="" id="">
+                  <option value=""></option>
+                  <option value="no">NO</option>
+                  <option value="yes">YES</option>
+                </select>
+              }
+              <!-- UNDERTAKER ABILITY -->
+            } @else if ([Roles.UNDERTAKER].includes(player.playerRole.roleName)) {
+              <h2>See:</h2>
+              @if (player.isPoisoned || player.isDrunk) {
+                <select>
+                  <option value=" "></option>
+                  @for (role of Object.values(Roles); track role){
+                    <option [ngValue]="role">{{ role }}</option>
+                  }
+                </select>
+              } @else{
+                <select>
+                  <option value=" "></option>
+                  @for (player of players.players; track player) {
+                    @if(player.isDead){
+                      <option [ngValue]="player">{{ player.playerRole.roleName }}</option>
+                    }
+                  }
+                </select>
+              }
 
-            <!-- RECLUSE / SPY ABILITY -->
-          } @else if ([Roles.RECLUSE, Roles.SPY].includes(player.playerRole.roleName)) {
-            <h2>Registers as:</h2>
+              <!-- RECLUSE / SPY ABILITY -->
+            } @else if ([Roles.RECLUSE, Roles.SPY].includes(player.playerRole.roleName)) {
+              <h2>Registers as:</h2>
               <select [(ngModel)]="player.registeredAs.roleName" (ngModelChange)="registerAs(player, $event)">
                 <option value=""></option>
                 @for (role of Object.values(Townsfolk); track role) {
@@ -103,18 +110,34 @@
                   <option [ngValue]="role">{{ role }}</option>
                 }
               </select>
-            <!-- IMP ABILITY -->
-          } @else if (player.playerRole.roleName === Roles.IMP) {
-            <h2>Kills:</h2>
-            <select [(ngModel)]="markedForDeathPlayer" (ngModelChange)="markForDeath(player, $event)">
-              <option [ngValue]="null"></option>
-              @for (p of players.players; track p) {
-                <option [ngValue]="p">{{ p.playerName }}</option>
+              <!-- IMP ABILITY -->
+            } @else if (player.playerRole.roleName === Roles.IMP) {
+              <h2>Kills:</h2>
+              <select [(ngModel)]="markedForDeathPlayer" (ngModelChange)="markForDeath(player, $event)">
+                <option [ngValue]="null"></option>
+                @for (p of players.players; track p) {
+                  <option [ngValue]="p">{{ p.playerName }}</option>
+                }
+              </select>
+              <!-- RAVEN KEEPER ABILITY -->
+            } @else if (player.playerRole.roleName === Roles.RAVEN_KEEPER){
+              @if (player.isDead) {
+                <h2>Choose:</h2>
+                <select>
+                  <option value=" "></option>
+                  @for (player of players.players; track player) {
+                    <option [ngValue]="player">{{ player.playerName }}</option>
+                  }
+                </select>
+                <h2>Sees:</h2>
+                <select>
+                  <option value="1"></option>
+                  @for (role of Object.values(Roles); track role) {
+                    <option [ngValue]="role">{{ role }}</option>
+                  }
+                </select>
               }
-            </select>
-            <!-- RAVEN KEEPER ABILITY -->
-          } @else if (player.playerRole.roleName === Roles.RAVEN_KEEPER){
-            @if (player.isDead) {
+            } @else if (player.playerRole.roleName === Roles.BUTLER){
               <h2>Choose:</h2>
               <select>
                 <option value=" "></option>
@@ -122,103 +145,88 @@
                   <option [ngValue]="player">{{ player.playerName }}</option>
                 }
               </select>
+              <!-- WASHERWOMAN ABILITY -->
+            } @else if (player.playerRole.roleName === Roles.WASHERWOMAN){
               <h2>Sees:</h2>
               <select>
+                <option value=" "></option>
+                @for (player of players.players; track player) {
+                  <option [ngValue]="player">{{ player.playerName }}</option>
+                }
+              </select>
+              <h2>and:</h2>
+              <select>
+                <option value=" "></option>
+                @for (player of players.players; track player) {
+                  <option [ngValue]="player">{{ player.playerName }}</option>
+                }
+              </select>
+              <h2>sees:</h2>
+              <select>
                 <option value="1"></option>
-                @for (role of Object.values(Roles); track role) {
+                @for (role of Object.values(Townsfolk); track role) {
                   <option [ngValue]="role">{{ role }}</option>
                 }
               </select>
+              <!-- LIBRARIAN ABILITY -->
+            } @else if (player.playerRole.roleName === Roles.LIBRARIAN) {
+              <h2>Sees:</h2>
+              <select>
+                <option value=" "></option>
+                @for (player of players.players; track player) {
+                  <option [ngValue]="player">{{ player.playerName }}</option>
+                }
+              </select>
+              <h2>and:</h2>
+              <select>
+                <option value=" "></option>
+                @for (player of players.players; track player) {
+                  <option [ngValue]="player">{{ player.playerName }}</option>
+                }
+              </select>
+              <h2>sees:</h2>
+              <select>
+                <option value="1"></option>
+                @for (role of Object.values(Outsider); track role) {
+                  <option [ngValue]="role">{{ role }}</option>
+                }
+              </select>
+              <!-- INVESTIGATOR ABILITY -->
+            } @else if (player.playerRole.roleName === Roles.INVESTIGATOR) {
+              <h2>Sees:</h2>
+              <select>
+                <option value=" "></option>
+                @for (player of players.players; track player) {
+                  <option [ngValue]="player">{{ player.playerName }}</option>
+                }
+              </select>
+              <h2>and:</h2>
+              <select>
+                <option value=" "></option>
+                @for (player of players.players; track player) {
+                  <option [ngValue]="player">{{ player.playerName }}</option>
+                }
+              </select>
+              <h2>sees:</h2>
+              <select>
+                <option value="1"></option>
+                @for (role of Object.values(Minion); track role) {
+                  <option [ngValue]="role">{{ role }}</option>
+                }
+              </select>
+              <!-- CHEF ABILITY -->
+            } @else if (player.playerRole.roleName === Roles.CHEF) {
+              <h2>Sees:</h2>
+              <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
             }
-          } @else if (player.playerRole.roleName === Roles.BUTLER){
-            <h2>Choose:</h2>
-            <select>
-              <option value=" "></option>
-              @for (player of players.players; track player) {
-                <option [ngValue]="player">{{ player.playerName }}</option>
-              }
-            </select>
-            <!-- WASHERWOMAN ABILITY -->
-          } @else if (player.playerRole.roleName === Roles.WASHERWOMAN){
-            <h2>Sees:</h2>
-            <select>
-              <option value=" "></option>
-              @for (player of players.players; track player) {
-                <option [ngValue]="player">{{ player.playerName }}</option>
-              }
-            </select>
-            <h2>and:</h2>
-            <select>
-              <option value=" "></option>
-              @for (player of players.players; track player) {
-                <option [ngValue]="player">{{ player.playerName }}</option>
-              }
-            </select>
-            <h2>sees:</h2>
-            <select>
-              <option value="1"></option>
-              @for (role of Object.values(Townsfolk); track role) {
-                <option [ngValue]="role">{{ role }}</option>
-              }
-            </select>
-            <!-- LIBRARIAN ABILITY -->
-          } @else if (player.playerRole.roleName === Roles.LIBRARIAN) {
-            <h2>Sees:</h2>
-            <select>
-              <option value=" "></option>
-              @for (player of players.players; track player) {
-                <option [ngValue]="player">{{ player.playerName }}</option>
-              }
-            </select>
-            <h2>and:</h2>
-            <select>
-              <option value=" "></option>
-              @for (player of players.players; track player) {
-                <option [ngValue]="player">{{ player.playerName }}</option>
-              }
-            </select>
-            <h2>sees:</h2>
-            <select>
-              <option value="1"></option>
-              @for (role of Object.values(Outsider); track role) {
-                <option [ngValue]="role">{{ role }}</option>
-              }
-            </select>
-            <!-- INVESTIGATOR ABILITY -->
-          } @else if (player.playerRole.roleName === Roles.INVESTIGATOR) {
-            <h2>Sees:</h2>
-            <select>
-              <option value=" "></option>
-              @for (player of players.players; track player) {
-                <option [ngValue]="player">{{ player.playerName }}</option>
-              }
-            </select>
-            <h2>and:</h2>
-            <select>
-              <option value=" "></option>
-              @for (player of players.players; track player) {
-                <option [ngValue]="player">{{ player.playerName }}</option>
-              }
-            </select>
-            <h2>sees:</h2>
-            <select>
-              <option value="1"></option>
-              @for (role of Object.values(Minion); track role) {
-                <option [ngValue]="role">{{ role }}</option>
-              }
-            </select>
-            <!-- CHEF ABILITY -->
-          } @else if (player.playerRole.roleName === Roles.CHEF) {
-            <h2>Sees:</h2>
-            <select>
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-            </select>
           }
         </div>
         <div class="player_conditions">
@@ -248,5 +256,5 @@
   }
   <div id="ghost_tag"></div>
 </div>
-<div class="classes_info">
+<div class="classes_info {{roundCycle}}" (click)="cycleDay()">
 </div>

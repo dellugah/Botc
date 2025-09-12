@@ -17,6 +17,8 @@ import {FormsModule} from '@angular/forms';
 export class PlayerTag implements OnInit{
   roundCounter: number = 0;
   isDay: boolean = false;
+  roundCycle = "night";
+  opposite: string = "/day_flag.png";
 
   protected readonly Roles = Roles;
   protected readonly Object = Object;
@@ -44,11 +46,19 @@ export class PlayerTag implements OnInit{
     })
   }
 
+  cycleDay(): void {
+    if(this.isDay){
+      this.roundCounter ++;
+      this.isDay = !this.isDay ;
+      this.roundCycle = "night";
+      this.opposite = "/day_flag.png";
+    }
+    else{
+      this.isDay = !this.isDay ;
+      this.roundCycle = "day";
+      this.opposite = "/night_flag.png";
+    }
 
-
-  increaseRoundCounter(): void {
-    this.roundCounter++;
-    this.isDay = false;
   }
 
   monkTarget(self: Player, player: Player): void {

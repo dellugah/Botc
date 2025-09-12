@@ -1,7 +1,20 @@
 import {Role, Roles} from './Role';
 
 export class Player {
+  get wasIndicated(): boolean {
+    return this._wasIndicated;
+  }
+
+  set wasIndicated(value: boolean) {
+    this._wasIndicated = value;
+  }
   //GETTERS AND SETTERS
+  get canNominate(): boolean {
+    return this._canNominate;
+  }
+  set canNominate(value: boolean) {
+    this._canNominate = value;
+  }
   get hasDeadVoters(): boolean {
     return this._hasDeadVote;
   }
@@ -87,6 +100,8 @@ export class Player {
   private _comments: string = "";
   private _registeredAs: Role | undefined;
   private _playerRole: Role | undefined;
+  private _canNominate: boolean = true;
+  private _wasIndicated: boolean = false;
 
   //DEATH TRACKER
   private _hasDeadVote: boolean = true;
