@@ -1,6 +1,13 @@
 import {Role, Roles} from './Role';
 
 export class Player {
+  //GETTERS AND SETTERS
+  get hasDeadVoters(): boolean {
+    return this._hasDeadVote;
+  }
+  set hasDeadVoters(value: boolean) {
+    this._hasDeadVote = value;
+  }
   get isMarkedForDeath(): boolean {
     return this._isMarkedForDeath;
   }
@@ -74,24 +81,30 @@ export class Player {
     this._playerRole = value;
   }
 
-  private _playerName: string = "Player Name";
+  //PLAYER & ROLE INFO
+  private _playerName: string = "";
   private _playerAlignment: string = "good";
   private _comments: string = "";
-  private _isDead: boolean = false;
-  private _isDrunk: boolean = false;
+  private _registeredAs: Role | undefined;
+  private _playerRole: Role | undefined;
 
+  //DEATH TRACKER
+  private _hasDeadVote: boolean = true;
+  private _hasAbility: boolean = true;
+  private _isDead: boolean = false;
+
+  //ALIGNMENTS TRACKER
+  private _isDrunk: boolean = false;
   private _isPoisoned: boolean = false;
   private _isProtected: boolean = false;
   private _isRedHearing: boolean = false;
   private _isMarkedForDeath: boolean = false;
 
-  private _registeredAs: Role | undefined;
-  private _playerRole: Role | undefined;
-  private _hasAbility: boolean = true;
 
   constructor(role: Roles) {
     this.playerRole = new Role(role);
     this.registeredAs = new Role(role);
+
     switch (role) {
       case Roles.SPY:
       case Roles.POISONER:

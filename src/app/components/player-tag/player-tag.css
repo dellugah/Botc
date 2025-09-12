@@ -89,8 +89,8 @@ h1{
   position: absolute;
   z-index: 2;
   top: -.8cqw;
-  left: 1.6cqw;
-  height: 10cqw;
+  left: 1.0cqw;
+  height: 11.5cqw;
   width: auto;
   pointer-events: none;
   filter: drop-shadow(0px 1cqw .4cqw rgba(0, 0, 0, 0.82));
@@ -187,10 +187,9 @@ h1{
   padding-left: 0;
   border-radius: 1.5cqw;
   margin-bottom: -6cqw;
-  background-image: url("/bottom.jpg");
-  background-size: 200% 100%;
+  background-image: url("/bottom.png");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: bottom;
   justify-content: center;
   align-items: center;
   display: flex;

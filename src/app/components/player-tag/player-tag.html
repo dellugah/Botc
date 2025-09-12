@@ -20,9 +20,6 @@
               @if(player.playerRole.roleName != player.registeredAs.roleName){
                 <img src="{{player.registeredAs.roleImage.toLowerCase()}}" alt="" width="auto" height="200%">
               }
-              @if(player.isDrunk){
-                <img src="/drunk.webp" alt="" width="auto" height="200%">
-              }
             </div>
             <h3 class="player_name">Name: {{player.playerName}}</h3>
           </div>
@@ -225,6 +222,9 @@
           }
         </div>
         <div class="player_conditions">
+          @if(player.isDrunk){
+            <img class="condition" src="/drunk.webp" alt="Is the Drunk">
+          }
           @if(player.isProtected){
             <img class="condition" src="/monk.webp" alt="protected">
           }
