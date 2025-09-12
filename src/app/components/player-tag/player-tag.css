@@ -1,32 +1,28 @@
 /*SIDE MENUS*/
 .classes_info{
-  cursor: pointer;
   padding-top: 5cqh;
   position: absolute;
   font-family: verdana, sans-serif;
-  font-size: 1.2cqw;
+  font-size: .8cqw;
   right: 0;
   top: 0;
   width: 13%;
-  z-index: 10;
   height: 35cqw;
   align-items: center;
   display: flex;
   flex-direction: column;
   filter: drop-shadow(0px 4cqh 1.5cqh rgba(0, 0, 0, 0.89));
-  cursor: pointer;
 }
 .classes_info::after{
   content: "";
   position: absolute;
   z-index: 10;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0, 0, 0) -10%, rgba(0, 0, 0, 0) 5em);
-  pointer-events: none;/* let clicks pass through */
+  background: linear-gradient(180deg, rgb(0, 0, 0) -10%, rgba(0, 0, 0, 0) 2em);
 }
 
 .round_info{
-  padding-top: 4cqh;
+  padding-top: 2cqw;
   position: absolute;
   font-family: verdana, sans-serif;
   font-size: .8cqw;
@@ -69,20 +65,6 @@
   bottom: -2cqw;
   z-index: -6;
   cursor: pointer;
-}
-
-.night{
-  /*background-image: url("/night.png");*/
-  /*background-repeat: no-repeat;*/
-  /*background-position: top;*/
-  /*background-size: 12cqw;*/
-}
-.day{
-  /*background-image: url("/day.png");*/
-  /*background-repeat: no-repeat;*/
-  /*background-position: top;*/
-  /*background-size: 12cqw;*/
-  /*filter: drop-shadow(0px 4cqh 1.5cqh rgba(0, 0, 0, 0.89));*/
 }
 
 /*PLAYER CONTAINERS*/
@@ -180,7 +162,7 @@
   position: absolute;
   z-index: 2;
   top: -.8cqw;
-  left: 1.0cqw;
+  left: 1.2cqw;
   height: 11.5cqw;
   width: auto;
   pointer-events: none;

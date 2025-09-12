@@ -256,5 +256,14 @@
   }
   <div id="ghost_tag"></div>
 </div>
-<div class="classes_info {{roundCycle}}" (click)="cycleDay()">
+<div class="classes_info">
+  @if(isDay){
+    <img class="top_flag" src="/topFlag.png" alt="">
+    <img class="background_flag" src="/talk_round.png" alt="">
+    <img class="bottom_flag" src="/guillotineFlag.png" alt="">
+  } @else{
+    <img class="top_flag" src="/topFlag.png" alt="">
+    <img class="background_flag" src="/wake_order.png" alt="">
+    <img class="bottom_flag" src="/wakeFlag.png" alt="">
+  }
 </div>
