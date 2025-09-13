@@ -111,6 +111,7 @@
   flex-direction: column;
   transition: top 0.4s;
   font-size: .9cqw;
+  margin-top: 1.3cqw;
 }
 
 .player_list{
@@ -240,4 +241,34 @@
 .player_options:hover {
   top: -2.5cqw;
   margin-bottom: -1.5cqw;
+}
+
+/*NOMINATION AREA*/
+.nomination{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.nomination_base{
+  position: absolute;
+  height: 140%;
+  top: -4%;
+  width: auto;
+  left: 33%;
+  filter: drop-shadow(0px 3px 3px #000000);
+}
+.nominated_base{
+  position: absolute;
+  height: 140%;
+  top: -4%;
+  width: auto;
+  right: 33%;
+  filter: drop-shadow(0px 3px 3px #000000);
+}
+
+.token{
+  scale: .88;
+  top: -15%;
+  height: 140%;
+  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0));
 }

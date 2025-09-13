@@ -172,5 +172,13 @@ export class PlayerTag implements OnInit{
     }
   }
 
+  nominatedPlayer(self : Player): void{
+    self.canNominate = !self.canNominate;
+  }
+  wasNominated(self : Player): void{
+    self.wasIndicated = !self.wasIndicated;
+  }
+
+
   protected readonly Outsiders = Outsiders;
 }

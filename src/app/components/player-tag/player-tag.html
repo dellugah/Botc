@@ -32,9 +32,27 @@
           @if (isDay) {
             @if (executeMode) {
               @if(!player.isDead){
-                <div class="nomination"><h2>Nominate: {{player.canNominate}}</h2></div>
+                <div class="nomination">
+                  <div class="token_container">
+                    <img class="nomination_base" src="/nomination_base.png" alt="" (click)="nominatedPlayer(player)">
+                  </div>
+                  @if(player.canNominate){
+                    <div class="token_container">
+                      <img class="nomination_base token"
+                           src="/nomination_token.png" alt=""
+                           (click)="nominatedPlayer(player)">
+                    </div>
+                  }
+                  <img class="nominated_base" src="/nomination_base.png" alt="" (click)="wasNominated(player)">
+                  @if(!player.wasIndicated){
+                    <img class="nominated_base  token"
+                         src="/nomination_token.png" alt=""
+                         (click)="wasNominated(player)">
+                  }
+                </div>
               }
-              <div class="indicated"><h2>Nominated: {{player.wasIndicated}}</h2></div>
+              <div class="nomination">
+              </div>
             }
           } @else{
             @if (player.playerRole.roleName === Roles.MONK) {
