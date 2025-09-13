@@ -1,6 +1,6 @@
 /*SIDE MENUS*/
 .classes_info{
-  padding-top: 5cqh;
+  padding-top: 2cqw;
   position: absolute;
   font-family: verdana, sans-serif;
   font-size: .8cqw;
@@ -19,6 +19,7 @@
   z-index: 10;
   inset: 0;
   background: linear-gradient(180deg, rgb(0, 0, 0) -10%, rgba(0, 0, 0, 0) 2em);
+  pointer-events: none;
 }
 
 .round_info{

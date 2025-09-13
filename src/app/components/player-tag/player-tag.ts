@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Players} from '../../classes/Players';
-import {Minions, Outsiders, Role, Roles, Townsfolk} from '../../classes/Role';
+import {Minions, Outsiders, Role, Roles, Townsfolk, wakeFirstNight, wakeOtherNights} from '../../classes/Role';
 import {Player} from '../../classes/Player';
-import {NgOptimizedImage} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -30,6 +29,14 @@ export class PlayerTag implements OnInit{
   poisonedPlayer: Player | null = null;
   markedForDeathPlayer: Player | null = null;
 
+  firstNightPlayers: Player[] = [];
+  otherNightPlayers: Player[] = [];
+  wakePlayer: string = "";
+  wakeIndex: number = 0;
+  isDawn: boolean = false;
+
+  executeMode: boolean = false;
+
 
   constructor(protected players: Players) {
     this.players = players;
@@ -44,21 +51,81 @@ export class PlayerTag implements OnInit{
       player.playerName = role + " Player";
       this.players.players.push(player);
     })
+
+    this.buildWakePlayerSequence();
+    console.log(this.wakePlayer);
   }
 
   cycleDay(): void {
     if(this.isDay){
-      this.roundCounter ++;
-      this.isDay = !this.isDay ;
-      this.roundCycle = "night";
-      this.opposite = "/day_flag.png";
+      this.executeMode = false; //resets the execute mode
+      this.roundCounter ++; //increases the round counter
+      this.isDay = !this.isDay ; //changes the day to night
+      this.roundCycle = "night"; //changes the round cycle to night
+      this.opposite = "/day_flag.png"; //changes the opposite flag to day
+      this.buildWakePlayerSequence(); //builds the wake player sequence
     }
     else{
-      this.isDay = !this.isDay ;
-      this.roundCycle = "day";
-      this.opposite = "/night_flag.png";
+      this.isDawn = false; //resets the dawn flag
+      this.wakeIndex = 0; //resets the wake index
+      this.isDay = !this.isDay; //changes the day to night
+      this.roundCycle = "day"; //changes the round cycle to day
+      this.opposite = "/night_flag.png"; //changes the opposite flag to night
     }
 
+  }
+
+  changeMode(): void {
+    this.executeMode = !this.executeMode;
+  }
+
+  //improve to see players in real time
+  buildWakePlayerSequence(){
+
+    //first night build
+    if(this.roundCounter == 0){
+      this.firstNightPlayers = [];
+      Object.values(wakeFirstNight).forEach(r => {
+        Object.values(this.players.players).forEach(p => {
+          if(p.playerRole.roleName.valueOf() == r.valueOf() && !p.isDead){
+            console.log(p.playerRole.roleName);
+            this.firstNightPlayers.push(p);
+          }
+        })
+      })
+    }
+    else{
+      //other nights build
+      this.otherNightPlayers = [];
+      Object.values(wakeOtherNights).forEach(r => {
+        Object.values(this.players.players).forEach(p => {
+          if(p.playerRole.roleName.valueOf() == r.valueOf() && !p.isDead){
+            console.log(p.playerRole.roleName);
+            this.otherNightPlayers.push(p);
+          }
+        })
+      })
+    }
+    this.wakePlayerSequence();
+  }
+
+  wakePlayerSequence(): void {
+    if (this.isDawn) return;
+
+    const list = this.roundCounter > 0 ? this.otherNightPlayers : this.firstNightPlayers;
+
+    if (this.wakeIndex >= list.length) {
+      this.wakePlayer = "";
+      this.isDawn = true;
+      return;
+    }
+    else {
+      this.wakePlayer = list[this.wakeIndex].playerRole.roleImage;
+      this.wakeIndex++;
+    }
+
+    // optional debug
+    console.log(this.wakeIndex, list.length);
   }
 
   monkTarget(self: Player, player: Player): void {
