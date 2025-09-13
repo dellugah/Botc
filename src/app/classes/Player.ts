@@ -1,6 +1,13 @@
 import {Role, Roles} from './Role';
 
 export class Player {
+  get scarletIsActive(): boolean {
+    return this._scarletIsActive;
+  }
+
+  set scarletIsActive(value: boolean) {
+    this._scarletIsActive = value;
+  }
   get wasIndicated(): boolean {
     return this._wasIndicated;
   }
@@ -107,6 +114,7 @@ export class Player {
   private _hasDeadVote: boolean = true;
   private _hasAbility: boolean = true;
   private _isDead: boolean = false;
+  private _scarletIsActive: boolean = false;
 
   //ALIGNMENTS TRACKER
   private _isDrunk: boolean = false;

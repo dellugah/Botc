@@ -71,4 +71,28 @@ export enum Minions{
   POISONER = "Poisoner"
 }
 
+export enum wakeFirstNight{
+  POISONER = "Poisoner",
+  SPY = "Spy",
+  WASHERWOMAN = "Washerwoman",
+  LIBRARIAN = "Librarian",
+  CHEF = "Chef",
+  EMPATH = "Empath",
+  FORTUNE_TELLER = "Fortune Teller",
+  BUTLER = "Butler"
+}
+
+export enum wakeOtherNights{
+  POISONER = "Poisoner",
+  MONK = "Monk",
+  SPY = "Spy",
+  SCARLET_WOMAN = "Scarlet Woman",
+  IMP = "Imp",
+  RAVEN_KEEPER = "Raven Keeper",
+  UNDERTAKER = "Undertaker",
+  EMPATH = "Empath",
+  FORTUNE_TELLER = "Fortune Teller",
+  BUTLER = "Butler",
+}
+
 
