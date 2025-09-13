@@ -50,28 +50,28 @@
   top: 0;
   width: 70%;
   z-index: 0;
-  filter: drop-shadow(0px 3cqh 1.5cqh rgba(0, 0, 0, 0.89));
+  filter: drop-shadow(0px 20px 1cqh rgba(0, 0, 0, 0.7));
 }
 .background_flag{
   width: 80%;
   position: absolute;
   top: 0;
   z-index: -1;
-  filter: drop-shadow(0px 4cqh 1.5cqh rgba(0, 0, 0, 0.89));
+  filter: drop-shadow(0px 20px 1cqh rgba(0, 0, 0, 0.7));
   pointer-events: none;
 }
 .bottom_flag{
   width: 60%;
   position: absolute;
-  bottom: -2cqw;
+  bottom: -1cqw;
   z-index: -2;
   cursor: pointer;
 }
 
 .wake_player{
   position: absolute;
-  top: 10cqw;
-  width: 80%;
+  top: 9cqw;
+  width: 90%;
   z-index: 1;
   filter: drop-shadow(0px 1cqh 1.5cqh rgba(0, 0, 0, 0.89));
 }
@@ -128,7 +128,7 @@
   position: absolute;
   z-index: 0;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0, 0, 0) 1%, rgba(0, 0, 0, 0) 10%);
+  background: linear-gradient(180deg, rgb(0, 0, 0, 0.7) 1%, rgba(0, 0, 0, 0) 10%);
   pointer-events: none;/* let clicks pass through */
 }
 
