@@ -10,12 +10,12 @@
     <div class="player_tag">
       <div class="player_cont">
         <div class="player_profile">
-          <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="poisoner" (click)="(player.isDead = true)">
+          <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="class_icon" (click)="(player.isDead = true)">
           @if(player.isDead){
-            <img class="death_token active" src="/death_Token.png" alt="dead" (click)="(player.isDead = false)">
+            <img class="death_token active" src="/death_token.png" alt="dead" (click)="(player.isDead = false)">
           }
           @else{
-            <img class="death_token" src="/death_Token.png" alt="dead">
+            <img class="death_token" src="/death_token.png" alt="dead">
           }
           <div class="player_info">
             <h2 class="player_class"><span class="{{player.playerAlignment}}">{{player.playerRole.roleName.toUpperCase()}}</span></h2>
@@ -34,25 +34,46 @@
               @if(!player.isDead){
                 <div class="nomination">
                   <div class="token_container">
-                    <img class="nomination_base" src="/nomination_base.png" alt="" (click)="nominatedPlayer(player)">
+                    <img class="left_base" src="/nomination_base.png" alt="" (click)="nominatedPlayer(player)">
                   </div>
                   @if(player.canNominate){
                     <div class="token_container">
-                      <img class="nomination_base token"
+                      <img class="left_base token"
                            src="/nomination_token.png" alt=""
                            (click)="nominatedPlayer(player)">
                     </div>
                   }
-                  <img class="nominated_base" src="/nomination_base.png" alt="" (click)="wasNominated(player)">
+                  <img class="right_base" src="/nominated_base.png" alt="" (click)="wasNominated(player)">
                   @if(!player.wasIndicated){
-                    <img class="nominated_base  token"
-                         src="/nomination_token.png" alt=""
+                    <img class="right_base  token"
+                         src="/nominated_token.png" alt=""
                          (click)="wasNominated(player)">
                   }
                 </div>
+              } @else{
+                <div class="nomination">
+                  <div class="token_container">
+                    <img class="center_base" src="/ghost_vote_base.png" alt="" (click)="spendDeadVote(player)">
+                    @if(player.hasDeadVote){
+                      <img class="center_base token"
+                           src="/ghost_vote_token.png" alt=""
+                           (click)="spendDeadVote(player)">
+                    }
+                  </div>
+                </div>
               }
-              <div class="nomination">
-              </div>
+
+            } @else {
+              @if([Roles.VIRGIN, Roles.SLAYER].includes(player.playerRole.roleName)){
+                <div class="token_container">
+                  <img class="center_base" src="/ability_base.png" alt="" (click)="spendAbility(player)">
+                  @if(player.hasAbility && !player.isDead){
+                    <img class="center_base token"
+                         src="/ability_token.png" alt=""
+                         (click)="spendAbility(player)">
+                  }
+                </div>
+              }
             }
           } @else{
             @if (player.playerRole.roleName === Roles.MONK) {
@@ -282,9 +303,11 @@
   <img class="top_flag" src="/topFlag.png" alt="">
   @if(isDay){
     @if(!executeMode){
+      <h1>Talk</h1>
       <img class="background_flag" src="/talk_round.png" alt="">
       <img class="bottom_flag" src="/guillotineFlag.png" alt="" (click)="changeMode()">
     } @else {
+      <h1>Nominate</h1>
       <img class="background_flag" src="/guillotine_round.png" alt="">
       <img class="bottom_flag" src="/talkFlag.png" alt="" (click)="changeMode()">
     }

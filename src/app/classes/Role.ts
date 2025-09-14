@@ -76,6 +76,7 @@ export enum wakeFirstNight{
   SPY = "Spy",
   WASHERWOMAN = "Washerwoman",
   LIBRARIAN = "Librarian",
+  INVESTIGATOR = "Investigator",
   CHEF = "Chef",
   EMPATH = "Empath",
   FORTUNE_TELLER = "Fortune Teller",

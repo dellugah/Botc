@@ -22,10 +22,10 @@ export class Player {
   set canNominate(value: boolean) {
     this._canNominate = value;
   }
-  get hasDeadVoters(): boolean {
+  get hasDeadVote(): boolean {
     return this._hasDeadVote;
   }
-  set hasDeadVoters(value: boolean) {
+  set hasDeadVote(value: boolean) {
     this._hasDeadVote = value;
   }
   get isMarkedForDeath(): boolean {

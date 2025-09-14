@@ -3,7 +3,7 @@
   padding-top: 2cqw;
   position: absolute;
   font-family: verdana, sans-serif;
-  font-size: .8cqw;
+  font-size: .75cqw;
   right: 0;
   top: 0;
   width: 13%;
@@ -26,7 +26,7 @@
   padding-top: 2cqw;
   position: absolute;
   font-family: verdana, sans-serif;
-  font-size: .8cqw;
+  font-size: .75cqw;
   left: 0;
   top: 0;
   width: 13%;
@@ -172,7 +172,7 @@
   position: absolute;
   z-index: 2;
   top: -.8cqw;
-  left: 1.2cqw;
+  left: 1.3cqw;
   height: 11.5cqw;
   width: auto;
   pointer-events: none;
@@ -249,7 +249,7 @@
   align-items: center;
   display: flex;
 }
-.nomination_base{
+.left_base{
   position: absolute;
   height: 140%;
   top: -4%;
@@ -257,7 +257,7 @@
   left: 33%;
   filter: drop-shadow(0px 3px 3px #000000);
 }
-.nominated_base{
+.right_base{
   position: absolute;
   height: 140%;
   top: -4%;
@@ -265,7 +265,14 @@
   right: 33%;
   filter: drop-shadow(0px 3px 3px #000000);
 }
-
+.center_base{
+  position: absolute;
+  height: 140%;
+  top: -4%;
+  width: auto;
+  left: 45%;
+  filter: drop-shadow(0px 3px 3px #000000);
+}
 .token{
   scale: .88;
   top: -15%;

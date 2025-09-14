@@ -57,20 +57,24 @@ export class PlayerTag implements OnInit{
   }
 
   cycleDay(): void {
-    if(this.isDay){
+    if(this.isDay){//move to the night phase
+      this.renovateVotes(); //renovate votes & nominations
       this.executeMode = false; //resets the execute mode
       this.roundCounter ++; //increases the round counter
       this.isDay = !this.isDay ; //changes the day to night
       this.roundCycle = "night"; //changes the round cycle to night
       this.opposite = "/day_flag.png"; //changes the opposite flag to day
       this.buildWakePlayerSequence(); //builds the wake player sequence
+      this.resetDemonMark() //reset demon mark for night phase
+      this.resetPoisonMark() //reset poison mark for night phase
     }
-    else{
+    else{//move to day phase
       this.isDawn = false; //resets the dawn flag
       this.wakeIndex = 0; //resets the wake index
       this.isDay = !this.isDay; //changes the day to night
       this.roundCycle = "day"; //changes the round cycle to day
       this.opposite = "/night_flag.png"; //changes the opposite flag to night
+      this.resetMonkMark() //reset monk mark for night phase
     }
 
   }
@@ -175,8 +179,53 @@ export class PlayerTag implements OnInit{
   nominatedPlayer(self : Player): void{
     self.canNominate = !self.canNominate;
   }
+
   wasNominated(self : Player): void{
     self.wasIndicated = !self.wasIndicated;
+  }
+
+  spendDeadVote(self : Player): void {
+    self.hasDeadVote = !self.hasDeadVote;
+  }
+
+  renovateVotes(): void {
+    Object.values(this.players.players).forEach(p => {
+      if(!p.isDead){
+        p.canNominate = true;
+        p.wasIndicated = false;
+      }
+    })
+  }
+
+  resetDemonMark(): void {
+    Object.values(this.players.players).forEach(p => {
+      if(p.isMarkedForDeath){
+        p.isMarkedForDeath = false;
+      }
+    })
+    this.markedForDeathPlayer = null;
+  }
+
+  resetPoisonMark(): void {
+    Object.values(this.players.players).forEach(p => {
+      if(p.isPoisoned){
+        p.isPoisoned = false;
+      }
+    })
+    this.poisonedPlayer = null;
+  }
+
+  resetMonkMark(): void{
+    Object.values(this.players.players).forEach(p => {
+      if(p.isProtected){
+        p.isProtected = false;
+      }
+    })
+    this.protectedPlayer = null;
+  }
+
+  spendAbility(self : Player): void {
+    self.hasAbility = !self.hasAbility;
   }
 
 
