@@ -81,7 +81,7 @@
               <select [(ngModel)]="protectedPlayer" (ngModelChange)="monkTarget(player, $event)">
                 <option [ngValue]=""></option>
                 @for (p of players.players; track p) {
-                  <option [ngValue]="p">{{ p.playerName }}</option>
+                  <option [ngValue]="p">{{ p.playerName }} ({{p.playerRole.roleName.valueOf()}})</option>
                 }
               </select>
               <!-- POISONER ABILITY -->
@@ -90,7 +90,7 @@
               <select [(ngModel)]="poisonedPlayer" (ngModelChange)="poisonerTarget($event)">
                 <option [ngValue]=""></option>
                 @for (p of players.players; track p) {
-                  <option [ngValue]="p">{{ p.playerName }}</option>
+                  <option [ngValue]="p">{{ p.playerName }}  ({{p.playerRole.roleName.valueOf()}})</option>
                 }
               </select>
               <!-- FORTUNE TELLER / EMPATH ABILITY -->
@@ -99,15 +99,15 @@
                 <h2>Choose:</h2>
                 <select>
                   <option value="1"></option>
-                  @for (player of players.players; track player) {
-                    <option [ngValue]="player">{{ player.playerName }}</option>
+                  @for (p of players.players; track p) {
+                    <option [ngValue]="player">{{ p.playerName }}  ({{p.playerRole.roleName.valueOf()}})</option>
                   }
                 </select>
                 <h2>and</h2>
                 <select>
                   <option value="1"></option>
-                  @for (player of players.players; track player) {
-                    <option [ngValue]="player">{{ player.playerName }}</option>
+                  @for (p of players.players; track p) {
+                    <option [ngValue]="player">{{ player.playerName }}  ({{p.playerRole.roleName.valueOf()}})</option>
                   }
                 </select>
                 <h2>Learn:</h2>
@@ -130,9 +130,9 @@
               } @else{
                 <select>
                   <option value=" "></option>
-                  @for (player of players.players; track player) {
+                  @for (p of players.players; track p) {
                     @if(player.isDead){
-                      <option [ngValue]="player">{{ player.playerRole.roleName }}</option>
+                      <option [ngValue]="p">{{ p.playerRole.roleName }}  ({{p.playerRole.roleName.valueOf()}})</option>
                     }
                   }
                 </select>
@@ -152,6 +152,7 @@
                 @for (role of Object.values(Minion); track role) {
                   <option [ngValue]="role">{{ role }}</option>
                 }
+                <option [ngValue]="Roles.IMP">{{ Roles.IMP.valueOf() }}</option>
               </select>
               <!-- IMP ABILITY -->
             } @else if (player.playerRole.roleName === Roles.IMP) {
@@ -159,7 +160,7 @@
               <select [(ngModel)]="markedForDeathPlayer" (ngModelChange)="markForDeath(player, $event)">
                 <option [ngValue]="null"></option>
                 @for (p of players.players; track p) {
-                  <option [ngValue]="p">{{ p.playerName }}</option>
+                  <option [ngValue]="p">{{ p.playerName }}  ({{p.playerRole.roleName.valueOf()}})</option>
                 }
               </select>
               <!-- RAVEN KEEPER ABILITY -->
@@ -168,8 +169,8 @@
                 <h2>Choose:</h2>
                 <select>
                   <option value=" "></option>
-                  @for (player of players.players; track player) {
-                    <option [ngValue]="player">{{ player.playerName }}</option>
+                  @for (p of players.players; track p) {
+                    <option [ngValue]="p">{{ p.playerName }} ({{p.playerRole.roleName.valueOf()}})</option>
                   }
                 </select>
                 <h2>Sees:</h2>
@@ -193,15 +194,15 @@
               <h2>Sees:</h2>
               <select>
                 <option value=" "></option>
-                @for (player of players.players; track player) {
-                  <option [ngValue]="player">{{ player.playerName }}</option>
+                @for (p of players.players; track p) {
+                  <option [ngValue]="p">{{ p.playerName }} ({{p.playerRole.roleName.valueOf()}})</option>
                 }
               </select>
               <h2>and:</h2>
               <select>
                 <option value=" "></option>
-                @for (player of players.players; track player) {
-                  <option [ngValue]="player">{{ player.playerName }}</option>
+                @for (p of players.players; track p) {
+                  <option [ngValue]="p">{{ p.playerName }}  ({{p.playerRole.roleName.valueOf()}})</option>
                 }
               </select>
               <h2>sees:</h2>
@@ -223,8 +224,8 @@
               <h2>and:</h2>
               <select>
                 <option value=" "></option>
-                @for (player of players.players; track player) {
-                  <option [ngValue]="player">{{ player.playerName }}</option>
+                @for (p of players.players; track p) {
+                  <option [ngValue]="p">{{ p.playerName }}  ({{p.playerRole.roleName.valueOf()}})</option>
                 }
               </select>
               <h2>sees:</h2>
@@ -239,15 +240,15 @@
               <h2>Sees:</h2>
               <select>
                 <option value=" "></option>
-                @for (player of players.players; track player) {
-                  <option [ngValue]="player">{{ player.playerName }}</option>
+                @for (p of players.players; track p) {
+                  <option [ngValue]="p">{{ p.playerName }} ({{p.playerRole.roleName.valueOf()}})</option>
                 }
               </select>
               <h2>and:</h2>
               <select>
                 <option value=" "></option>
-                @for (player of players.players; track player) {
-                  <option [ngValue]="player">{{ player.playerName }}</option>
+                @for (p of players.players; track p) {
+                  <option [ngValue]="p">{{ p.playerName }}  ({{p.playerRole.roleName.valueOf()}})</option>
                 }
               </select>
               <h2>sees:</h2>

@@ -1,29 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {Players} from '../../classes/Players';
-import {Minions, Outsiders, Role, Roles, Townsfolk, wakeFirstNight, wakeOtherNights} from '../../classes/Role';
-import {Player} from '../../classes/Player';
-import {FormsModule} from '@angular/forms';
+import {Player} from './Player';
+import {Role, Roles, wakeFirstNight, wakeOtherNights} from './Role';
+import {Players} from './Players';
 
-@Component({
-  selector: 'app-player-tag',
-  imports: [
-    FormsModule
-  ],
-  templateUrl: './player-tag.html',
-  styleUrl: './player-tag.css'
-})
-
-export class PlayerTag implements OnInit{
+export class GameMechanic {
   roundCounter: number = 0;
   isDay: boolean = false;
   roundCycle = "night";
   opposite: string = "/day_flag.png";
-
-  protected readonly Roles = Roles;
-  protected readonly Object = Object;
-  protected readonly Townsfolk = Townsfolk;
-  protected readonly Outsider = Outsiders;
-  protected readonly Minion = Minions;
 
   protectedPlayer: Player | null = null;
   poisonedPlayer: Player | null = null;
@@ -37,42 +20,8 @@ export class PlayerTag implements OnInit{
 
   executeMode: boolean = false;
 
-
   constructor(protected players: Players) {
     this.players = players;
-  }
-
-  ngOnInit() {
-
-    //CHANGE ONCE GATHER PLAYERS IS DONE
-    let player: Player;
-
-    player = new Player(Roles.IMP);
-    player.playerName = "Alice";
-    this.players.players.push(player);
-
-    player = new Player(Roles.SPY);
-    player.playerName = "Bob";
-    this.players.players.push(player);
-
-    player = new Player(Roles.RECLUSE);
-    player.playerName = "Charlie";
-    this.players.players.push(player);
-
-    player = new Player(Roles.EMPATH);
-    player.playerName = "Dave";
-    this.players.players.push(player);
-
-    player = new Player(Roles.SLAYER);
-    player.playerName = "Eve";
-    this.players.players.push(player);
-
-    player = new Player(Roles.MONK);
-    player.playerName = "Frank";
-    this.players.players.push(player);
-
-    this.buildWakePlayerSequence();
-    console.log(this.wakePlayer);
   }
 
   cycleDay(): void {
@@ -163,11 +112,11 @@ export class PlayerTag implements OnInit{
   }
 
   poisonerTarget(player: Player): void {
-      Object.values(this.players.players).forEach(p => {
-        if (p.isPoisoned) {
-          p.isPoisoned = false;
-        }
-      })
+    Object.values(this.players.players).forEach(p => {
+      if (p.isPoisoned) {
+        p.isPoisoned = false;
+      }
+    })
     player.isPoisoned = true;
   }
 
@@ -246,7 +195,4 @@ export class PlayerTag implements OnInit{
   spendAbility(self : Player): void {
     self.hasAbility = !self.hasAbility;
   }
-
-
-  protected readonly Outsiders = Outsiders;
 }
