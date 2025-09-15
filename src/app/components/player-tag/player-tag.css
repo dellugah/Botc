@@ -67,8 +67,10 @@
   z-index: -2;
   cursor: pointer;
 }
-
-.wake_player{
+.highlight-player{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 9cqw;
   width: 90%;
@@ -277,5 +279,14 @@
   scale: .88;
   top: -15%;
   height: 140%;
+  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0));
+}
+
+.token_image{
+  left: 46%;
+  height:80%;
+  width: auto;
+  z-index: 1;
+  pointer-events: none;
   filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0));
 }

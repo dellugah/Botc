@@ -79,3 +79,9 @@ app-player-tag{
 .good{
   color: #0077ff;
 }
+.stroke{
+  margin-top: -1.5cqw;
+  font-weight: bold;
+  font-size: 1cqw;
+  color: #ffffff;
+}

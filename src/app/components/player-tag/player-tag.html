@@ -24,7 +24,7 @@
                 <img src="{{player.registeredAs.roleImage.toLowerCase()}}" alt="" width="auto" height="200%">
               }
             </div>
-            <h3 class="player_name">{{player.playerName}}</h3>
+            <h2 class="player_name">{{player.playerName}}</h2>
           </div>
         </div>
         <div class="player_ability">
@@ -68,9 +68,11 @@
                 <div class="token_container">
                   <img class="center_base" src="/ability_base.png" alt="" (click)="spendAbility(player)">
                   @if(player.hasAbility && !player.isDead){
+                    <img class="center_base token_image" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="" width="auto" height="200%">
                     <img class="center_base token"
                          src="/ability_token.png" alt=""
                          (click)="spendAbility(player)">
+
                   }
                 </div>
               }
@@ -308,14 +310,22 @@
       <img class="background_flag" src="/talk_round.png" alt="">
       <img class="bottom_flag" src="/guillotineFlag.png" alt="" (click)="changeMode()">
     } @else {
-      <h1>Nominate</h1>
+      <h1>Block</h1>
+      <div class="highlight-player">
+        <img src="{{blockPlayer.playerRole.toLowerCase()}}" alt=""
+             width="90%" height="auto"
+             (click)="resetBlock()">
+        <span class="stroke"><h1>{{blockPlayer.playerName}}</h1></span>
+      </div>
       <img class="background_flag" src="/guillotine_round.png" alt="">
       <img class="bottom_flag" src="/talkFlag.png" alt="" (click)="changeMode()">
     }
   } @else{
     <h1>Wake</h1>
-    <img class="wake_player" src="{{wakePlayer.toLowerCase()}}" alt="">
-    <img class="next_wake" src="" alt="">
+    <div class="highlight-player">
+      <img src="{{wakePlayer.playerRole.toLowerCase()}}" alt="" width="90%" height="auto">
+      <span class="stroke"><h1>{{wakePlayer.playerName}}</h1></span>
+    </div>
     <img class="background_flag" src="/wake_order.png" alt="">
     <img class="bottom_flag" src="/wakeFlag.png" alt="" (click)="wakePlayerSequence()">
   }

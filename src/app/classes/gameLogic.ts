@@ -2,7 +2,7 @@ import {Player} from './Player';
 import {Role, Roles, wakeFirstNight, wakeOtherNights} from './Role';
 import {Players} from './Players';
 
-export class GameMechanic {
+export class gameLogic {
   roundCounter: number = 0;
   isDay: boolean = false;
   roundCycle = "night";
@@ -14,7 +14,22 @@ export class GameMechanic {
 
   firstNightPlayers: Player[] = [];
   otherNightPlayers: Player[] = [];
-  wakePlayer: string = "";
+
+  wakePlayer: {
+    playerRole: string,
+    playerName: string,
+  } = {
+    playerRole: "",
+    playerName: ""
+  };
+
+  blockPlayer: {
+    playerRole: string,
+    playerName: string,
+  } = {
+    playerRole: "",
+    playerName: ""
+  }
   wakeIndex: number = 0;
   isDawn: boolean = false;
 
@@ -23,6 +38,8 @@ export class GameMechanic {
   constructor(protected players: Players) {
     this.players = players;
   }
+
+  //GAME FUNCTIONS
 
   cycleDay(): void {
     if(this.isDay){//move to the night phase
@@ -35,6 +52,7 @@ export class GameMechanic {
       this.buildWakePlayerSequence(); //builds the wake player sequence
       this.resetDemonMark() //reset demon mark for night phase
       this.resetPoisonMark() //reset poison mark for night phase
+      this.resetBlock()
     }
     else{//move to day phase
       this.isDawn = false; //resets the dawn flag
@@ -50,7 +68,6 @@ export class GameMechanic {
   changeMode(): void {
     this.executeMode = !this.executeMode;
   }
-
   //improve to see players in real time
   buildWakePlayerSequence(){
 
@@ -87,17 +104,24 @@ export class GameMechanic {
     const list = this.roundCounter > 0 ? this.otherNightPlayers : this.firstNightPlayers;
 
     if (this.wakeIndex >= list.length) {
-      this.wakePlayer = "";
+      this.wakePlayer.playerRole = "";
+      this.wakePlayer.playerName = "";
       this.isDawn = true;
       return;
     }
     else {
-      this.wakePlayer = list[this.wakeIndex].playerRole.roleImage;
+      this.wakePlayer.playerRole = list[this.wakeIndex].playerRole.roleImage;
+      this.wakePlayer.playerName = list[this.wakeIndex].playerName;
       this.wakeIndex++;
     }
 
     // optional debug
     console.log(this.wakeIndex, list.length);
+  }
+
+  nominatePlayer( player: Player): void {
+    this.blockPlayer.playerRole = player.playerRole.roleImage;
+    this.blockPlayer.playerName = player.playerName;
   }
 
   monkTarget(self: Player, player: Player): void {
@@ -150,6 +174,9 @@ export class GameMechanic {
 
   wasNominated(self : Player): void{
     self.wasIndicated = !self.wasIndicated;
+    if(self.wasIndicated){
+      this.nominatePlayer(self);
+    }
   }
 
   spendDeadVote(self : Player): void {
@@ -194,5 +221,9 @@ export class GameMechanic {
 
   spendAbility(self : Player): void {
     self.hasAbility = !self.hasAbility;
+  }
+
+  resetBlock() : void{
+    this.blockPlayer = {playerRole: "", playerName: ""}; //resets the block player
   }
 }
