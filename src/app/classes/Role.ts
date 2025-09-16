@@ -54,7 +54,7 @@ export enum Townsfolk{
   UNDERTAKER = "Undertaker",
   EMPATH = "Empath",
   FORTUNE_TELLER = "Fortune Teller",
-  MONK = "Monk",
+  MONK = "Monk"
 }
 
 export enum Outsiders{

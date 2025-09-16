@@ -43,16 +43,17 @@ export class gameLogic {
 
   cycleDay(): void {
     if(this.isDay){//move to the night phase
-      this.renovateVotes(); //renovate votes & nominations
       this.executeMode = false; //resets the execute mode
       this.roundCounter ++; //increases the round counter
       this.isDay = !this.isDay ; //changes the day to night
       this.roundCycle = "night"; //changes the round cycle to night
       this.opposite = "/day_flag.png"; //changes the opposite flag to day
+      this.renovateVotes(); //renovate votes & nominations
+      this.resetDemonMark(); //reset demon mark for night phase
+      this.resetPoisonMark(); //reset poison mark for night phase
+      this.executeBlockPlayer(); //execute block player
       this.buildWakePlayerSequence(); //builds the wake player sequence
-      this.resetDemonMark() //reset demon mark for night phase
-      this.resetPoisonMark() //reset poison mark for night phase
-      this.resetBlock()
+      this.resetBlock(); //reset block player
     }
     else{//move to day phase
       this.isDawn = false; //resets the dawn flag
@@ -60,7 +61,7 @@ export class gameLogic {
       this.isDay = !this.isDay; //changes the day to night
       this.roundCycle = "day"; //changes the round cycle to day
       this.opposite = "/night_flag.png"; //changes the opposite flag to night
-      this.resetMonkMark() //reset monk mark for night phase
+      this.resetMonkMark(); //reset monk mark for night phase
     }
 
   }
@@ -68,6 +69,7 @@ export class gameLogic {
   changeMode(): void {
     this.executeMode = !this.executeMode;
   }
+
   //improve to see players in real time
   buildWakePlayerSequence(){
 
@@ -122,17 +124,6 @@ export class gameLogic {
   nominatePlayer( player: Player): void {
     this.blockPlayer.playerRole = player.playerRole.roleImage;
     this.blockPlayer.playerName = player.playerName;
-  }
-
-  monkTarget(self: Player, player: Player): void {
-    if(!self.isPoisoned && !self.isDrunk){
-      Object.values(this.players.players).forEach(p => {
-        if(p.isProtected){
-          p.isProtected = false;
-        }
-      })
-      player.isProtected = true;
-    }
   }
 
   poisonerTarget(player: Player): void {
@@ -210,6 +201,15 @@ export class gameLogic {
     this.poisonedPlayer = null;
   }
 
+  spendAbility(self : Player): void {
+    self.hasAbility = !self.hasAbility;
+  }
+
+  resetBlock() : void{
+    this.blockPlayer = {playerRole: "", playerName: ""}; //resets the block player
+  }
+
+  //TROUBLE BREWING SPECIFIC
   resetMonkMark(): void{
     Object.values(this.players.players).forEach(p => {
       if(p.isProtected){
@@ -219,11 +219,25 @@ export class gameLogic {
     this.protectedPlayer = null;
   }
 
-  spendAbility(self : Player): void {
-    self.hasAbility = !self.hasAbility;
-  }
+  executeBlockPlayer(): void {
+    Object.values(this.players.players).forEach(p => {
+      console.log(p.playerRole.roleImage.valueOf().toLowerCase());
+      console.log(this.blockPlayer.playerRole);
+      if(p.playerRole.roleImage.valueOf().toLowerCase() == this.blockPlayer.playerRole.toLowerCase()){
+        p.isDead = true;
+        p.wasExecuted = true;
+      }
+    })
+}
 
-  resetBlock() : void{
-    this.blockPlayer = {playerRole: "", playerName: ""}; //resets the block player
+  monkTarget(self: Player, player: Player): void {
+    if(!self.isPoisoned && !self.isDrunk){
+      Object.values(this.players.players).forEach(p => {
+        if(p.isProtected){
+          p.isProtected = false;
+        }
+      })
+      player.isProtected = true;
+    }
   }
 }

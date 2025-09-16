@@ -56,6 +56,14 @@ export class PlayerTag extends gameLogic implements OnInit{
     player.playerName = "Frank";
     this.players.players.push(player);
 
+    player = new Player(Roles.VIRGIN);
+    player.playerName = "Grace";
+    this.players.players.push(player);
+
+    player = new Player(Roles.UNDERTAKER);
+    player.playerName = "Harry";
+    this.players.players.push(player);
+
     this.buildWakePlayerSequence();
     console.log(this.wakePlayer);
   }

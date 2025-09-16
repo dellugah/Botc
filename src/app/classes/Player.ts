@@ -1,17 +1,22 @@
 import {Role, Roles} from './Role';
 
 export class Player {
+  get wasExecuted(): boolean {
+    return this._wasExecuted;
+  }
+
+  set wasExecuted(value: boolean) {
+    this._wasExecuted = value;
+  }
   get scarletIsActive(): boolean {
     return this._scarletIsActive;
   }
-
   set scarletIsActive(value: boolean) {
     this._scarletIsActive = value;
   }
   get wasIndicated(): boolean {
     return this._wasIndicated;
   }
-
   set wasIndicated(value: boolean) {
     this._wasIndicated = value;
   }
@@ -115,13 +120,14 @@ export class Player {
   private _hasAbility: boolean = true;
   private _isDead: boolean = false;
   private _scarletIsActive: boolean = false;
+  private _wasExecuted: boolean = false;
 
   //ALIGNMENTS TRACKER
   private _isDrunk: boolean = false;
   private _isPoisoned: boolean = false;
   private _isProtected: boolean = false;
   private _isRedHearing: boolean = false;
-  private _isMarkedForDeath: boolean = false;
+  private _isMarkedForDeath: boolean = false; //trouble Brewing
 
 
   constructor(role: Roles) {

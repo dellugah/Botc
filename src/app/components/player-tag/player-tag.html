@@ -12,7 +12,11 @@
         <div class="player_profile">
           <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="class_icon" (click)="(player.isDead = true)">
           @if(player.isDead){
-            <img class="death_token active" src="/death_token.png" alt="dead" (click)="(player.isDead = false)">
+            @if(player.wasExecuted){
+              <img class="death_token active" src="/executed_token.png" alt="dead" (click)="(player.isDead = false)">
+            } @else {
+              <img class="death_token active" src="/death_token.png" alt="dead" (click)="(player.isDead = false)">
+            }
           }
           @else{
             <img class="death_token" src="/death_token.png" alt="dead">
@@ -133,7 +137,7 @@
                 <select>
                   <option value=" "></option>
                   @for (p of players.players; track p) {
-                    @if(player.isDead){
+                    @if(p.isDead && p.wasExecuted){
                       <option [ngValue]="p">{{ p.playerRole.roleName }}  ({{p.playerRole.roleName.valueOf()}})</option>
                     }
                   }
