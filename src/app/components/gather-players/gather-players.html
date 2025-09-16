@@ -1,1 +1,36 @@
-<p>gather-players works!</p>
+<div class="main-menu-board">
+  <img class="light" src="/main_menu/Light.png" alt="">
+  <img class="left_selection" src="/main_menu/left_selection.png" alt="">
+  <img class="stripe" src="/main_menu/stripe.png" alt="">
+  <div class="player_list">
+    <img class="player_sheet" src="/main_menu/add.png" alt="" (click)="addPlayer()">
+    @for (p of players.players; track p) {
+      <div class="player_paper">
+        <h2 class="player_name">player name</h2>
+        <img class="player_sheet" src="/main_menu/player.png" alt="">
+      </div>
+    }
+  </div>
+
+
+  <div class="evil_letter">
+    <div class="role_letter_container" >
+      <img class="role_letter" src="/main_menu/evil-letter-bottom.png" alt="">
+      <img class="role_letter_token" src="/main_menu/register-token-evil.png" alt="">
+      <img class="role_letter" src="/main_menu/evil-letter-top.png" alt="">
+    </div>
+  </div>
+
+  <div class="good_letter">
+    <div class="role_letter_container" >
+      <img class="role_letter" src="/main_menu/good-letter-bottom.png" alt="">
+      <img class="role_letter_token" src="/main_menu/register-token-good.png" alt="">
+      <img class="role_letter" src="/main_menu/good-letter-top.png" alt="">
+    </div>
+  </div>
+
+  <img class="main_menu_letter" src="/main_menu/main-menu-letter.png" alt="">
+
+
+  <img class="wood_board" src="/main_menu/background_board.png" alt="">
+</div>

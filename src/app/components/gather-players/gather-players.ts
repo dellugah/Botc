@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {Players} from '../../classes/Players';
+import {Player} from '../../classes/Player';
+import {Role, Roles} from '../../classes/Role';
 
 @Component({
   selector: 'app-gather-players',
@@ -7,5 +10,15 @@ import { Component } from '@angular/core';
   styleUrl: './gather-players.css'
 })
 export class GatherPlayers {
+
+  constructor(protected players: Players) {
+    this.players = players;
+  }
+
+  addPlayer(): void {
+    let player : Player = new Player(Roles.IMP)
+    player.playerName = "";
+    this.players.players.push(player);
+  }
 
 }
