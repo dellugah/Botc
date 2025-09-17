@@ -29,41 +29,6 @@ export class PlayerTag extends gameLogic implements OnInit{
 
   ngOnInit() {
 
-    //CHANGE ONCE GATHER PLAYERS IS DONE
-    let player: Player;
-
-    player = new Player(Roles.IMP);
-    player.playerName = "Alice";
-    this.players.players.push(player);
-
-    player = new Player(Roles.SPY);
-    player.playerName = "Bob";
-    this.players.players.push(player);
-
-    player = new Player(Roles.RECLUSE);
-    player.playerName = "Charlie";
-    this.players.players.push(player);
-
-    player = new Player(Roles.EMPATH);
-    player.playerName = "Dave";
-    this.players.players.push(player);
-
-    player = new Player(Roles.SLAYER);
-    player.playerName = "Eve";
-    this.players.players.push(player);
-
-    player = new Player(Roles.MONK);
-    player.playerName = "Frank";
-    this.players.players.push(player);
-
-    player = new Player(Roles.VIRGIN);
-    player.playerName = "Grace";
-    this.players.players.push(player);
-
-    player = new Player(Roles.UNDERTAKER);
-    player.playerName = "Harry";
-    this.players.players.push(player);
-
     this.buildWakePlayerSequence();
     console.log(this.wakePlayer);
   }

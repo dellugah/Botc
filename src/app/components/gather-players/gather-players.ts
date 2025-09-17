@@ -16,9 +16,17 @@ export class GatherPlayers {
   }
 
   addPlayer(): void {
-    let player : Player = new Player(Roles.IMP)
-    player.playerName = "";
+    let player : Player = new Player();
     this.players.players.push(player);
+  }
+
+
+  namePlayer(player: Player, name: string): void {
+    player.playerName = name;
+  }
+
+  assignedRole(player: Player, role: Roles): void {
+    player.playerRole = new Role(role);
   }
 
 }

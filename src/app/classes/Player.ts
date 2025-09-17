@@ -114,6 +114,7 @@ export class Player {
   private _playerRole: Role | undefined;
   private _canNominate: boolean = true;
   private _wasIndicated: boolean = false;
+  private hasRole: boolean = false;
 
   //DEATH TRACKER
   private _hasDeadVote: boolean = true;
@@ -130,10 +131,9 @@ export class Player {
   private _isMarkedForDeath: boolean = false; //trouble Brewing
 
 
-  constructor(role: Roles) {
+  buildRole( role : Roles) : void {
     this.playerRole = new Role(role);
     this.registeredAs = new Role(role);
-
     switch (role) {
       case Roles.SPY:
       case Roles.POISONER:
