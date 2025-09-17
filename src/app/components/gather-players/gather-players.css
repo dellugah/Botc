@@ -25,6 +25,7 @@
 }
 
 .left_selection{
+
   position: absolute;
   height: 100%;
   left: 0;
@@ -91,9 +92,10 @@
 }
 
 .player_list{
-  max-height: 100%;
   position: absolute;
-  left: 1.3%;
+  height: 100%;
+  width: 70%;
+  left: 1.8%;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -110,13 +112,14 @@
 
 .player_name{
   font-size: 2.3cqh;
-  padding-top: 4.5cqh;
-  padding-left: 2cqh;
+  margin-top: 7cqh;
+  left: 2%;
   position: absolute;
 }
 
 .player_paper{
   overflow: visible;
+  margin: 0;
 }
 
 .role_letter_container{

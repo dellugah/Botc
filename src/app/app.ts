@@ -5,7 +5,7 @@ import {GatherPlayers} from './components/gather-players/gather-players';
 
 @Component({
   selector: 'app-root',
-  imports: [GatherPlayers],
+  imports: [GatherPlayers, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

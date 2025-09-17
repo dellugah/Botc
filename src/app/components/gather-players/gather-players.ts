@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Players} from '../../classes/Players';
 import {Player} from '../../classes/Player';
 import {Role, Roles} from '../../classes/Role';
 import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-gather-players',
@@ -18,7 +19,7 @@ export class GatherPlayers {
   playerName : string = "";
 
 
-  constructor(protected players: Players) {
+  constructor(protected players: Players, protected router: Router) {
     this.players = players;
   }
 
@@ -35,15 +36,23 @@ export class GatherPlayers {
     player.playerRole = new Role(role);
   }
 
-  doneButton(): void {
+  backToMenu(): void {
+
     this.activeMenu = PlayerMenu.MAIN_MENU;
+  }
+
+  playGame() : void{
+    this.router.navigate(['/player-tag'])
   }
   add(): void {
     if(this.playerName == ""){
       alert("Please enter a name");
     }
     else{
-      this.players.players.unshift(new Player(this.playerName));
+      let p = new Player(this.playerName);
+      p.playerRole = new Role(Roles.IMP);
+      p.registeredAs = new Role(Roles.IMP);
+      this.players.players.unshift(p);
       this.playerName = "";
     }
   }

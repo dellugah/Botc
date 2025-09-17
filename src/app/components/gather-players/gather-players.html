@@ -3,11 +3,29 @@
   <img class="left_selection" src="/main_menu/left_selection.png" alt="">
   <img class="stripe" src="/main_menu/stripe.png" alt="">
   <div class="player_list">
-    <img class="player_sheet" src="/main_menu/add.png" alt="" (click)="addPlayer()">
+    @switch (activeMenu.valueOf()){
+      @case (0) {
+        <div class="player_paper">
+          <img class="player_sheet" src="/main_menu/main_menu.png" alt="" (click)="addPlayer()">
+        </div>
+
+      }
+      @case(1) {
+        <div class="player_paper">
+          <img class="player_sheet" src="/main_menu/add_player.png" alt="" (click)="backToMenu()">
+        </div>
+      }
+      @case(2) {
+        <h1>Settings</h1>
+      }
+      @default {
+
+      }
+    }
     @for (p of players.players; track p) {
       <div class="player_paper">
         <h2 class="player_name">{{p.playerName}}</h2>
-        <img class="player_sheet" src="/main_menu/player.png" alt="">
+        <img class="player_sheet" src="/main_menu/player.png" alt="" (click)="playGame()">
       </div>
     }
   </div>
@@ -31,6 +49,10 @@
       </div>
 
       <img class="main_menu_letter" src="/main_menu/main-menu-letter.png" alt="">
+
+      @if(players.players.length >= 5){
+        <img class="done_button" src="/main_menu/play.png" alt="" (click)="playGame()">
+      }
     }
     @case(1){
 
@@ -50,12 +72,11 @@
           <img class="role_letter" src="/main_menu/good-letter-top.png" alt="">
         </div>
       </div>
-      <img class="done_button" src="/main_menu/done.png" alt="" (click)="doneButton()">
-      <img class="add_more_button" src="/main_menu/add_more.png" alt="" (click)="add()">
+      <img class="done_button" src="/main_menu/done.png" alt="" (click)="backToMenu()">
+      <img class="add_more_button" src="/main_menu/add.png" alt="" (click)="add()">
 
     }
-    @case(2){
-
+    @case(2){\
     }
     @default {
 
