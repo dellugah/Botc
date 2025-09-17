@@ -6,29 +6,60 @@
     <img class="player_sheet" src="/main_menu/add.png" alt="" (click)="addPlayer()">
     @for (p of players.players; track p) {
       <div class="player_paper">
+        <h2 class="player_name">{{p.playerName}}</h2>
         <img class="player_sheet" src="/main_menu/player.png" alt="">
       </div>
     }
   </div>
 
-  <div class="evil_letter">
-    <div class="role_letter_container" >
-      <img class="role_letter" src="/main_menu/evil-letter-bottom.png" alt="">
-      <img class="role_letter_token" src="/main_menu/register-token-evil.png" alt="">
-      <img class="role_letter" src="/main_menu/evil-letter-top.png" alt="">
-    </div>
-  </div>
+  @switch (activeMenu.valueOf()){
+    @case (0) {
+      <div class="evil_letter">
+        <div class="role_letter_container" >
+          <img class="role_letter" src="/main_menu/evil-letter-bottom.png" alt="">
+          <img class="role_letter_token" src="/main_menu/register-token-evil.png" alt="">
+          <img class="role_letter" src="/main_menu/evil-letter-top.png" alt="">
+        </div>
+      </div>
 
-  <div class="good_letter">
-    <div class="role_letter_container" >
-      <img class="role_letter" src="/main_menu/good-letter-bottom.png" alt="">
-      <img class="role_letter_token" src="/main_menu/register-token-good.png" alt="">
-      <img class="role_letter" src="/main_menu/good-letter-top.png" alt="">
-    </div>
-  </div>
+      <div class="good_letter">
+        <div class="role_letter_container" >
+          <img class="role_letter" src="/main_menu/good-letter-bottom.png" alt="">
+          <img class="role_letter_token" src="/main_menu/register-token-good.png" alt="">
+          <img class="role_letter" src="/main_menu/good-letter-top.png" alt="">
+        </div>
+      </div>
 
-  <img class="main_menu_letter" src="/main_menu/main-menu-letter.png" alt="">
+      <img class="main_menu_letter" src="/main_menu/main-menu-letter.png" alt="">
+    }
+    @case(1){
 
+      <textarea id="player_name" maxlength="13" [(ngModel)]="playerName"></textarea>
+      <img class="player_naming_menu" src="/main_menu/player_name_menu.png" alt="">
+      <div class="evil_letter">
+        <div class="role_letter_container" >
+          <img class="role_letter" src="/main_menu/evil-letter-bottom.png" alt="">
+          <img class="role_letter_token" src="/main_menu/register-token-evil.png" alt="">
+          <img class="role_letter" src="/main_menu/evil-letter-top.png" alt="">
+        </div>
+      </div>
+      <div class="good_letter">
+        <div class="role_letter_container" >
+          <img class="role_letter" src="/main_menu/good-letter-bottom.png" alt="">
+          <img class="role_letter_token" src="/main_menu/register-token-good.png" alt="">
+          <img class="role_letter" src="/main_menu/good-letter-top.png" alt="">
+        </div>
+      </div>
+      <img class="done_button" src="/main_menu/done.png" alt="" (click)="doneButton()">
+      <img class="add_more_button" src="/main_menu/add_more.png" alt="" (click)="add()">
 
+    }
+    @case(2){
+
+    }
+    @default {
+
+    }
+  }
   <img class="wood_board" src="/main_menu/background_board.png" alt="">
 </div>

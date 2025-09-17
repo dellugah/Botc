@@ -20,6 +20,7 @@
 
 .wood_board{
   height: 100%;
+  width: 100%;
   right: 0;
 }
 
@@ -41,7 +42,43 @@
   right: 0;
   z-index: 10;
   pointer-events: none;
+
+  mix-blend-mode: screen;            /* or whatever blend you prefer */
+  animation: light-flicker 6s infinite steps(1, end);
+
 }
+
+.player_naming_menu{
+  position: absolute;
+  height: 100%;
+  right: 0;
+  bottom: 15%;
+  filter: drop-shadow(-5px 5px 10px #000);
+  z-index: 6;
+}
+
+.done_button{
+  position: absolute;
+  height: 15%;
+  right: 2%;
+  bottom: 5%;
+  z-index: 6;
+  transform: rotate(-15deg);        /* rotate */
+  transform-origin: center center;
+  filter: drop-shadow(0px 8px 5px #000);
+}
+
+.add_more_button{
+  position: absolute;
+  height: 15%;
+  left: 22%;
+  bottom: 5%;
+  z-index: 6;
+  transform: rotate(15deg);        /* rotate */
+  transform-origin: center center;
+  filter: drop-shadow(0px 8px 5px #000);
+}
+
 .main_menu_letter{
   width: 40%;
   position: absolute;
@@ -72,8 +109,9 @@
 }
 
 .player_name{
-  padding-top: 1.5cqw;
-  padding-left: 1.5cqw;
+  font-size: 2.3cqh;
+  padding-top: 4.5cqh;
+  padding-left: 2cqh;
   position: absolute;
 }
 
@@ -129,4 +167,56 @@
   width: 30%;
   transform: rotate(25deg);        /* rotate */
   transform-origin: center center;
+}
+
+
+#player_name{
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  width: 22%;
+  height: 7%;
+  font-size: 4cqh;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: #000000;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  resize: none;
+  transform: rotate(11.5deg);        /* rotate */
+  transform-origin: center center;
+  z-index: 10;
+  overflow-y: hidden;
+}
+
+#player_name:active{
+  border: none;
+}
+
+/*animations*/
+@keyframes light-flicker {
+  0%   { opacity: 1;   filter: brightness(1) }
+  4%   { opacity: .85; filter: brightness(.9) }
+  7%   { opacity: 1;   filter: brightness(1) }
+  9%   { opacity: .7;  filter: brightness(.8) }
+  10%  { opacity: 1;   filter: brightness(1) }
+  14%  { opacity: .4;  filter: brightness(.95) }
+  14.5% { opacity: 1;  filter: brightness(.9) }
+  14.6% { opacity: .1;  filter: brightness(.9) }
+  14.7% { opacity: 1;  filter: brightness(.9) }
+  14.8% { opacity: .1;  filter: brightness(.9) }
+  14.9% { opacity: 1;  filter: brightness(2) }
+  15%  { opacity: .1;   filter: brightness(1) }
+  15.5% { opacity: 1;  filter: brightness(.9) }
+  16%  { opacity: .3;  filter: brightness(.6) }
+  16.5% { opacity: 1;   filter: brightness(1) }
+  17%  { opacity: .3;  filter: brightness(.9) }
+  18%  { opacity: 1;   filter: brightness(1) }
+  22%  { opacity: .5;  filter: brightness(.6) }
+  23%  { opacity: 1;   filter: brightness(1) }
+  60%  { opacity: 1;   filter: brightness(1) }
+  62%  { opacity: .8;  filter: brightness(.9) }
+  64%  { opacity: 1;   filter: brightness(1) }
+  100% { opacity: 1;   filter: brightness(1) }
 }

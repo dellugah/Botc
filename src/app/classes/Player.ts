@@ -130,6 +130,9 @@ export class Player {
   private _isRedHearing: boolean = false;
   private _isMarkedForDeath: boolean = false; //trouble Brewing
 
+  constructor(playerName: string) {
+    this.playerName = playerName;
+  }
 
   buildRole( role : Roles) : void {
     this.playerRole = new Role(role);
