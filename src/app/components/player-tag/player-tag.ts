@@ -28,8 +28,6 @@ export class PlayerTag extends gameLogic implements OnInit{
   }
 
   ngOnInit() {
-
     this.buildWakePlayerSequence();
-    console.log(this.wakePlayer);
   }
 }

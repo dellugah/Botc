@@ -3,6 +3,8 @@ import {Role, Roles, wakeFirstNight, wakeOtherNights} from './Role';
 import {Players} from './Players';
 
 export class gameLogic {
+  roundPlayers: Map<number, Players> = new Map();
+
   roundCounter: number = 0;
   isDay: boolean = false;
   roundCycle = "night";
@@ -37,6 +39,7 @@ export class gameLogic {
 
   constructor(protected players: Players) {
     this.players = players;
+    this.buildRoundPlayers(this.players)
   }
 
   //GAME FUNCTIONS
@@ -44,17 +47,19 @@ export class gameLogic {
   cycleDay(): void {
     if(this.isDay){//move to the night phase
       this.executeMode = false; //resets the execute mode
-      this.roundCounter ++; //increases the round counter
       this.isDay = !this.isDay ; //changes the day to night
       this.roundCycle = "night"; //changes the round cycle to night
       this.opposite = "/day_flag.png"; //changes the opposite flag to day
-      this.renovateVotes(); //renovate votes & nominations
-      this.resetDemonMark(); //reset demon mark for night phase
-      this.resetPoisonMark(); //reset poison mark for night phase
       this.executeBlockPlayer(); //execute block player
-      this.buildWakePlayerSequence(); //builds the wake player sequence
-      this.resetBlock(); //reset block player
+      this.roundCounter ++; //increases the round counter
+
+      if(!this.roundPlayers.has(this.roundCounter)){
+        this.saveInfo();
+      } else{
+        this.copyInfo();
+      }
     }
+
     else{//move to day phase
       this.isDawn = false; //resets the dawn flag
       this.wakeIndex = 0; //resets the wake index
@@ -63,7 +68,6 @@ export class gameLogic {
       this.opposite = "/night_flag.png"; //changes the opposite flag to night
       this.resetMonkMark(); //reset monk mark for night phase
     }
-
   }
 
   changeMode(): void {
@@ -98,6 +102,73 @@ export class gameLogic {
       })
     }
     this.wakePlayerSequence();
+  }
+
+  //build round players with a copy of each player on the players array
+  buildRoundPlayers(players: Players): void {
+    const snapshot = this.clonePlayers(players);
+    this.roundPlayers.set(this.roundCounter - 1, snapshot);
+  }
+
+  saveInfo() : void{
+    this.buildRoundPlayers(this.players) //save Round on key map
+    this.renovateVotes(); //renovate votes & nominations
+    this.resetDemonMark(); //reset demon mark for night phase
+    this.resetPoisonMark(); //reset poison mark for night phase
+    this.buildWakePlayerSequence(); //builds the wake player sequence
+    this.resetBlock(); //reset block player
+  }
+
+  copyInfo() : void{
+    for (let i = this.roundCounter; i < this.roundPlayers.size; i++) {
+      if(this.roundPlayers.get(this.roundCounter)?.players[i] != this.players.players[i]){
+        this.saveInfo();
+        return;
+      }
+    }
+    this.players = this.clonePlayers(this.roundPlayers.get(this.roundCounter)!);
+  }
+
+  rollbackRound(): void {
+    if (this.roundCounter > 0) {
+      this.roundCounter--;
+      const snapshot = this.roundPlayers.get(this.roundCounter);
+      if (snapshot) {
+        // restore a fresh clone to avoid future mutations changing the stored snapshot
+        this.players = this.clonePlayers(snapshot);
+      }
+    }
+  }
+
+  private clonePlayers(source: Players): Players {
+    const clone = new Players();
+    Object.values(source.players).forEach(p => {
+      const np = new Player(p.playerName);
+      // copy relevant state
+      np.playerAlignment = p.playerAlignment;
+      np.comments = p.comments;
+      np.registeredAs = new Role(p.registeredAs.roleName);
+      np.playerRole = new Role(p.playerRole.roleName);
+
+      np.canNominate = p.canNominate;
+      np.wasIndicated = p.wasIndicated;
+
+      np.hasDeadVote = p.hasDeadVote;
+      np.hasAbility = p.hasAbility;
+      np.isDead = p.isDead;
+      np.diedOnRound = p.diedOnRound;
+      np.scarletIsActive = p.scarletIsActive;
+      np.wasExecuted = p.wasExecuted;
+
+      np.isDrunk = p.isDrunk;
+      np.isPoisoned = p.isPoisoned;
+      np.isProtected = p.isProtected;
+      np.isRedHearing = p.isRedHearing;
+      np.isMarkedForDeath = p.isMarkedForDeath;
+
+      clone.players.push(np);
+    });
+    return clone;
   }
 
   wakePlayerSequence(): void {
@@ -223,7 +294,9 @@ export class gameLogic {
     Object.values(this.players.players).forEach(p => {
       console.log(p.playerRole.roleImage.valueOf().toLowerCase());
       console.log(this.blockPlayer.playerRole);
-      if(p.playerRole.roleImage.valueOf().toLowerCase() == this.blockPlayer.playerRole.toLowerCase()){
+      if(p.playerRole.roleImage.valueOf().toLowerCase() == this.blockPlayer.playerRole.toLowerCase()
+        && p.playerName == this.blockPlayer.playerName){
+
         p.isDead = true;
         p.wasExecuted = true;
       }

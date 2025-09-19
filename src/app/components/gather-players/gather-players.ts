@@ -50,8 +50,8 @@ export class GatherPlayers {
     }
     else{
       let p = new Player(this.playerName);
-      p.playerRole = new Role(Roles.IMP);
-      p.registeredAs = new Role(Roles.IMP);
+      p.playerRole = new Role(Roles.NONE);
+      p.registeredAs = new Role(Roles.NONE);
       this.players.players.unshift(p);
       this.playerName = "";
     }

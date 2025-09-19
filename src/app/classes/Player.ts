@@ -1,6 +1,13 @@
 import {Role, Roles} from './Role';
 
 export class Player {
+  get diedOnRound(): number {
+    return this._diedOnRound;
+  }
+
+  set diedOnRound(value: number) {
+    this._diedOnRound = value;
+  }
   get wasExecuted(): boolean {
     return this._wasExecuted;
   }
@@ -114,12 +121,12 @@ export class Player {
   private _playerRole: Role | undefined;
   private _canNominate: boolean = true;
   private _wasIndicated: boolean = false;
-  private hasRole: boolean = false;
 
   //DEATH TRACKER
   private _hasDeadVote: boolean = true;
   private _hasAbility: boolean = true;
   private _isDead: boolean = false;
+  private _diedOnRound : number = Number.MAX_VALUE;
   private _scarletIsActive: boolean = false;
   private _wasExecuted: boolean = false;
 
@@ -134,7 +141,7 @@ export class Player {
     this.playerName = playerName;
   }
 
-  buildRole( role : Roles) : void {
+  buildRole(role : Roles) : void {
     this.playerRole = new Role(role);
     this.registeredAs = new Role(role);
     switch (role) {
@@ -150,5 +157,7 @@ export class Player {
         break;
     }
   }
+
+  clearRoles() :  void {}
 
 }
