@@ -1,0 +1,18 @@
+#role_selection_container{
+  height: 80cqh;
+  width: auto;
+  display: inline-block;
+  min-width: max-content;
+  min-height: max-content;
+  max-width: max-content;
+  max-height: max-content;
+  padding: 0;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+}
+
+.background{
+  height: 80cqh;
+  width: auto;
+}
