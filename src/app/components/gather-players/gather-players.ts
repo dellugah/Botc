@@ -15,8 +15,11 @@ import {Router} from '@angular/router';
 })
 export class GatherPlayers {
 
+  protected readonly PlayerMenu = PlayerMenu;
   activeMenu : PlayerMenu = PlayerMenu.MAIN_MENU;
   playerName : string = "";
+
+  playerToEdit : Player | null = null;
 
 
   constructor(protected players: Players, protected router: Router) {
@@ -56,7 +59,11 @@ export class GatherPlayers {
       this.playerName = "";
     }
   }
-  protected readonly PlayerMenu = PlayerMenu;
+
+  selectedRole(player: Player): void {
+    this.playerToEdit = player;
+    this.activeMenu = PlayerMenu.ASSIGNING_ROLE;
+  }
 }
 
 export enum PlayerMenu {

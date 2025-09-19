@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import {Role, Roles, wakeFirstNight, wakeOtherNights} from './Role';
+import {Role, Roles, WakeFirstNight, WakeOtherNights} from './Role';
 import {Players} from './Players';
 
 export class gameLogic {
@@ -80,7 +80,7 @@ export class gameLogic {
     //first night build
     if(this.roundCounter == 0){
       this.firstNightPlayers = [];
-      Object.values(wakeFirstNight).forEach(r => {
+      Object.values(WakeFirstNight).forEach(r => {
         Object.values(this.players.players).forEach(p => {
           if(p.playerRole.roleName.valueOf() == r.valueOf() && !p.isDead){
             console.log(p.playerRole.roleName);
@@ -92,7 +92,7 @@ export class gameLogic {
     else{
       //other nights build
       this.otherNightPlayers = [];
-      Object.values(wakeOtherNights).forEach(r => {
+      Object.values(WakeOtherNights).forEach(r => {
         Object.values(this.players.players).forEach(p => {
           if(p.playerRole.roleName.valueOf() == r.valueOf() && !p.isDead){
             console.log(p.playerRole.roleName);
@@ -156,7 +156,6 @@ export class gameLogic {
       np.hasDeadVote = p.hasDeadVote;
       np.hasAbility = p.hasAbility;
       np.isDead = p.isDead;
-      np.diedOnRound = p.diedOnRound;
       np.scarletIsActive = p.scarletIsActive;
       np.wasExecuted = p.wasExecuted;
 

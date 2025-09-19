@@ -79,6 +79,13 @@ app-player-tag{
 .good{
   color: #0077ff;
 }
+.neutral{
+  background: linear-gradient(90deg, #be1b1e 0%, #0e70b0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.player_conditions{}
 .stroke{
   margin-top: -1.5cqw;
   font-weight: bold;

@@ -94,7 +94,7 @@
 .player_list{
   position: absolute;
   height: 100%;
-  width: 70%;
+  width: 18%;
   left: 1.8%;
   z-index: 1;
   display: flex;
@@ -113,7 +113,7 @@
 .player_name{
   font-size: 2.3cqh;
   margin-top: 7cqh;
-  left: 2%;
+  left: 10%;
   position: absolute;
 }
 
@@ -123,6 +123,9 @@
 }
 
 .role_letter_container{
+  height: 100%;
+  width: 100%;
+  filter: drop-shadow(0px 10px 10px #000);
 }
 
 .role_letter{
@@ -172,6 +175,19 @@
   transform-origin: center center;
 }
 
+.position_evil{
+  position: absolute;
+  top: 7%;
+  right: 3%;
+  rotate: -30deg;
+}
+
+.position_good{
+  position: absolute;
+  top: 7%;
+  left: 20%;
+  rotate: 20deg;
+}
 
 #player_name{
   position: absolute;

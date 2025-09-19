@@ -74,7 +74,11 @@ export enum Minions{
   POISONER = "Poisoner"
 }
 
-export enum wakeFirstNight{
+export enum Demons{
+  IMP = "Imp"
+}
+
+export enum WakeFirstNight{
   POISONER = "Poisoner",
   SPY = "Spy",
   WASHERWOMAN = "Washerwoman",
@@ -86,7 +90,7 @@ export enum wakeFirstNight{
   BUTLER = "Butler"
 }
 
-export enum wakeOtherNights{
+export enum WakeOtherNights{
   POISONER = "Poisoner",
   MONK = "Monk",
   SPY = "Spy",
@@ -99,4 +103,36 @@ export enum wakeOtherNights{
   BUTLER = "Butler",
 }
 
+export enum TroubleBrewing {
+
+  //TOWNSFOLK
+  MONK = "Monk",
+  RAVEN_KEEPER = "Raven Keeper",
+  UNDERTAKER = "Undertaker",
+  EMPATH = "Empath",
+  FORTUNE_TELLER = "Fortune Teller",
+  WASHERWOMAN = "Washerwoman",
+  LIBRARIAN = "Librarian",
+  INVESTIGATOR = "Investigator",
+  CHEF = "Chef",
+  VIRGIN = "Virgin",
+  SLAYER = "Slayer",
+  SOLDIER = "Soldier",
+  MAYOR = "Mayor",
+
+  //OUTSIDERS
+  BUTLER = "Butler",
+  RECLUSE = "Recluse",
+  SAINT = "Saint",
+  DRUNK = "Drunk",
+
+  //MINIONS
+  POISONER = "Poisoner",
+  SPY = "Spy",
+  SCARLET_WOMAN = "Scarlet Woman",
+  BARON = "Baron",
+
+  //DEMONS
+  IMP = "Imp"
+}
 

@@ -1,13 +1,6 @@
-import {Role, Roles} from './Role';
+import {Demons, Minions, Role, Roles} from './Role';
 
 export class Player {
-  get diedOnRound(): number {
-    return this._diedOnRound;
-  }
-
-  set diedOnRound(value: number) {
-    this._diedOnRound = value;
-  }
   get wasExecuted(): boolean {
     return this._wasExecuted;
   }
@@ -115,7 +108,7 @@ export class Player {
 
   //PLAYER & ROLE INFO
   private _playerName: string = "";
-  private _playerAlignment: string = "good";
+  private _playerAlignment: string = "neutral";
   private _comments: string = "";
   private _registeredAs: Role | undefined;
   private _playerRole: Role | undefined;
@@ -126,7 +119,6 @@ export class Player {
   private _hasDeadVote: boolean = true;
   private _hasAbility: boolean = true;
   private _isDead: boolean = false;
-  private _diedOnRound : number = Number.MAX_VALUE;
   private _scarletIsActive: boolean = false;
   private _wasExecuted: boolean = false;
 
@@ -141,21 +133,25 @@ export class Player {
     this.playerName = playerName;
   }
 
-  buildRole(role : Roles) : void {
+  changeAlignment(): void {
+    this.playerAlignment = this.playerAlignment?.valueOf() == "good" ? "evil" : "good";
+  }
+
+  buildRole(role: Roles): void;
+  buildRole(role: Roles, register: Roles): void;
+
+  buildRole(role : Roles , register? : Roles) : void {
     this.playerRole = new Role(role);
-    this.registeredAs = new Role(role);
-    switch (role) {
-      case Roles.SPY:
-      case Roles.POISONER:
-      case Roles.SCARLET_WOMAN:
-      case Roles.BARON:
-      case Roles.IMP:
-        this.playerAlignment = "evil";
-        break;
-      default:
-        this.playerAlignment = "good";
-        break;
+    this.registeredAs = new Role(register ?? role);
+
+    if ((Object.values(Minions) as string[]).includes(role as string)
+      || (Object.values(Demons) as string[]).includes(role as string)) {
+      // is a Minion or demon
+      this.playerAlignment = "evil";
+    } else {
+      this.playerAlignment = "good";
     }
+
   }
 
   clearRoles() :  void {}

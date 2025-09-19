@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Players} from '../../classes/Players';
-import {Minions, Outsiders, Role, Roles, Townsfolk, wakeFirstNight, wakeOtherNights} from '../../classes/Role';
+import {Demons, Minions, Outsiders, Role, Roles, Townsfolk, WakeFirstNight, WakeOtherNights} from '../../classes/Role';
 import {Player} from '../../classes/Player';
 import {FormsModule} from '@angular/forms';
 import {gameLogic} from '../../classes/gameLogic';
@@ -30,4 +30,6 @@ export class PlayerTag extends gameLogic implements OnInit{
   ngOnInit() {
     this.buildWakePlayerSequence();
   }
+
+  protected readonly Demons = Demons;
 }
