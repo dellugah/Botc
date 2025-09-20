@@ -85,6 +85,34 @@ app-player-tag{
   background-clip: text;
   color: transparent;
 }
+
+.evil_letter{
+  position: absolute;
+  width: 40%;
+  height: auto;
+  top: 45%;
+  right: 30%;
+  transform: rotate(35deg);        /* rotate */
+  transform-origin: center center;
+  z-index: 5;
+}
+
+.good_letter{
+  position: absolute;
+  width: 40%;
+  height: auto;
+  top: 47%;
+  right: 10%;
+  transform: rotate(-25deg);        /* rotate */
+  transform-origin: center center;
+  z-index: 5;
+}
+
+.role_letter_container{
+  height: 100%;
+  width: 100%;
+  filter: drop-shadow(0px 10px 10px #000);
+}
 .player_conditions{}
 .stroke{
   margin-top: -1.5cqw;

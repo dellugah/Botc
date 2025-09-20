@@ -4,11 +4,13 @@ import {Player} from '../../classes/Player';
 import {Role, Roles} from '../../classes/Role';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
+import {RoleSelection} from '../role-selection/role-selection';
 
 @Component({
   selector: 'app-gather-players',
   imports: [
-    FormsModule
+    FormsModule,
+    RoleSelection
   ],
   templateUrl: './gather-players.html',
   styleUrl: './gather-players.css'

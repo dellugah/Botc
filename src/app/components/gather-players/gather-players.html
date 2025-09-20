@@ -5,20 +5,13 @@
   <div class="player_list">
     @switch (activeMenu.valueOf()){
       @case (0) {
-        <div class="player_paper">
-          <img class="player_sheet" src="/main_menu/main_menu.png" alt="">
-        </div>
-
+        <img class="player_sheet" src="/main_menu/main_menu.png" alt="">
       }
       @case(1) {
-        <div class="player_paper">
-          <img class="player_sheet" src="/main_menu/add_player.png" alt="">
-        </div>
+        <img class="player_sheet" src="/main_menu/add_player.png" alt="">
       }
       @case(2) {
-        <div class="player_paper">
-          <img class="player_sheet" src="/main_menu/main_menu.png" alt="" (click)="backToMenu()">
-        </div>
+        <img class="player_sheet" src="/main_menu/main_menu.png" alt="">
       }
       @default {
 
@@ -34,6 +27,7 @@
 
   @switch (activeMenu.valueOf()){
     @case (0) {
+<!--      Main Menu-->
       <div class="evil_letter">
         <div class="role_letter_container" >
           <img class="role_letter" src="/main_menu/evil-letter-bottom.png" alt="">
@@ -58,7 +52,7 @@
       }
     }
     @case(1){
-
+<!--      Add Player-->
       <textarea id="player_name" maxlength="13" [(ngModel)]="playerName"></textarea>
       <img class="player_naming_menu" src="/main_menu/player_name_menu.png" alt="">
       <div class="evil_letter">
@@ -75,19 +69,20 @@
           <img class="role_letter" src="/main_menu/good-letter-top.png" alt="">
         </div>
       </div>
-      <img class="done_button" src="/main_menu/main_menu_white.png" alt="" (click)="backToMenu()">
+      <img class="done_button" src="/main_menu/back.png" alt="" (click)="backToMenu()">
       <img class="add_more_button" src="/main_menu/add.png" alt="" (click)="add()">
 
     }
     @case(2){
-      <div class="evil_letter position_evil">
-        <img class="role_letter_container" src="/main_menu/role_selection_background.png" alt="">
-      </div>
-      <div class="good_letter position_good">
-        <img class="role_letter_container" src="/main_menu/role_selection_trouble_brewing.png" alt="">
-      </div>
+      <app-role-selection></app-role-selection>
+<!--      <div class="evil_letter position_evil">-->
+<!--        <img class="role_letter_container" src="/main_menu/role_selection_background.png" alt="">-->
+<!--      </div>-->
+<!--      <div class="good_letter position_good">-->
+<!--        <img class="role_letter_container" src="/main_menu/role_selection_trouble_brewing.png" alt="">-->
+<!--      </div>-->
 
-      <img class="done_button role_button" src="/main_menu/main_menu_white.png" alt="" (click)="backToMenu()">
+      <img class="done_button role_button" src="/main_menu/done.png" alt="" (click)="backToMenu()">
     }
     @default {
 
