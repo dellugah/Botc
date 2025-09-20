@@ -6,13 +6,13 @@
     @switch (activeMenu.valueOf()){
       @case (0) {
         <div class="player_paper">
-          <img class="player_sheet" src="/main_menu/main_menu.png" alt="" (click)="addPlayer()">
+          <img class="player_sheet" src="/main_menu/main_menu.png" alt="">
         </div>
 
       }
       @case(1) {
         <div class="player_paper">
-          <img class="player_sheet" src="/main_menu/add_player.png" alt="" (click)="backToMenu()">
+          <img class="player_sheet" src="/main_menu/add_player.png" alt="">
         </div>
       }
       @case(2) {
@@ -51,6 +51,7 @@
       </div>
 
       <img class="main_menu_letter" src="/main_menu/main-menu-letter.png" alt="">
+      <img class="add_more_button" src="/main_menu/add_players.png" alt="" (click)="addPlayer()">
 
       @if(players.players.length >= 5){
         <img class="done_button" src="/main_menu/play.png" alt="" (click)="playGame()">
@@ -74,7 +75,7 @@
           <img class="role_letter" src="/main_menu/good-letter-top.png" alt="">
         </div>
       </div>
-      <img class="done_button" src="/main_menu/done.png" alt="" (click)="backToMenu()">
+      <img class="done_button" src="/main_menu/main_menu_white.png" alt="" (click)="backToMenu()">
       <img class="add_more_button" src="/main_menu/add.png" alt="" (click)="add()">
 
     }
@@ -85,6 +86,8 @@
       <div class="good_letter position_good">
         <img class="role_letter_container" src="/main_menu/role_selection_trouble_brewing.png" alt="">
       </div>
+
+      <img class="done_button role_button" src="/main_menu/main_menu_white.png" alt="" (click)="backToMenu()">
     }
     @default {
 
