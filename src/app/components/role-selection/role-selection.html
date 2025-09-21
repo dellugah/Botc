@@ -3,12 +3,14 @@
     <img class="role_letter_container" src="/main_menu/role_selection_background.png" alt="">
     <div class="role_letter_container top_roles">
       @for (m of Object.values(Minions); track m) {
-        <img class="icons" src="/{{m.valueOf().toLowerCase().replace(' ', '')}}.webp" alt="">
+        <img class="icons" src="/{{m.valueOf().toLowerCase().replace(' ', '')}}.webp" alt=""
+             (click)="selectRole(m)">
       }
     </div>
     <div class="role_letter_container bottom_roles">
       @for (m of Object.values(Demons); track m) {
-        <img class="icons" src="/{{m.valueOf().toLowerCase().replace(' ', '')}}.webp" alt="">
+        <img class="icons" src="/{{m.valueOf().toLowerCase().replace(' ', '')}}.webp" alt=""
+             (click)="selectRole(m)">
       }
     </div>
   </div>
@@ -16,12 +18,14 @@
     <img class="role_letter_container" src="/main_menu/role_selection_trouble_brewing.png" alt="">
     <div class="role_letter_container top_roles">
       @for (m of Object.values(Townsfolk); track m) {
-        <img class="icons" src="/{{m.valueOf().toLowerCase().replace(' ', '')}}.webp" alt="">
+        <img class="icons" src="/{{m.valueOf().toLowerCase().replace(' ', '')}}.webp" alt=""
+             (click)="selectRole(m)">
       }
     </div>
     <div class="role_letter_container bottom_roles">
       @for (m of Object.values(Outsiders); track m) {
-        <img class="icons" src="/{{m.valueOf().toLowerCase().replace(' ', '')}}.webp" alt="">
+        <img class="icons" src="/{{m.valueOf().toLowerCase().replace(' ', '')}}.webp"
+             alt="" (click)="selectRole(m)">
       }
     </div>
   </div>

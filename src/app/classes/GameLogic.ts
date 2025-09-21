@@ -2,7 +2,7 @@ import {Player} from './Player';
 import {Role, Roles, WakeFirstNight, WakeOtherNights} from './Role';
 import {Players} from './Players';
 
-export class gameLogic {
+export class GameLogic {
   roundPlayers: Map<number, Players> = new Map();
 
   roundCounter: number = 0;

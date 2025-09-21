@@ -74,15 +74,30 @@
 
     }
     @case(2){
-      <app-role-selection></app-role-selection>
-<!--      <div class="evil_letter position_evil">-->
-<!--        <img class="role_letter_container" src="/main_menu/role_selection_background.png" alt="">-->
-<!--      </div>-->
-<!--      <div class="good_letter position_good">-->
-<!--        <img class="role_letter_container" src="/main_menu/role_selection_trouble_brewing.png" alt="">-->
-<!--      </div>-->
-
-      <img class="done_button role_button" src="/main_menu/done.png" alt="" (click)="backToMenu()">
+      @if(edit.player?.playerRole?.roleName == Roles.NONE){
+        <app-role-selection></app-role-selection>
+      } @else {
+        @if(edit.player?.playerAlignment == "good"){
+          <div class="letter_role">
+            <div class="role_letter_container" >
+              <img class="icon" src="{{edit.player?.normalizedRoleImageName}}" alt="">
+              <img class="role_letter" src="/main_menu/good-letter-bottom.png" alt="">
+              <img class="role_letter_token" src="/main_menu/register-token-good.png" alt="">
+              <img class="role_letter" src="/main_menu/good-letter-top.png" alt="">
+            </div>
+          </div>
+        } @else {
+          <div class="letter_role">
+            <div class="role_letter_container" >
+              <img class="icon" src="{{edit.player?.normalizedRoleImageName}}" alt="">
+              <img class="role_letter" src="/main_menu/evil-letter-bottom.png" alt="">
+              <img class="role_letter_token" src="/main_menu/register-token-evil.png" alt="">
+              <img class="role_letter" src="/main_menu/evil-letter-top.png" alt="">
+            </div>
+          </div>
+        }
+      }
+      <img class="done_button role_button" src="/main_menu/back.png" alt="" (click)="backToMenu()">
     }
     @default {
 

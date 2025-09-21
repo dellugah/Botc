@@ -168,6 +168,25 @@
   z-index: 10;
 }
 
+.icon{
+  position: absolute;
+  height: 25cqh;
+  top: -2cqh;
+  left: 28%;
+  z-index: 10;
+}
+
+.letter_role{
+  position: absolute;
+  width: 40%;
+  height: auto;
+  top: 30%;
+  right: 20%;
+  rotate: 15deg;
+  transform-origin: center center;
+  z-index: 5;
+}
+
 #player_name{
   position: absolute;
   top: 40%;

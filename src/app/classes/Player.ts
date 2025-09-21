@@ -153,6 +153,13 @@ export class Player {
     }
 
   }
+  get normalizedRoleImageName(): string | null {
+    const img = this._playerRole?.roleImage;
+    if (!img) return null;
+    // Remove slashes to use as a plain name if needed, lower-case, strip all spaces
+    return img.replace(/\//g, '').toLowerCase().replace(/\s+/g, '');
+  }
+
 
   clearRoles() :  void {}
 

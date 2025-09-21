@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Players} from '../../classes/Players';
 import {Demons, Minions, Outsiders, Role, Roles, Townsfolk, WakeFirstNight, WakeOtherNights} from '../../classes/Role';
 import {Player} from '../../classes/Player';
 import {FormsModule} from '@angular/forms';
-import {gameLogic} from '../../classes/gameLogic';
+import {GameLogic} from '../../classes/GameLogic';
+import {Edit} from '../../classes/Edit';
 
 @Component({
   selector: 'app-player-tag',
@@ -14,7 +15,7 @@ import {gameLogic} from '../../classes/gameLogic';
   styleUrl: './player-tag.css'
 })
 
-export class PlayerTag extends gameLogic implements OnInit{
+export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
 
   protected readonly Roles = Roles;
   protected readonly Object = Object;
@@ -23,12 +24,16 @@ export class PlayerTag extends gameLogic implements OnInit{
   protected readonly Minion = Minions;
   protected readonly Outsiders = Outsiders;
 
-  constructor(protected playerList: Players) {
+  constructor(protected playerList: Players, protected edit : Edit) {
     super(playerList);
   }
 
   ngOnInit() {
     this.buildWakePlayerSequence();
+  }
+
+  ngOnDestroy() {
+    this.roundPlayers = new Map();
   }
 
   protected readonly Demons = Demons;

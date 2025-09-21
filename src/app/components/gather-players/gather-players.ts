@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Edit} from '../../classes/Edit';
 import {Players} from '../../classes/Players';
 import {Player} from '../../classes/Player';
 import {Role, Roles} from '../../classes/Role';
@@ -21,10 +22,9 @@ export class GatherPlayers {
   activeMenu : PlayerMenu = PlayerMenu.MAIN_MENU;
   playerName : string = "";
 
-  playerToEdit : Player | null = null;
 
-
-  constructor(protected players: Players, protected router: Router) {
+  constructor(protected players: Players, protected router: Router,
+              protected edit : Edit) {
     this.players = players;
   }
 
@@ -32,17 +32,7 @@ export class GatherPlayers {
     this.activeMenu = PlayerMenu.NAMING_PLAYER;
   }
 
-
-  namePlayer(player: Player, name: string): void {
-    player.playerName = name;
-  }
-
-  assignedRole(player: Player, role: Roles): void {
-    player.playerRole = new Role(role);
-  }
-
   backToMenu(): void {
-
     this.activeMenu = PlayerMenu.MAIN_MENU;
   }
 
@@ -63,9 +53,13 @@ export class GatherPlayers {
   }
 
   selectedRole(player: Player): void {
-    this.playerToEdit = player;
+    console.log("editing role for player");
+    console.log(this.edit.player?.playerRole?.roleImage?.toLowerCase());
+    this.edit.player = player;
     this.activeMenu = PlayerMenu.ASSIGNING_ROLE;
   }
+
+  protected readonly Roles = Roles;
 }
 
 export enum PlayerMenu {
