@@ -59,6 +59,13 @@ export class GatherPlayers {
     this.activeMenu = PlayerMenu.ASSIGNING_ROLE;
   }
 
+  resetRole(player: Player | null): void {
+    if (player != null) {
+      player.buildRole(Roles.NONE);
+    } else {
+      return;
+    }
+  }
   protected readonly Roles = Roles;
 }
 

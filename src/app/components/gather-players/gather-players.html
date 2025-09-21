@@ -20,6 +20,9 @@
     @for (p of players.players; track p) {
       <div class="player_paper">
         <h2 class="player_name">{{p.playerName}}</h2>
+        @if(p.playerRole.roleName != Roles.NONE){
+          <img class="player_class_icon" src="{{p.playerRole.roleImage.toLowerCase()}}" alt="class_icon">
+        }
         <img class="player_sheet" src="/main_menu/player.png" alt="" (click)="selectedRole(p)">
       </div>
     }
@@ -81,6 +84,7 @@
           <div class="letter_role">
             <div class="role_letter_container" >
               <img class="icon" src="{{edit.player?.normalizedRoleImageName}}" alt="">
+              <img class="seal" src="/main_menu/seal.png" alt="" (click)="resetRole(edit.player)">
               <img class="role_letter" src="/main_menu/good-letter-bottom.png" alt="">
               <img class="role_letter_token" src="/main_menu/register-token-good.png" alt="">
               <img class="role_letter" src="/main_menu/good-letter-top.png" alt="">
@@ -90,6 +94,7 @@
           <div class="letter_role">
             <div class="role_letter_container" >
               <img class="icon" src="{{edit.player?.normalizedRoleImageName}}" alt="">
+              <img class="seal" src="/main_menu/seal.png" alt="" (click)="resetRole(edit.player)">
               <img class="role_letter" src="/main_menu/evil-letter-bottom.png" alt="">
               <img class="role_letter_token" src="/main_menu/register-token-evil.png" alt="">
               <img class="role_letter" src="/main_menu/evil-letter-top.png" alt="">

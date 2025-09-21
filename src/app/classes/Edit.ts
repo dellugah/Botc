@@ -3,5 +3,12 @@ import {Injectable} from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class Edit {
-  player : Player | null = null ;
+  get player(): Player | null {
+    return this._player;
+  }
+
+  set player(value: Player | null) {
+    this._player = value;
+  }
+  private _player : Player | null = null ;
 }

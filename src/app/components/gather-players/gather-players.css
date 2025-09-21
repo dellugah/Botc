@@ -16,7 +16,14 @@
 
   transform-origin: center center;
 }
-
+.player_class_icon{
+  pointer-events: none;
+  opacity: .5;
+  position: absolute;
+  margin-top: 1cqh;
+  height: 15%;
+  right: 0;
+}
 .wood_board{
   height: 100%;
   width: 100%;
@@ -174,6 +181,17 @@
   top: -2cqh;
   left: 28%;
   z-index: 10;
+}
+
+.seal{
+  position: absolute;
+  height: 18cqh;
+  top: 15.5cqh;
+  left: 39%;
+  z-index: 11;
+  filter: drop-shadow(0px 5px 5px #000);
+  rotate: 15deg;
+  transform-origin: center center;
 }
 
 .letter_role{
