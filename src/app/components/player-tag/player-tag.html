@@ -357,6 +357,7 @@
   }
 </div>
 
-@if(roleMenuActive){
+@if(this.edit.player != null){
+  <div id="screen_block"></div>
   <app-role-selection id="role_select"></app-role-selection>
 }

@@ -25,7 +25,6 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
   protected readonly Outsider = Outsiders;
   protected readonly Minion = Minions;
   protected readonly Outsiders = Outsiders;
-  protected roleMenuActive : boolean = false;
 
   constructor(protected playerList: Players, protected edit : Edit) {
     super(playerList);
@@ -41,7 +40,6 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
 
   changeRole(player : Player) : void {
     this.edit.player = player;
-    this.roleMenuActive = !this.roleMenuActive;
   }
 
   protected readonly Demons = Demons;
