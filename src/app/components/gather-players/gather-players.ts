@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
 import {Edit} from '../../classes/Edit';
 import {Players} from '../../classes/Players';
 import {Player} from '../../classes/Player';
@@ -16,16 +16,29 @@ import {RoleSelection} from '../role-selection/role-selection';
   templateUrl: './gather-players.html',
   styleUrl: './gather-players.css'
 })
-export class GatherPlayers {
+export class GatherPlayers implements AfterViewInit {
 
-  protected readonly PlayerMenu = PlayerMenu;
+  protected readonly Roles = Roles;
   activeMenu : PlayerMenu = PlayerMenu.MAIN_MENU;
   playerName : string = "";
 
 
   constructor(protected players: Players, protected router: Router,
-              protected edit : Edit) {
+              protected edit : Edit, private cdr: ChangeDetectorRef
+  ) {
     this.players = players;
+  }
+
+  ngAfterViewInit(): void {
+    console.log("resting players");
+    for (let i = 0; i < this.players.players.length; i++) {
+      const original = this.players.players[i];
+      const reset = new Player(original.playerName);
+      reset.buildRole(Roles.NONE);
+      this.players.players.splice(i, 1, reset);
+    }
+    this.activeMenu = PlayerMenu.MAIN_MENU
+    this.cdr.detectChanges();
   }
 
   addPlayer(): void {
@@ -37,6 +50,7 @@ export class GatherPlayers {
   }
 
   playGame() : void{
+    this.edit.player = null;
     this.router.navigate(['/player-tag'])
   }
   add(): void {
@@ -53,8 +67,6 @@ export class GatherPlayers {
   }
 
   selectedRole(player: Player): void {
-    console.log("editing role for player");
-    console.log(this.edit.player?.playerRole?.roleImage?.toLowerCase());
     this.edit.player = player;
     this.activeMenu = PlayerMenu.ASSIGNING_ROLE;
   }
@@ -66,7 +78,14 @@ export class GatherPlayers {
       return;
     }
   }
-  protected readonly Roles = Roles;
+
+  deletePlayer(player: Player | null): void {
+    if (player != null) {
+      this.players.players = this.players.players.filter(p => p !== player);
+      this.edit.player = null;
+      this.activeMenu = PlayerMenu.MAIN_MENU;
+    }
+  }
 }
 
 export enum PlayerMenu {

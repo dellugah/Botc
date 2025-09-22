@@ -76,7 +76,7 @@
   filter: drop-shadow(0px 8px 5px #000);
 }
 
-.add_more_button{
+.left_button{
   position: absolute;
   height: 15%;
   left: 22%;
@@ -199,7 +199,7 @@
   width: 40%;
   height: auto;
   top: 30%;
-  right: 20%;
+  right: 18%;
   rotate: 15deg;
   transform-origin: center center;
   z-index: 5;
@@ -208,8 +208,8 @@
 .butler_item{
   position: absolute;
   width: 60%;
-  top: -23%;
-  right: 18%;
+  top: -35%;
+  right: 6%;
   z-index: 3;
   rotate: 55deg;
   transform-origin: center center;

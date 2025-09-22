@@ -320,7 +320,7 @@
         </div>
       </div>
       <div class="player_options">
-        <button><h2>Change Role</h2></button>
+        <button (click)="changeRole(player)"><h2>Change Role</h2></button>
         <button (click)="player.changeAlignment()"><h2>Change Alignment </h2></button>
         <button><h2>Comments</h2></button>
       </div>
@@ -356,3 +356,7 @@
     <img class="bottom_flag" src="/wakeFlag.png" alt="" (click)="wakePlayerSequence()">
   }
 </div>
+
+@if(roleMenuActive){
+  <app-role-selection id="role_select"></app-role-selection>
+}

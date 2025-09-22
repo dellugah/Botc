@@ -47,7 +47,7 @@
       </div>
 
       <img class="main_menu_letter" src="/main_menu/main-menu-letter.png" alt="">
-      <img class="add_more_button" src="/main_menu/add_players.png" alt="" (click)="addPlayer()">
+      <img class="left_button" src="/main_menu/add_players.png" alt="" (click)="addPlayer()">
 
       @if(players.players.length >= 5){
         <img class="done_button" src="/main_menu/play.png" alt="" (click)="playGame()">
@@ -72,7 +72,7 @@
         </div>
       </div>
       <img class="done_button" src="/main_menu/back.png" alt="" (click)="backToMenu()">
-      <img class="add_more_button" src="/main_menu/add.png" alt="" (click)="add()">
+      <img class="left_button" src="/main_menu/add.png" alt="" (click)="add()">
 
     }
     @case(2){
@@ -102,6 +102,7 @@
         }
         <img class="butler_item" src="/main_menu/role_signature/butler_img.png" alt="">
       }
+      <img class="left_button role_button" src="/main_menu/delete_player.png" alt="" (click)="deletePlayer(this.edit.player)">
       <img class="done_button role_button" src="/main_menu/back.png" alt="" (click)="backToMenu()">
     }
     @default {
