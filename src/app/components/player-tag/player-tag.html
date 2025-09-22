@@ -358,6 +358,6 @@
 </div>
 
 @if(this.edit.player != null){
-  <div id="screen_block"></div>
+  <div id="screen_block" (click)="this.edit.player = null"></div>
   <app-role-selection id="role_select"></app-role-selection>
 }
