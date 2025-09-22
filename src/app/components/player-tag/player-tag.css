@@ -245,6 +245,13 @@
   margin-bottom: -1.5cqw;
 }
 
+.option_buttons{
+  pointer-events: none;
+}
+.player_options:hover ~ option_buttons{
+  pointer-events: all;
+}
+
 /*NOMINATION AREA*/
 .nomination{
   justify-content: center;
