@@ -144,11 +144,15 @@ export class Player {
     this.playerRole = new Role(role);
     this.registeredAs = new Role(register ?? role);
 
-    if ((Object.values(Minions) as string[]).includes(role as string)
-      || (Object.values(Demons) as string[]).includes(role as string)) {
+    if(role.valueOf() == "Mystery")  {
+      //has no role
+      this.playerAlignment = "neutral";
+    } else if((Object.values(Minions) as string[]).includes(role as string)
+      || (Object.values(Demons) as string[]).includes(role as string)){
       // is a Minion or demon
       this.playerAlignment = "evil";
-    } else {
+    } else{
+      // is townsfolk or outsider
       this.playerAlignment = "good";
     }
 

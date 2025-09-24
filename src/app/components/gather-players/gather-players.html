@@ -22,7 +22,11 @@
         @if(p.playerRole.roleName != Roles.NONE){
           <img class="player_class_icon" src="{{p.playerRole.roleImage.toLowerCase()}}" alt="class_icon">
         }
-        <img class="player_sheet" src="/main_menu/player.png" alt="" (click)="selectedRole(p)">
+        @if(p == edit.player){
+          <img class="selected_tag" src="/main_menu/selected_tag.png" alt="">
+        }
+        <img class="player_sheet" src="/main_menu/player.png" alt=""
+             (click)="selectedRole(p)">
       </div>
     }
   </div>
@@ -55,7 +59,10 @@
     }
     @case(1){
 <!--      Add Player-->
-      <textarea id="player_name" maxlength="13" [(ngModel)]="playerName"></textarea>
+      <textarea id="player_name" maxlength="13"
+                [(ngModel)]="playerName"
+                (keydown.enter)="add()">
+      </textarea>
       <img class="player_naming_menu" src="/main_menu/player_name_menu.png" alt="">
       <div class="evil_letter">
         <div class="role_letter_container" >

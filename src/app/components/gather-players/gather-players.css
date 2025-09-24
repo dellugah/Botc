@@ -102,31 +102,41 @@
 .player_list{
   position: absolute;
   height: 100%;
-  width: 18%;
-  left: 1.8%;
+  width: 19%;
   z-index: 1;
   display: flex;
   flex-direction: column;
   filter: drop-shadow(0px 5px 3px #000);
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .player_sheet{
   height: 11cqh;
+  margin-left: 1.3cqw;
   margin-top: .5cqw;
   margin-bottom: .5cqw;
+  overflow: visible;
 }
 
+.selected_tag{
+  position: absolute;
+  height: 13cqh;
+  left: .55cqw;
+  margin-top: .1cqw;
+  margin-bottom: .5cqw;
+  pointer-events: none;
+
+}
 .player_name{
   font-size: 2.3cqh;
   margin-top: 7cqh;
-  left: 10%;
+  left: 13%;
   position: absolute;
 }
 
 .player_paper{
   cursor: pointer;
-  overflow: visible;
   margin: 0;
 }
 

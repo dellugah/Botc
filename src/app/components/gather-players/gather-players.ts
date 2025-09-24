@@ -46,6 +46,9 @@ export class GatherPlayers implements AfterViewInit {
   }
 
   backToMenu(): void {
+    if(this.edit.player != null){
+      this.edit.player = null;
+    }
     this.activeMenu = PlayerMenu.MAIN_MENU;
   }
 
@@ -86,6 +89,7 @@ export class GatherPlayers implements AfterViewInit {
       this.activeMenu = PlayerMenu.MAIN_MENU;
     }
   }
+
 }
 
 export enum PlayerMenu {
