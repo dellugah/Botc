@@ -53,9 +53,12 @@ export class GameLogic {
       this.executeBlockPlayer(); //execute block player
       this.roundCounter ++; //increases the round counter
 
-      if(!this.roundPlayers.has(this.roundCounter)){
+      //information isn't being copied from the map correctly in case it already exists
+      if(!this.roundPlayers.has(this.roundCounter)){//if the round is not in the map
         this.saveInfo();
-      } else{
+      } else{//if the round is in the map
+
+        //not working properly
         this.copyInfo();
       }
     }
@@ -121,6 +124,7 @@ export class GameLogic {
 
   copyInfo() : void{
     for (let i = this.roundCounter; i < this.roundPlayers.size; i++) {
+      //problematic if statement
       if(this.roundPlayers.get(this.roundCounter)?.players[i] != this.players.players[i]){
         this.saveInfo();
         return;
