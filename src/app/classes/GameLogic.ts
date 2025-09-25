@@ -9,6 +9,7 @@ export class GameLogic {
   isDay: boolean = false;
   roundCycle = "night";
   opposite: string = "/day_flag.png";
+  hasChanged : boolean = false;
 
   protectedPlayer: Player | null = null;
   poisonedPlayer: Player | null = null;
@@ -86,7 +87,6 @@ export class GameLogic {
       Object.values(WakeFirstNight).forEach(r => {
         Object.values(this.players.players).forEach(p => {
           if(p.playerRole.roleName.valueOf() == r.valueOf() && !p.isDead){
-            console.log(p.playerRole.roleName);
             this.firstNightPlayers.push(p);
           }
         })
@@ -123,14 +123,29 @@ export class GameLogic {
   }
 
   copyInfo() : void{
-    for (let i = this.roundCounter; i < this.roundPlayers.size; i++) {
-      //problematic if statement
-      if(this.roundPlayers.get(this.roundCounter)?.players[i] != this.players.players[i]){
+    this.testForChanges()
+    if (this.roundCounter > 0) {
+      if (this.hasChanged) {
         this.saveInfo();
-        return;
+      } else {
+        this.players = this.clonePlayers(this.roundPlayers.get(this.roundCounter)!);
       }
+      //THIS WORKS PROPERLY
     }
-    this.players = this.clonePlayers(this.roundPlayers.get(this.roundCounter)!);
+  }
+
+  // NOT HAPPY WITH THIS FUNCTION, AS SOON AS A PLAYER IS MODIFIED, IT WILL HAVE TO
+  // RESTART THE WHOLE INFO SAVING AND ALL INFO ENTERED AFTER WILL BE LOST,
+  // SHOULD I MAKE A PROMPT TO ASK IF INFO SHOULD BE REPLACED IN CASE OF CHANGES?
+  testForChanges(): void {
+    if(!this.hasChanged){
+      let counter = 0;
+      Object.values(this.roundPlayers.get(this.roundCounter - 1)?.players!).forEach(p => {
+        if (!p.equals(this.players.players[counter]))
+          this.hasChanged = true;
+        counter++;
+      })
+    }
   }
 
   rollbackRound(): void {

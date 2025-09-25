@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {Players} from '../../classes/Players';
 import {Demons, Minions, Outsiders, Role, Roles, Townsfolk, WakeFirstNight, WakeOtherNights} from '../../classes/Role';
 import {Player} from '../../classes/Player';

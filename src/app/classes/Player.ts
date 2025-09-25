@@ -167,4 +167,27 @@ export class Player {
 
   clearRoles() :  void {}
 
+  toString(): string {
+    return [
+      this.playerName,
+      this.playerAlignment,
+      this.playerRole.roleName,
+      this.registeredAs.roleName,
+      this.canNominate,
+      this.wasIndicated,
+      this.hasDeadVote,
+      this.hasAbility,
+      this.isDead,
+      this.wasExecuted,
+      this.isDrunk,
+      this.isPoisoned,
+      this.isProtected,
+      this.isRedHearing,
+      this.isMarkedForDeath,
+    ].join('|');
+  }
+
+  equals(other: Player): boolean {
+    return this.toString() === other.toString();
+  }
 }

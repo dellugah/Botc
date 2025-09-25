@@ -3,10 +3,10 @@
   <img class="top_flag" src="/topFlag.png" alt="">
   <img class="bottom_flag" src="{{opposite}}" alt="" (click)="cycleDay()">
   <h1>Round</h1>
-  <h1>{{roundCounter}}</h1>
+  <h1>{{roundCounter + 1}}</h1>
 </div>
 <div class="player_list">
-  @for( player of players.players; track player){
+  @for( player of players.players; track player.playerName){
     <div class="player_tag">
       <div class="player_cont">
         <div class="player_profile">

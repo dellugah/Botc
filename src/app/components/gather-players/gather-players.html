@@ -16,7 +16,7 @@
       @default {
       }
     }
-    @for (p of players.players; track p) {
+    @for (p of players.players; track p.playerName) {
       <div class="player_paper">
         <h2 class="player_name">{{p.playerName}}</h2>
         @if(p.playerRole.roleName != Roles.NONE){
@@ -29,6 +29,7 @@
              (click)="selectedRole(p)">
       </div>
     }
+
   </div>
 
   @switch (activeMenu.valueOf()){
