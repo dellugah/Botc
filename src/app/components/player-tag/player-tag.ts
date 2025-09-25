@@ -1,17 +1,18 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Players} from '../../classes/Players';
-import {Demons, Minions, Outsiders, Role, Roles, Townsfolk, WakeFirstNight, WakeOtherNights} from '../../classes/Role';
-import {Player} from '../../classes/Player';
+import {Demons, Minions, Outsiders, Roles, Townsfolk} from '../../classes/Role';
 import {FormsModule} from '@angular/forms';
 import {GameLogic} from '../../classes/GameLogic';
-import {Edit} from '../../classes/Edit';
+import {CommentPlayer, Edit} from '../../classes/Edit';
 import {RoleSelection} from '../role-selection/role-selection';
+import {CommentBoard} from '../comment-board/comment-board';
 
 @Component({
   selector: 'app-player-tag',
   imports: [
     FormsModule,
-    RoleSelection
+    RoleSelection,
+    CommentBoard
   ],
   templateUrl: './player-tag.html',
   styleUrl: './player-tag.css'
@@ -26,7 +27,7 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
   protected readonly Minion = Minions;
   protected readonly Outsiders = Outsiders;
 
-  constructor(protected playerList: Players, protected edit : Edit) {
+  constructor(protected playerList: Players, protected edit : Edit, protected comment : CommentPlayer ) {
     super(playerList);
   }
 
@@ -36,10 +37,6 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.roundPlayers = new Map();
-  }
-
-  changeRole(player : Player) : void {
-    this.edit.player = player;
   }
 
   protected readonly Demons = Demons;

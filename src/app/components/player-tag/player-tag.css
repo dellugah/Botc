@@ -132,7 +132,8 @@
   z-index: 0;
   inset: 0;
   background: linear-gradient(180deg, rgb(0, 0, 0, 0.7) 1%, rgba(0, 0, 0, 0) 10%);
-  pointer-events: none;/* let clicks pass through */
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, 0);
 }
 
 /*PROFILE RELATED*/
@@ -238,9 +239,6 @@
   margin-bottom: -1.5cqw;
 }
 
-.option_buttons{
-  pointer-events: none;
-}
 .player_cont:hover ~ .player_options{
   top: -2.5cqw;
   margin-bottom: -1.5cqw;
@@ -316,6 +314,13 @@
   width: 90%;
   height: 90%;
   z-index: 10;
+}
+
+app-comment-board{
+  position: absolute;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, 0);
 }
 
 #screen_block{

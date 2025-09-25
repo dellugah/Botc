@@ -12,3 +12,15 @@ export class Edit {
   }
   private _player : Player | null = null ;
 }
+
+@Injectable({ providedIn: 'root' })
+export class CommentPlayer {
+  get player(): Player | null {
+    return this._player;
+  }
+
+  set player(value: Player | null) {
+    this._player = value;
+  }
+  private _player : Player | null = null ;
+}

@@ -13,9 +13,9 @@
           <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="class_icon" (click)="(player.isDead = true)">
           @if(player.isDead){
             @if(player.wasExecuted){
-              <img class="death_token active" src="/executed_token.png" alt="dead" (click)="(player.isDead = false)">
+              <img class="death_token active" src="/executed_token.png" alt="dead" (click)="player.isDead = false ; player.wasExecuted = false">
             } @else {
-              <img class="death_token active" src="/death_token.png" alt="dead" (click)="(player.isDead = false)">
+              <img class="death_token active" src="/death_token.png" alt="dead" (click)="player.isDead = false">
             }
           }
           @else{
@@ -32,7 +32,6 @@
           </div>
         </div>
         <div class="player_ability">
-          <!-- MONK ABILITY -->
           @if (isDay) {
             @if (executeMode) {
               @if(!player.isDead){
@@ -84,7 +83,7 @@
           } @else{
             @switch (player.playerRole.roleName) {
 
-              @case (Roles.MONK) {
+              @case (Roles.MONK) {           <!-- MONK ABILITY -->
                 <h2>Protects:</h2>
                 <select [(ngModel)]="protectedPlayer" (ngModelChange)="monkTarget(player, $event)">
                   <option [ngValue]=""></option>
@@ -105,10 +104,32 @@
               }
 
               @case (Roles.FORTUNE_TELLER) {
+                @if (player.hasAbility) {
+                  <h2>Choose:</h2>
+                  <select>
+                    <option value="1"></option>
+                    @for (p of players.players; track p) {
+                      <option [ngValue]="player">{{ p.playerName }} ({{ p.playerRole.roleName.valueOf() }})</option>
+                    }
+                  </select>
+                  <h2>and</h2>
+                  <select>
+                    <option value="1"></option>
+                    @for (p of players.players; track p) {
+                      <option [ngValue]="player">{{ p.playerName }} ({{ p.playerRole.roleName.valueOf() }})</option>
+                    }
+                  </select>
+                  <h2>Learn:</h2>
+                  <select>
+                    <option value=""></option>
+                    <option value="no">NO</option>
+                    <option value="yes">YES</option>
+                  </select>
+                }
               }
               @case (Roles.EMPATH) {
                 @if (player.hasAbility) {
-                  <h2>Choose:</h2>
+                  <h2>Sees:</h2>
                   <select>
                     <option value="1"></option>
                     @for (p of players.players; track p) {
@@ -206,8 +227,8 @@
                 <h2>Choose:</h2>
                 <select>
                   <option value=" "></option>
-                  @for (player of players.players; track player) {
-                    <option [ngValue]="player">{{ player.playerName }}</option>
+                  @for (p of players.players; track p) {
+                    <option [ngValue]="p">{{ p.playerName }} ({{ p.playerRole.roleName.valueOf() }})</option>
                   }
                 </select>
               }
@@ -240,8 +261,8 @@
                 <h2>Sees:</h2>
                 <select>
                   <option value=" "></option>
-                  @for (player of players.players; track player) {
-                    <option [ngValue]="player">{{ player.playerName }}</option>
+                  @for (p of players.players; track p) {
+                    <option [ngValue]="p">{{ p.playerName }} ({{ p.playerRole.roleName.valueOf() }})</option>
                   }
                 </select>
                 <h2>and:</h2>
@@ -320,9 +341,9 @@
         </div>
       </div>
       <div class="player_options">
-        <button (click)="changeRole(player)"><h2>Change Role</h2></button>
+        <button (click)="this.edit.player = player"><h2>Change Role</h2></button>
         <button (click)="player.changeAlignment()"><h2>Change Alignment </h2></button>
-        <button class="option_buttons"><h2>Comments</h2></button>
+        <button class="option_buttons" (click)="this.comment.player = player"><h2>Comments</h2></button>
       </div>
     </div>
   }
@@ -362,4 +383,9 @@
 @if(this.edit.player != null){
   <div id="screen_block" (click)="this.edit.player = null"></div>
   <app-role-selection id="role_select"></app-role-selection>
+}
+
+@if(this.comment.player != null){
+  <div id="screen_block" (click)="this.comment.player = null"></div>
+  <app-comment-board id="comments_section"></app-comment-board>
 }

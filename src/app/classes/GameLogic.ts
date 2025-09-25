@@ -33,6 +33,7 @@ export class GameLogic {
     playerRole: "",
     playerName: ""
   }
+
   wakeIndex: number = 0;
   isDawn: boolean = false;
 
@@ -53,13 +54,11 @@ export class GameLogic {
       this.opposite = "/day_flag.png"; //changes the opposite flag to day
       this.executeBlockPlayer(); //execute block player
       this.roundCounter ++; //increases the round counter
-
+      this.preserveComments(this.players);
       //information isn't being copied from the map correctly in case it already exists
       if(!this.roundPlayers.has(this.roundCounter)){//if the round is not in the map
         this.saveInfo();
-      } else{//if the round is in the map
-
-        //not working properly
+      } else{ //if the round is in the map
         this.copyInfo();
       }
     }
@@ -78,9 +77,9 @@ export class GameLogic {
     this.executeMode = !this.executeMode;
   }
 
-  //improve to see players in real time
-  buildWakePlayerSequence(){
 
+  //SAVING GAME MODES FUNCTIONS
+  public buildWakePlayerSequence(){
     //first night build
     if(this.roundCounter == 0){
       this.firstNightPlayers = [];
@@ -107,13 +106,9 @@ export class GameLogic {
     this.wakePlayerSequence();
   }
 
-  //build round players with a copy of each player on the players array
-  buildRoundPlayers(players: Players): void {
-    const snapshot = this.clonePlayers(players);
-    this.roundPlayers.set(this.roundCounter - 1, snapshot);
-  }
-
-  saveInfo() : void{
+  // SAVE GAME DATA INTO THE KEYMAP
+  // RESET GAME INFOS
+  private saveInfo() : void{
     this.buildRoundPlayers(this.players) //save Round on key map
     this.renovateVotes(); //renovate votes & nominations
     this.resetDemonMark(); //reset demon mark for night phase
@@ -122,33 +117,70 @@ export class GameLogic {
     this.resetBlock(); //reset block player
   }
 
-  copyInfo() : void{
-    this.testForChanges()
+  //BUILD ROUND PLAYERS
+  //SAVE THE ROUND PLAYERS ON THE KEY MAP
+  private buildRoundPlayers(players: Players): void {
+    const snapshot = this.clonePlayers(players);
+    this.roundPlayers.set(this.roundCounter - 1, snapshot);
+  }
+
+  //PRESERVE COMMENTS FROM THE PAST ROUND
+  private preserveComments(players: Players): void {
+    if (this.roundCounter <= 0) return;
+
+    for (let roundIndex = 0; roundIndex < this.roundPlayers.size; roundIndex++) {
+      const round = this.roundPlayers.get(roundIndex);
+      if (!round) continue;
+
+      const targetList = round.players;
+      const sourceList = players.players;
+      const len = Math.min(targetList.length, sourceList.length);
+
+      for (let playerIndex = 0; playerIndex < len; playerIndex++) {
+        const targetPlayer = targetList[playerIndex];
+        const sourcePlayer = sourceList[playerIndex];
+        if (!targetPlayer || !sourcePlayer) continue;
+
+        targetPlayer.comments = sourcePlayer.comments;
+      }
+    }
+  }
+
+  //COPY GAME DATA FROM THE CURRENT ROUND WITH NEXT
+  //BUT IF INFO CHANGED FROM THE CURRENT ROUND, SAVE THE CHANGES
+  //AND DELETE ALL FUTURE ROUND DATA FROM THE KEYMAP
+  private copyInfo() : void{
     if (this.roundCounter > 0) {
+      this.testForChanges() //test if any info changed from this round to the one saved on the keymap
       if (this.hasChanged) {
+        for (let i = this.roundPlayers.size; i >= this.roundCounter; i--) {
+          this.roundPlayers.delete(i);
+        }
+        this.hasChanged = false;
         this.saveInfo();
       } else {
         this.players = this.clonePlayers(this.roundPlayers.get(this.roundCounter)!);
       }
-      //THIS WORKS PROPERLY
     }
   }
 
-  // NOT HAPPY WITH THIS FUNCTION, AS SOON AS A PLAYER IS MODIFIED, IT WILL HAVE TO
-  // RESTART THE WHOLE INFO SAVING AND ALL INFO ENTERED AFTER WILL BE LOST,
-  // SHOULD I MAKE A PROMPT TO ASK IF INFO SHOULD BE REPLACED IN CASE OF CHANGES?
-  testForChanges(): void {
+  //TEST IF ANY INFO CHANGE FROM THE CURRENT ROUND IN RELATION TO FUTURE STORED DATA
+  //IF SO, RESET THE HASCHANGED FLAG TO TRUE
+  private testForChanges(): void {
     if(!this.hasChanged){
       let counter = 0;
       Object.values(this.roundPlayers.get(this.roundCounter - 1)?.players!).forEach(p => {
-        if (!p.equals(this.players.players[counter]))
+        if (!p.equals(this.players.players[counter])){
           this.hasChanged = true;
+          return;
+        }
         counter++;
       })
     }
   }
 
-  rollbackRound(): void {
+  //ROLLBACK GAME DATA
+  protected rollbackRound(): void {
     if (this.roundCounter > 0) {
       this.roundCounter--;
       const snapshot = this.roundPlayers.get(this.roundCounter);
@@ -165,7 +197,6 @@ export class GameLogic {
       const np = new Player(p.playerName);
       // copy relevant state
       np.playerAlignment = p.playerAlignment;
-      np.comments = p.comments;
       np.registeredAs = new Role(p.registeredAs.roleName);
       np.playerRole = new Role(p.playerRole.roleName);
 
@@ -184,10 +215,14 @@ export class GameLogic {
       np.isRedHearing = p.isRedHearing;
       np.isMarkedForDeath = p.isMarkedForDeath;
 
+      if (!(np.isDead) && np.wasExecuted) np.wasExecuted = false;
+
       clone.players.push(np);
     });
     return clone;
   }
+
+  //GAME FUNCTIONS
 
   wakePlayerSequence(): void {
     if (this.isDawn) return;
@@ -205,9 +240,6 @@ export class GameLogic {
       this.wakePlayer.playerName = list[this.wakeIndex].playerName;
       this.wakeIndex++;
     }
-
-    // optional debug
-    console.log(this.wakeIndex, list.length);
   }
 
   nominatePlayer( player: Player): void {
