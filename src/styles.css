@@ -132,3 +132,10 @@ select:focus {
   box-shadow: none;
 }
 
+img {
+  user-select: none;
+  -webkit-user-select: none; /* Safari/iOS */
+  -ms-user-select: none;     /* old Edge */
+}
+
+
