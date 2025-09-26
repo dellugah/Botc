@@ -2,8 +2,12 @@
   "name": "Botc",
   "short_name": "Botc",
   "display": "fullscreen",
-  "scope": "./",
-  "start_url": "./",
+  "display_override": ["fullscreen", "standalone"],
+  "scope": "/botc/",
+  "start_url": "/botc/",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
