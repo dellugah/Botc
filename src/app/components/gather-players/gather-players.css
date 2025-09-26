@@ -30,21 +30,20 @@
 }
 
 .left_selection{
-
   position: absolute;
-  height: 100%;
+  height: 80cqh;
   left: 0;
 }
 
 .stripe{
   position: absolute;
-  height: 100%;
+  height: 80cqh;
   left: 18%;
   z-index: 3;
 }
 .light{
   position: absolute;
-  height: 100%;
+  height: 80cqh;
   right: 0;
   z-index: 10;
   pointer-events: none;
