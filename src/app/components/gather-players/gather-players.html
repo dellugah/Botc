@@ -63,7 +63,7 @@
       <textarea id="player_name" maxlength="13"
                 [(ngModel)]="playerName"
                 (keydown.enter)="add()"
-                (keyup.enter)="this.playerName = ''">
+                (keyup.enter)="playerName = ''">
       </textarea>
       <img class="player_naming_menu" src="/main_menu/player_name_menu.png" alt="">
       <div class="evil_letter">

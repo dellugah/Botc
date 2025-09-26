@@ -10,12 +10,12 @@
     <div class="player_tag">
       <div class="player_cont">
         <div class="player_profile">
-          <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="class_icon" (click)="(player.isDead = true)">
+          <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="class_icon" (click)="killPlayer(player)">
           @if(player.isDead){
             @if(player.wasExecuted){
-              <img class="death_token active" src="/executed_token.png" alt="dead" (click)="player.isDead = false ; player.wasExecuted = false">
+              <img class="death_token active" src="/executed_token.png" alt="dead" (click)="resurrectPlayer(player)">
             } @else {
-              <img class="death_token active" src="/death_token.png" alt="dead" (click)="player.isDead = false">
+              <img class="death_token active" src="/death_token.png" alt="dead" (click)="resurrectPlayer(player)">
             }
           }
           @else{
@@ -343,7 +343,7 @@
       <div class="player_options">
         <button (click)="this.edit.player = player"><h2>Change Role</h2></button>
         <button (click)="player.changeAlignment()"><h2>Change Alignment </h2></button>
-        <button class="option_buttons" (click)="this.comment.player = player"><h2>Comments</h2></button>
+        <button (click)="this.comment.player = player"><h2>Comments</h2></button>
       </div>
     </div>
   }

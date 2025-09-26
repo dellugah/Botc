@@ -77,8 +77,6 @@ export class GameLogic {
     this.executeMode = !this.executeMode;
   }
 
-
-  //SAVING GAME MODES FUNCTIONS
   public buildWakePlayerSequence(){
     //first night build
     if(this.roundCounter == 0){
@@ -90,6 +88,9 @@ export class GameLogic {
           }
         })
       })
+      for (let i = this.firstNightPlayers.length - 1; i >= 0; i--) {
+        this.moveToFirst(this.firstNightPlayers[i]);
+      }
     }
     else{
       //other nights build
@@ -102,9 +103,13 @@ export class GameLogic {
           }
         })
       })
+      for (let i = this.otherNightPlayers.length - 1; i >= 0; i--) {
+        this.moveToFirst(this.otherNightPlayers[i]);
+      }
     }
     this.wakePlayerSequence();
   }
+  //SAVING GAME MODES FUNCTIONS
 
   // SAVE GAME DATA INTO THE KEYMAP
   // RESET GAME INFOS
@@ -125,6 +130,7 @@ export class GameLogic {
   }
 
   //PRESERVE COMMENTS FROM THE PAST ROUND
+
   private preserveComments(players: Players): void {
     if (this.roundCounter <= 0) return;
 
@@ -134,17 +140,43 @@ export class GameLogic {
 
       const targetList = round.players;
       const sourceList = players.players;
-      const len = Math.min(targetList.length, sourceList.length);
 
-      for (let playerIndex = 0; playerIndex < len; playerIndex++) {
-        const targetPlayer = targetList[playerIndex];
-        const sourcePlayer = sourceList[playerIndex];
-        if (!targetPlayer || !sourcePlayer) continue;
+      // Build a lookup map for faster matching by stable key (name + role)
+      const sourceByKey = new Map<string, Player>();
+      for (const s of sourceList) {
+        const key = `${s.playerName}|${s.playerRole?.roleName}`;
+        sourceByKey.set(key, s);
+      }
 
+      for (const targetPlayer of targetList) {
+        if (!targetPlayer) continue;
+        const key = `${targetPlayer.playerName}|${targetPlayer.playerRole?.roleName}`;
+        const sourcePlayer = sourceByKey.get(key);
+        if (!sourcePlayer) continue;
         targetPlayer.comments = sourcePlayer.comments;
       }
     }
   }
+
+  // private preserveComments(players: Players): void {
+  //   if (this.roundCounter <= 0) return;
+  //
+  //   for (let roundIndex = 0; roundIndex < this.roundPlayers.size; roundIndex++) {
+  //     const round = this.roundPlayers.get(roundIndex);
+  //     if (!round) continue;
+  //
+  //     const targetList = round.players;
+  //     const sourceList = players.players;
+  //     const len = Math.min(targetList.length, sourceList.length);
+  //
+  //     for (let playerIndex = 0; playerIndex < len; playerIndex++) {
+  //         const targetPlayer = targetList[playerIndex];
+  //         const sourcePlayer = sourceList[playerIndex];
+  //         if (!targetPlayer || !sourcePlayer) continue;
+  //         targetPlayer.comments = sourcePlayer.comments;
+  //     }
+  //   }
+  // }
 
   //COPY GAME DATA FROM THE CURRENT ROUND WITH NEXT
   //BUT IF INFO CHANGED FROM THE CURRENT ROUND, SAVE THE CHANGES
@@ -196,12 +228,15 @@ export class GameLogic {
     Object.values(source.players).forEach(p => {
       const np = new Player(p.playerName);
       // copy relevant state
+
+      //UPDATE EVERY TIME A NEW VALUE IS ADDED TO THE PLAYER CLASS
       np.playerAlignment = p.playerAlignment;
       np.registeredAs = new Role(p.registeredAs.roleName);
       np.playerRole = new Role(p.playerRole.roleName);
 
       np.canNominate = p.canNominate;
       np.wasIndicated = p.wasIndicated;
+      np.comments = p.comments;
 
       np.hasDeadVote = p.hasDeadVote;
       np.hasAbility = p.hasAbility;
@@ -215,14 +250,42 @@ export class GameLogic {
       np.isRedHearing = p.isRedHearing;
       np.isMarkedForDeath = p.isMarkedForDeath;
 
-      if (!(np.isDead) && np.wasExecuted) np.wasExecuted = false;
-
       clone.players.push(np);
     });
     return clone;
   }
 
   //GAME FUNCTIONS
+
+  //COMMENTS NEED TO ALSO BE MOVED
+  moveToLast(p : Player): void {
+    const index = this.players.players.indexOf(p);
+    if (index !== -1) {
+      const moved = this.players.players.splice(index, 1)[0];
+      this.players.players.push(moved);
+    }
+  }
+
+  //COMMENTS NEED TO ALSO BE MOVED
+  moveToFirst(p : Player): void {
+    const index = this.players.players.indexOf(p);
+    if (index > 0) {
+      const moved = this.players.players.splice(index, 1)[0];
+      this.players.players.unshift(moved);
+    }
+
+  }
+
+  killPlayer(player : Player): void {
+    player.isDead = true;
+    this.moveToLast(player);
+  }
+
+  resurrectPlayer(player : Player): void {
+    player.isDead = false;
+    player.wasExecuted = false;
+    this.moveToFirst(player);
+  }
 
   wakePlayerSequence(): void {
     if (this.isDawn) return;
@@ -330,6 +393,23 @@ export class GameLogic {
     this.blockPlayer = {playerRole: "", playerName: ""}; //resets the block player
   }
 
+  executeBlockPlayer(): void {
+    Object.values(this.players.players).forEach(p => {
+      console.log(p.playerRole.roleImage.valueOf().toLowerCase());
+      console.log(this.blockPlayer.playerRole);
+      if(p.playerRole.roleImage.valueOf().toLowerCase() == this.blockPlayer.playerRole.toLowerCase()
+        && p.playerName == this.blockPlayer.playerName){
+        p.isDead = true;
+        p.wasExecuted = true;
+        const index = this.players.players.indexOf(p);
+        if (index !== -1) {
+          const moved = this.players.players.splice(index, 1)[0];
+          this.players.players.push(moved);
+        }
+      }
+    })
+  }
+
   //TROUBLE BREWING SPECIFIC
   resetMonkMark(): void{
     Object.values(this.players.players).forEach(p => {
@@ -340,18 +420,7 @@ export class GameLogic {
     this.protectedPlayer = null;
   }
 
-  executeBlockPlayer(): void {
-    Object.values(this.players.players).forEach(p => {
-      console.log(p.playerRole.roleImage.valueOf().toLowerCase());
-      console.log(this.blockPlayer.playerRole);
-      if(p.playerRole.roleImage.valueOf().toLowerCase() == this.blockPlayer.playerRole.toLowerCase()
-        && p.playerName == this.blockPlayer.playerName){
 
-        p.isDead = true;
-        p.wasExecuted = true;
-      }
-    })
-}
 
   monkTarget(self: Player, player: Player): void {
     if(!self.isPoisoned && !self.isDrunk){

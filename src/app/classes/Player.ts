@@ -122,7 +122,7 @@ export class Player {
   private _scarletIsActive: boolean = false;
   private _wasExecuted: boolean = false;
 
-  //ALIGNMENTS TRACKER
+  //STATUS ALIGNMENTS TRACKER
   private _isDrunk: boolean = false;
   private _isPoisoned: boolean = false;
   private _isProtected: boolean = false;
@@ -163,9 +163,6 @@ export class Player {
     // Remove slashes to use as a plain name if needed, lower-case, strip all spaces
     return img.replace(/\//g, '').toLowerCase().replace(/\s+/g, '');
   }
-
-
-  clearRoles() :  void {}
 
   toString(): string {
     return [
