@@ -48,33 +48,31 @@ export class GameLogic {
 
   cycleDay(): void {
     if(this.isDay){//move to the night phase
-      this.executeMode = false; //resets the execute mode
-      this.isDay = !this.isDay ; //changes the day to night
-      this.roundCycle = "night"; //changes the round cycle to night
-      this.opposite = "/day_flag.png"; //changes the opposite flag to day
-      this.executeBlockPlayer(); //execute block player
-      this.roundCounter ++; //increases the round counter
-      this.preserveComments(this.players);
-      //information isn't being copied from the map correctly in case it already exists
-      if(!this.roundPlayers.has(this.roundCounter)){//if the round is not in the map
-        this.saveInfo();
-      } else{ //if the round is in the map
-        this.copyInfo();
-      }
+      this.changeToNightCycle()
     }
-
     else{//move to day phase
-      this.isDawn = false; //resets the dawn flag
-      this.wakeIndex = 0; //resets the wake index
-      this.isDay = !this.isDay; //changes the day to night
-      this.roundCycle = "day"; //changes the round cycle to day
-      this.opposite = "/night_flag.png"; //changes the opposite flag to night
-      this.resetMonkMark(); //reset monk mark for night phase
+      this.changeToDayCycle()
     }
   }
 
   changeMode(): void {
     this.executeMode = !this.executeMode;
+  }
+
+  changeToDayCycle(): void {
+    this.isDawn = false; //resets the dawn flag
+    this.wakeIndex = 0; //resets the wake index
+    this.isDay = !this.isDay; //changes the day to night
+    this.roundCycle = "day"; //changes the round cycle to day
+    this.opposite = "/night_flag.png"; //changes the opposite flag to night
+  }
+
+  changeToNightCycle(): void {
+    this.executeMode = false; //resets the execute mode
+    this.isDay = !this.isDay ; //changes the day to night
+    this.roundCycle = "night"; //changes the round cycle to night
+    this.opposite = "/day_flag.png"; //changes the opposite flag to day
+    this.wakePlayerSequence()
   }
 
   public buildWakePlayerSequence(){
@@ -115,11 +113,30 @@ export class GameLogic {
   // RESET GAME INFOS
   private saveInfo() : void{
     this.buildRoundPlayers(this.players) //save Round on key map
+    this.resetMonkMark(); //reset monk mark for night phase
     this.renovateVotes(); //renovate votes & nominations
     this.resetDemonMark(); //reset demon mark for night phase
     this.resetPoisonMark(); //reset poison mark for night phase
-    this.buildWakePlayerSequence(); //builds the wake player sequence
     this.resetBlock(); //reset block player
+  }
+
+  nextRound(): void {
+    //CHANGE TO NIGHT IF DAY
+    if(this.isDay) this.changeToNightCycle();
+
+    //EXECUTE THE ROUND CLEN
+    this.executeBlockPlayer(); //execute block player
+    this.roundCounter++; //increases the round counter
+    this.isDawn = false; //resets the dawn flag
+    this.wakeIndex = 0; //resets the wake index
+    this.buildWakePlayerSequence(); //builds the wake player sequence
+    this.preserveComments(this.players);
+    //information isn't being copied from the map correctly in case it already exists
+    if (!this.roundPlayers.has(this.roundCounter)) {//if the round is not in the map
+      this.saveInfo();
+    } else { //if the round is in the map
+      this.copyInfo();
+    }
   }
 
   //BUILD ROUND PLAYERS
@@ -213,6 +230,8 @@ export class GameLogic {
 
   //ROLLBACK GAME DATA
   protected rollbackRound(): void {
+    this.isDawn = false; //resets the dawn flag
+    this.wakeIndex = 0; //resets the wake index
     if (this.roundCounter > 0) {
       this.roundCounter--;
       const snapshot = this.roundPlayers.get(this.roundCounter);

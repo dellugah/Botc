@@ -173,26 +173,26 @@
                 }
               }
 
-              @case (Roles.RECLUSE) {}
+<!--              @case (Roles.RECLUSE) {}-->
 
-              @case (Roles.SPY) {
-                <h2>Registers as:</h2>
-                <select [(ngModel)]="player.registeredAs.roleName" (ngModelChange)="registerAs(player, $event)">
-                  <option value=""></option>
-                  @for (role of Object.values(Townsfolk); track role) {
-                    <option [ngValue]="role">{{ role }}</option>
-                  }
-                  @for (role of Object.values(Outsiders); track role) {
-                    <option [ngValue]="role">{{ role }}</option>
-                  }
-                  @for (role of Object.values(Minion); track role) {
-                    <option [ngValue]="role">{{ role }}</option>
-                  }
-                  @for (role of Object.values(Demons); track role) {
-                    <option [ngValue]="role">{{ role }}</option>
-                  }
-                </select>
-              }
+<!--              @case (Roles.SPY) {-->
+<!--                <h2>Registers as:</h2>-->
+<!--                <select [(ngModel)]="player.registeredAs.roleName" (ngModelChange)="registerAs(player, $event)">-->
+<!--                  <option value=""></option>-->
+<!--                  @for (role of Object.values(Townsfolk); track role) {-->
+<!--                    <option [ngValue]="role">{{ role }}</option>-->
+<!--                  }-->
+<!--                  @for (role of Object.values(Outsiders); track role) {-->
+<!--                    <option [ngValue]="role">{{ role }}</option>-->
+<!--                  }-->
+<!--                  @for (role of Object.values(Minion); track role) {-->
+<!--                    <option [ngValue]="role">{{ role }}</option>-->
+<!--                  }-->
+<!--                  @for (role of Object.values(Demons); track role) {-->
+<!--                    <option [ngValue]="role">{{ role }}</option>-->
+<!--                  }-->
+<!--                </select>-->
+<!--              }-->
 
               @case (Roles.IMP) {
                 <h2>Kills:</h2>
@@ -326,7 +326,7 @@
           @if(player.isDrunk){
             <img class="condition" src="/drunk.webp" alt="Is the Drunk">
           }
-          @if(player.isProtected){
+          @if(player.isProtected && !isDay){
             <img class="condition" src="/monk.webp" alt="protected">
           }
           @if(player.isPoisoned){
@@ -377,7 +377,7 @@
     <img class="bottom_flag" src="/wakeFlag.png" alt="" (click)="wakePlayerSequence()">
   }
 </div>
-<img class="right_option" src="/side_options.png" alt="">
+<img class="right_option" src="/side_options.png" alt="" (click)="nextRound()">
 <img class="left_option" src="/side_options.png" alt="" (click)="rollbackRound()">
 
 @if(this.edit.player != null){
