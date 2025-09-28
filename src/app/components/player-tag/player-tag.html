@@ -377,8 +377,12 @@
     <img class="bottom_flag" src="/wakeFlag.png" alt="" (click)="wakePlayerSequence()">
   }
 </div>
+
 <img class="right_option" src="/side_options.png" alt="" (click)="nextRound()">
+<img class="right_option symbol_right" src="/next-button.png" alt="">
+
 <img class="left_option" src="/side_options.png" alt="" (click)="rollbackRound()">
+<img class="left_option symbol_left" src="/next-button.png" alt="">
 
 @if(this.edit.player != null){
   <div id="screen_block" (click)="this.edit.player = null"></div>
