@@ -134,7 +134,16 @@ export class Player {
   }
 
   changeAlignment(): void {
-    this.playerAlignment = this.playerAlignment?.valueOf() == "good" ? "evil" : "good";
+    switch (this.playerAlignment) {
+      case "good": this.playerAlignment = "evil"; break;
+      case "evil": {
+        this.playerAlignment = "neutral";
+        this.buildRole(Roles.NONE);
+        break;
+      }
+      case "neutral": this.playerAlignment = "good"; break;
+      default: this.playerAlignment = "good"; break;
+    }
   }
 
   buildRole(role: Roles): void;
