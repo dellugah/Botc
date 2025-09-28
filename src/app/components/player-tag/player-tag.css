@@ -219,19 +219,20 @@
 /*BOTTOM OPTIONS*/
 .player_options{
   position: relative;
-  top: -8cqw;
+  top: -13cqw;
   height: 9cqw;
   width: 75%;
   padding-right: 0;
   padding-left: 0;
   border-radius: 1.5cqw;
-  margin-bottom: -6cqw;
+  margin-bottom: -6.5cqw;
   background-image: url("/bottom.png");
   background-repeat: no-repeat;
   background-position: bottom;
   justify-content: center;
   align-items: center;
   display: flex;
+  pointer-events: none;
   filter: drop-shadow(0px 10px 10px #000);
   transition: top 0.4s ease 0.07s, margin-bottom 0.4s ease 0.07s;
   z-index: 0;
@@ -242,7 +243,7 @@
 /*}*/
 
 .slide_options:hover ~ .player_options{
-  top: -1.5cqw;
+  top: -6cqw;
   margin-bottom: -1.5cqw;
 }
 
@@ -270,26 +271,39 @@
 }
 .center_base{
   position: absolute;
-  height: 140%;
+  height: 120%;
   top: -4%;
   width: auto;
-  left: 45%;
+  left: 50%;
+  transform: translate(-50%, 0);
   filter: drop-shadow(0px 3px 3px #000000);
 }
+
 .token{
-  scale: .88;
+  scale: .9;
   top: -15%;
   height: 140%;
   filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0));
 }
 
+.ability_token{
+  scale: .80;
+  top: -22%;
+  left: 49%;
+  height: 140%;
+  transform: translate(-50%, 0);
+  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0));
+}
+
 .token_image{
-  left: 46%;
-  height:80%;
+  left: 50%;
+  top:0%;
+  height:60%;
   width: auto;
   z-index: 1;
   pointer-events: none;
   filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0));
+  transform: translate(-50%, 0);
 }
 
 .right_option{
@@ -327,17 +341,9 @@
 
 .slide_options{
   position: relative;
-  z-index: 10;
-  margin-top: -1cqw;
-  margin-bottom: -2cqw;
-  width: 5%;
+  width: 6%;
   filter: drop-shadow(0px 0 5px rgb(0, 0, 0));
   transition: margin-top 0.4s ease 0.02s;
-}
-
-.slide_options:hover{
-  margin-top: -2cqw;
-  rotate: 180deg;
 }
 
 #role_select{

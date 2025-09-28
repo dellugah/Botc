@@ -72,7 +72,7 @@
                   <img class="center_base" src="/ability_base.png" alt="" (click)="spendAbility(player)">
                   @if(player.hasAbility && !player.isDead){
                     <img class="center_base token_image" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="" width="auto" height="200%">
-                    <img class="center_base token"
+                    <img class="center_base ability_token"
                          src="/ability_token.png" alt=""
                          (click)="spendAbility(player)">
 
