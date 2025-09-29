@@ -342,6 +342,9 @@
       </div>
       <img class="slide_options" src="/edit_player_tag.png" alt="" (click)="toggleOptions(player)">
       <div class="player_options" [class.open]="openedPlayer === player">
+        @if (player.playerRole.roleName != Roles.NONE) {
+          <button><h2>About this role</h2></button>
+        }
         <button (click)="this.edit.player = player"><h2>Change Role</h2></button>
         <button (click)="player.changeAlignment()"><h2>Change Alignment </h2></button>
         <button (click)="this.comment.player = player"><h2>Comments</h2></button>
