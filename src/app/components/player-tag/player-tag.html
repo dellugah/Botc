@@ -10,7 +10,7 @@
     <div class="player_tag">
       <div class="player_cont">
         <div class="player_profile">
-          <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="class_icon" (click)="killPlayer(player)">
+          <img class="player_class_pic" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="class_icon" (click)="blockOrKillPlayer(player)">
           @if(player.isDead){
             @if(player.wasExecuted){
               <img class="death_token active" src="/executed_token.png" alt="dead" (click)="resurrectPlayer(player)">
@@ -58,7 +58,7 @@
                   <div class="token_container">
                     <img class="center_base" src="/ghost_vote_base.png" alt="" (click)="spendDeadVote(player)">
                     @if(player.hasDeadVote){
-                      <img class="center_base token"
+                      <img class="center_base center_token"
                            src="/ghost_vote_token.png" alt=""
                            (click)="spendDeadVote(player)">
                     }
@@ -72,7 +72,7 @@
                   <img class="center_base" src="/ability_base.png" alt="" (click)="spendAbility(player)">
                   @if(player.hasAbility && !player.isDead){
                     <img class="center_base token_image" src="{{player.playerRole.roleImage.toLowerCase()}}" alt="" width="auto" height="200%">
-                    <img class="center_base ability_token"
+                    <img class="center_base center_token"
                          src="/ability_token.png" alt=""
                          (click)="spendAbility(player)">
 

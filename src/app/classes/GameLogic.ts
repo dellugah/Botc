@@ -295,9 +295,13 @@ export class GameLogic {
 
   }
 
-  killPlayer(player : Player): void {
-    player.isDead = true;
-    this.moveToLast(player);
+  blockOrKillPlayer(player : Player): void {
+    if(this.executeMode){
+      this.nominatePlayer(player);
+    } else{
+      player.isDead = true;
+      this.moveToLast(player);
+    }
   }
 
   resurrectPlayer(player : Player): void {
@@ -368,9 +372,6 @@ export class GameLogic {
 
   wasNominated(self : Player): void{
     self.wasIndicated = !self.wasIndicated;
-    if(self.wasIndicated){
-      this.nominatePlayer(self);
-    }
   }
 
   spendDeadVote(self : Player): void {
