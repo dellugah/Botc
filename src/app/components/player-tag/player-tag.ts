@@ -27,6 +27,8 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
   protected readonly Minion = Minions;
   protected readonly Outsiders = Outsiders;
 
+  openedPlayer: any | null = null;
+
   constructor(protected playerList: Players, protected edit : Edit, protected comment : CommentPlayer ) {
     super(playerList);
   }
@@ -38,6 +40,11 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.roundPlayers = new Map();
   }
+
+  toggleOptions(player: any) {
+    this.openedPlayer = this.openedPlayer === player ? null : player;
+  }
+
 
   protected readonly Demons = Demons;
 }

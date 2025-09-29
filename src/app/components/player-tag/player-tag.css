@@ -238,7 +238,7 @@
 }
 
 
-.slide_options:hover ~ .player_options{
+.player_options.open {
   top: -6cqw;
   margin-bottom: -4.5cqw;
 }
@@ -342,6 +342,7 @@
   filter: drop-shadow(0px 0 5px rgb(0, 0, 0));
   transition: margin-top 0.4s ease 0.02s;
 }
+
 
 #role_select{
   position: absolute;
