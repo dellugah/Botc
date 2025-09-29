@@ -28,6 +28,8 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
   protected readonly Outsiders = Outsiders;
 
   openedPlayer: any | null = null;
+  closeTimer: ReturnType<typeof setTimeout> | null = null;
+
 
   constructor(protected playerList: Players, protected edit : Edit, protected comment : CommentPlayer ) {
     super(playerList);
@@ -42,8 +44,24 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
   }
 
   toggleOptions(player: any) {
+    // toggle open/close
     this.openedPlayer = this.openedPlayer === player ? null : player;
+
+    // clear previous timer
+    if (this.closeTimer) {
+      clearTimeout(this.closeTimer);
+      this.closeTimer = null;
+    }
+
+    // start a new timer only if opened
+    if (this.openedPlayer) {
+      this.closeTimer = setTimeout(() => {
+        this.openedPlayer = null;
+        this.closeTimer = null;
+      }, 5000);
+    }
   }
+
 
 
   protected readonly Demons = Demons;
