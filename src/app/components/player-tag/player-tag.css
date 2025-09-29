@@ -305,7 +305,7 @@
 
 .right_option{
   pointer-events: none;
-  height: 30%;
+  height: 25%;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -315,7 +315,7 @@
 .left_option{
   pointer-events: none;
   transform: scaleX(-1);
-  height: 30%;
+  height: 25%;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -323,16 +323,16 @@
 }
 
 .symbol_right{
-  scale: .45;
-  right: -7cqh;
-  bottom: -8%;
+  scale: .40;
+  right: -6cqh;
+  bottom: -6.5%;
   pointer-events: all;
 }
 
 .symbol_left{
-  scale: .45;
-  left: -7cqh;
-  bottom: -8%;
+  scale: .40;
+  left: -6cqh;
+  bottom: -6.5%;
   pointer-events: all;
 }
 
