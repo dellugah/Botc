@@ -31,11 +31,11 @@ export class GatherPlayers implements AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log("resting players");
-    for (let i = 0; i < this.players.players.length; i++) {
-      const original = this.players.players[i];
+    for (let i = 0; i < this.players.playerList.length; i++) {
+      const original = this.players.playerList[i];
       const reset = new Player(original.playerName);
       reset.buildRole(Roles.NONE);
-      this.players.players.splice(i, 1, reset);
+      this.players.playerList.splice(i, 1, reset);
     }
     this.activeMenu = PlayerMenu.MAIN_MENU
     this.cdr.detectChanges();
@@ -64,7 +64,7 @@ export class GatherPlayers implements AfterViewInit {
       let p = new Player(this.playerName);
       p.playerRole = new Role(Roles.NONE);
       p.registeredAs = new Role(Roles.NONE);
-      this.players.players.unshift(p);
+      this.players.playerList.unshift(p);
       this.playerName = "";
     }
   }
@@ -84,7 +84,7 @@ export class GatherPlayers implements AfterViewInit {
 
   deletePlayer(player: Player | null): void {
     if (player != null) {
-      this.players.players = this.players.players.filter(p => p !== player);
+      this.players.playerList = this.players.playerList.filter(p => p !== player);
       this.edit.player = null;
       this.activeMenu = PlayerMenu.MAIN_MENU;
     }

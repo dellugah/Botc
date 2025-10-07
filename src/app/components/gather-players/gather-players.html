@@ -16,7 +16,7 @@
       @default {
       }
     }
-    @for (p of players.players; track p.playerName) {
+    @for (p of players.playerList; track p.playerName) {
       <div class="player_paper">
         <h2 class="player_name">{{p.playerName}}</h2>
         @if(p.playerRole.roleName != Roles.NONE){
@@ -54,7 +54,7 @@
       <img class="main_menu_letter" src="/main_menu/main-menu-letter.png" alt="">
       <img class="left_button" src="/main_menu/add_players.png" alt="" (click)="addPlayer()">
 
-      @if(players.players.length >= 5){
+      @if(players.playerList.length >= 5){
         <img class="done_button" src="/main_menu/play.png" alt="" (click)="playGame()">
       }
     }

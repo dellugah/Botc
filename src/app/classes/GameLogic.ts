@@ -41,6 +41,8 @@ export class GameLogic {
 
   constructor(protected players: Players) {
     this.players = players;
+
+    this.players.buildRoundPlayers(this.roundCounter);
     this.buildRoundPlayers(this.players)
   }
 
@@ -80,7 +82,7 @@ export class GameLogic {
     if(this.roundCounter == 0){
       this.firstNightPlayers = [];
       Object.values(WakeFirstNight).forEach(r => {
-        Object.values(this.players.players).forEach(p => {
+        Object.values(this.players.playerList).forEach(p => {
           if(p.playerRole.roleName.valueOf() == r.valueOf() && !p.isDead){
             this.firstNightPlayers.push(p);
           }
@@ -94,7 +96,7 @@ export class GameLogic {
       //other nights build
       this.otherNightPlayers = [];
       Object.values(WakeOtherNights).forEach(r => {
-        Object.values(this.players.players).forEach(p => {
+        Object.values(this.players.playerList).forEach(p => {
           if(p.playerRole.roleName.valueOf() == r.valueOf() && !p.isDead){
             console.log(p.playerRole.roleName);
             this.otherNightPlayers.push(p);
@@ -112,6 +114,7 @@ export class GameLogic {
   // SAVE GAME DATA INTO THE KEYMAP
   // RESET GAME INFOS
   private saveInfo() : void{
+    // this.players.buildRoundPlayers(this.roundCounter)                                UNCOMMENT WHEN IMPLEMENTED
     this.buildRoundPlayers(this.players) //save Round on key map
     this.resetMonkMark(); //reset monk mark for night phase
     this.renovateVotes(); //renovate votes & nominations
@@ -130,12 +133,15 @@ export class GameLogic {
     this.isDawn = false; //resets the dawn flag
     this.wakeIndex = 0; //resets the wake index
     this.buildWakePlayerSequence(); //builds the wake player sequence
-    this.preserveComments(this.players);
-    //information isn't being copied from the map correctly in case it already exists
+
+    // this.players.preserveComments(this.roundCounter);                                 UNCOMMENT WHEN IMPLEMENTED
+    this.preserveComments(this.players);//                                               COMMENT WHEN DEPRECATED
+    // if(this.players.hasRoundCount(this.roundCounter)){                                UNCOMMENT WHEN IMPLEMENTED
     if (!this.roundPlayers.has(this.roundCounter)) {//if the round is not in the map
       this.saveInfo();
     } else { //if the round is in the map
-      this.copyInfo();
+      // if(this.players.copyInfo(this.roundCounter)) this.saveInfo();                   UNCOMMENT WHEN IMPLEMENTED
+      this.copyInfo();//                                                                 COMMENT WHEN DEPRECATED
     }
   }
 
@@ -155,8 +161,8 @@ export class GameLogic {
       const round = this.roundPlayers.get(roundIndex);
       if (!round) continue;
 
-      const targetList = round.players;
-      const sourceList = players.players;
+      const targetList = round.playerList;
+      const sourceList = players.playerList;
 
       // Build a lookup map for faster matching by stable key (name + role)
       const sourceByKey = new Map<string, Player>();
@@ -218,8 +224,8 @@ export class GameLogic {
   private testForChanges(): void {
     if(!this.hasChanged){
       let counter = 0;
-      Object.values(this.roundPlayers.get(this.roundCounter - 1)?.players!).forEach(p => {
-        if (!p.equals(this.players.players[counter])){
+      Object.values(this.roundPlayers.get(this.roundCounter - 1)?.playerList!).forEach(p => {
+        if (!p.equals(this.players.playerList[counter])){
           this.hasChanged = true;
           return;
         }
@@ -244,7 +250,7 @@ export class GameLogic {
 
   private clonePlayers(source: Players): Players {
     const clone = new Players();
-    Object.values(source.players).forEach(p => {
+    Object.values(source.playerList).forEach(p => {
       const np = new Player(p.playerName);
       // copy relevant state
 
@@ -269,7 +275,7 @@ export class GameLogic {
       np.isRedHearing = p.isRedHearing;
       np.isMarkedForDeath = p.isMarkedForDeath;
 
-      clone.players.push(np);
+      clone.playerList.push(np);
     });
     return clone;
   }
@@ -278,19 +284,19 @@ export class GameLogic {
 
   //COMMENTS NEED TO ALSO BE MOVED
   moveToLast(p : Player): void {
-    const index = this.players.players.indexOf(p);
+    const index = this.players.playerList.indexOf(p);
     if (index !== -1) {
-      const moved = this.players.players.splice(index, 1)[0];
-      this.players.players.push(moved);
+      const moved = this.players.playerList.splice(index, 1)[0];
+      this.players.playerList.push(moved);
     }
   }
 
   //COMMENTS NEED TO ALSO BE MOVED
   moveToFirst(p : Player): void {
-    const index = this.players.players.indexOf(p);
+    const index = this.players.playerList.indexOf(p);
     if (index > 0) {
-      const moved = this.players.players.splice(index, 1)[0];
-      this.players.players.unshift(moved);
+      const moved = this.players.playerList.splice(index, 1)[0];
+      this.players.playerList.unshift(moved);
     }
 
   }
@@ -334,7 +340,7 @@ export class GameLogic {
   }
 
   poisonerTarget(player: Player): void {
-    Object.values(this.players.players).forEach(p => {
+    Object.values(this.players.playerList).forEach(p => {
       if (p.isPoisoned) {
         p.isPoisoned = false;
       }
@@ -355,7 +361,7 @@ export class GameLogic {
 
   markForDeath(self: Player, player: Player | null): void {
     if(!self.isPoisoned && !self.isDrunk){
-      Object.values(this.players.players).forEach(p => {
+      Object.values(this.players.playerList).forEach(p => {
         if(p.isMarkedForDeath){
           p.isMarkedForDeath = false;
         }
@@ -379,7 +385,7 @@ export class GameLogic {
   }
 
   renovateVotes(): void {
-    Object.values(this.players.players).forEach(p => {
+    Object.values(this.players.playerList).forEach(p => {
       if(!p.isDead){
         p.canNominate = true;
         p.wasIndicated = false;
@@ -388,7 +394,7 @@ export class GameLogic {
   }
 
   resetDemonMark(): void {
-    Object.values(this.players.players).forEach(p => {
+    Object.values(this.players.playerList).forEach(p => {
       if(p.isMarkedForDeath){
         p.isMarkedForDeath = false;
       }
@@ -397,7 +403,7 @@ export class GameLogic {
   }
 
   resetPoisonMark(): void {
-    Object.values(this.players.players).forEach(p => {
+    Object.values(this.players.playerList).forEach(p => {
       if(p.isPoisoned){
         p.isPoisoned = false;
       }
@@ -414,17 +420,17 @@ export class GameLogic {
   }
 
   executeBlockPlayer(): void {
-    Object.values(this.players.players).forEach(p => {
+    Object.values(this.players.playerList).forEach(p => {
       console.log(p.playerRole.roleImage.valueOf().toLowerCase());
       console.log(this.blockPlayer.playerRole);
       if(p.playerRole.roleImage.valueOf().toLowerCase() == this.blockPlayer.playerRole.toLowerCase()
         && p.playerName == this.blockPlayer.playerName){
         p.isDead = true;
         p.wasExecuted = true;
-        const index = this.players.players.indexOf(p);
+        const index = this.players.playerList.indexOf(p);
         if (index !== -1) {
-          const moved = this.players.players.splice(index, 1)[0];
-          this.players.players.push(moved);
+          const moved = this.players.playerList.splice(index, 1)[0];
+          this.players.playerList.push(moved);
         }
       }
     })
@@ -432,7 +438,7 @@ export class GameLogic {
 
   //TROUBLE BREWING SPECIFIC
   resetMonkMark(): void{
-    Object.values(this.players.players).forEach(p => {
+    Object.values(this.players.playerList).forEach(p => {
       if(p.isProtected){
         p.isProtected = false;
       }
@@ -444,7 +450,7 @@ export class GameLogic {
 
   monkTarget(self: Player, player: Player): void {
     if(!self.isPoisoned && !self.isDrunk){
-      Object.values(this.players.players).forEach(p => {
+      Object.values(this.players.playerList).forEach(p => {
         if(p.isProtected){
           p.isProtected = false;
         }

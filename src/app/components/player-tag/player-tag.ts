@@ -62,7 +62,5 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
     }
   }
 
-
-
   protected readonly Demons = Demons;
 }
