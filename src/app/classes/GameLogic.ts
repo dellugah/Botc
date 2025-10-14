@@ -42,7 +42,7 @@ export class GameLogic {
   constructor(protected players: Players) {
     this.players = players;
 
-    this.players.buildRoundPlayers(this.roundCounter);
+    // this.players.buildRoundPlayers(this.roundCounter);
     this.buildRoundPlayers(this.players)
   }
 
