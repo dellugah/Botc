@@ -1,5 +1,4 @@
 import {Player} from './Player';
-import {Role, Roles, WakeFirstNight, WakeOtherNights} from './Role';
 import {Players} from './Players';
 
 export class GameLogic {
@@ -40,11 +39,8 @@ export class GameLogic {
   executeMode: boolean = false;
 
   constructor(protected players: Players) {
-    this.players = players;
-
-    // this.players.buildRoundPlayers(this.roundCounter);
-    this.buildRoundPlayers(this.players)
-  }
+    players.buildRoundPlayers(this.roundCounter);
+    }
 
   //GAME FUNCTIONS
 
@@ -76,52 +72,9 @@ export class GameLogic {
     this.opposite = "/day_flag.png"; //changes the opposite flag to day
     this.wakePlayerSequence()
   }
-
-  public buildWakePlayerSequence(){
-    //first night build
-    if(this.roundCounter == 0){
-      this.firstNightPlayers = [];
-      Object.values(WakeFirstNight).forEach(r => {
-        Object.values(this.players.playerList).forEach(p => {
-          if(p.playerRole.roleName.valueOf() == r.valueOf() && !p.isDead){
-            this.firstNightPlayers.push(p);
-          }
-        })
-      })
-      for (let i = this.firstNightPlayers.length - 1; i >= 0; i--) {
-        this.moveToFirst(this.firstNightPlayers[i]);
-      }
-    }
-    else{
-      //other nights build
-      this.otherNightPlayers = [];
-      Object.values(WakeOtherNights).forEach(r => {
-        Object.values(this.players.playerList).forEach(p => {
-          if(p.playerRole.roleName.valueOf() == r.valueOf() && !p.isDead){
-            console.log(p.playerRole.roleName);
-            this.otherNightPlayers.push(p);
-          }
-        })
-      })
-      for (let i = this.otherNightPlayers.length - 1; i >= 0; i--) {
-        this.moveToFirst(this.otherNightPlayers[i]);
-      }
-    }
-    this.wakePlayerSequence();
-  }
   //SAVING GAME MODES FUNCTIONS
-
   // SAVE GAME DATA INTO THE KEYMAP
   // RESET GAME INFOS
-  private saveInfo() : void{
-    // this.players.buildRoundPlayers(this.roundCounter)                                UNCOMMENT WHEN IMPLEMENTED
-    this.buildRoundPlayers(this.players) //save Round on key map
-    this.resetMonkMark(); //reset monk mark for night phase
-    this.renovateVotes(); //renovate votes & nominations
-    this.resetDemonMark(); //reset demon mark for night phase
-    this.resetPoisonMark(); //reset poison mark for night phase
-    this.resetBlock(); //reset block player
-  }
 
   nextRound(): void {
     //CHANGE TO NIGHT IF DAY
@@ -132,106 +85,40 @@ export class GameLogic {
     this.roundCounter++; //increases the round counter
     this.isDawn = false; //resets the dawn flag
     this.wakeIndex = 0; //resets the wake index
-    this.buildWakePlayerSequence(); //builds the wake player sequence
-
-    // this.players.preserveComments(this.roundCounter);                                 UNCOMMENT WHEN IMPLEMENTED
-    this.preserveComments(this.players);//                                               COMMENT WHEN DEPRECATED
-    // if(this.players.hasRoundCount(this.roundCounter)){                                UNCOMMENT WHEN IMPLEMENTED
-    if (!this.roundPlayers.has(this.roundCounter)) {//if the round is not in the map
+    this.players.buildWakePlayerSequence(this.roundCounter);
+    this.players.preserveComments(this.roundCounter);
+    if(!this.players.hasRoundCount(this.roundCounter)){
       this.saveInfo();
     } else { //if the round is in the map
-      // if(this.players.copyInfo(this.roundCounter)) this.saveInfo();                   UNCOMMENT WHEN IMPLEMENTED
-      this.copyInfo();//                                                                 COMMENT WHEN DEPRECATED
+      this.copyInfo();
     }
+    this.wakePlayerSequence();
   }
 
-  //BUILD ROUND PLAYERS
-  //SAVE THE ROUND PLAYERS ON THE KEY MAP
-  private buildRoundPlayers(players: Players): void {
-    const snapshot = this.clonePlayers(players);
-    this.roundPlayers.set(this.roundCounter - 1, snapshot);
-  }
+  private saveInfo() : void{
+    this.players.buildRoundPlayers(this.roundCounter)//                                UNCOMMENT WHEN IMPLEMENTED
+    this.resetMonkMark(); //reset monk mark for night phase
+    this.renovateVotes(); //renovate votes & nominations
+    this.resetDemonMark(); //reset demon mark for night phase
+    this.resetPoisonMark(); //reset poison mark for night phase
+    this.resetBlock(); //reset block player
+  }//                                    changes were made to implement new players
 
-  //PRESERVE COMMENTS FROM THE PAST ROUND
-
-  private preserveComments(players: Players): void {
-    if (this.roundCounter <= 0) return;
-
-    for (let roundIndex = 0; roundIndex < this.roundPlayers.size; roundIndex++) {
-      const round = this.roundPlayers.get(roundIndex);
-      if (!round) continue;
-
-      const targetList = round.playerList;
-      const sourceList = players.playerList;
-
-      // Build a lookup map for faster matching by stable key (name + role)
-      const sourceByKey = new Map<string, Player>();
-      for (const s of sourceList) {
-        const key = `${s.playerName}|${s.playerRole?.roleName}`;
-        sourceByKey.set(key, s);
-      }
-
-      for (const targetPlayer of targetList) {
-        if (!targetPlayer) continue;
-        const key = `${targetPlayer.playerName}|${targetPlayer.playerRole?.roleName}`;
-        const sourcePlayer = sourceByKey.get(key);
-        if (!sourcePlayer) continue;
-        targetPlayer.comments = sourcePlayer.comments;
-      }
-    }
-  }
-
-  // private preserveComments(players: Players): void {
-  //   if (this.roundCounter <= 0) return;
-  //
-  //   for (let roundIndex = 0; roundIndex < this.roundPlayers.size; roundIndex++) {
-  //     const round = this.roundPlayers.get(roundIndex);
-  //     if (!round) continue;
-  //
-  //     const targetList = round.players;
-  //     const sourceList = players.players;
-  //     const len = Math.min(targetList.length, sourceList.length);
-  //
-  //     for (let playerIndex = 0; playerIndex < len; playerIndex++) {
-  //         const targetPlayer = targetList[playerIndex];
-  //         const sourcePlayer = sourceList[playerIndex];
-  //         if (!targetPlayer || !sourcePlayer) continue;
-  //         targetPlayer.comments = sourcePlayer.comments;
-  //     }
-  //   }
-  // }
-
-  //COPY GAME DATA FROM THE CURRENT ROUND WITH NEXT
-  //BUT IF INFO CHANGED FROM THE CURRENT ROUND, SAVE THE CHANGES
-  //AND DELETE ALL FUTURE ROUND DATA FROM THE KEYMAP
   private copyInfo() : void{
     if (this.roundCounter > 0) {
       this.testForChanges() //test if any info changed from this round to the one saved on the keymap
       if (this.hasChanged) {
-        for (let i = this.roundPlayers.size; i >= this.roundCounter; i--) {
-          this.roundPlayers.delete(i);
-        }
+        this.players.deleteAllRoundsAfter(this.roundCounter);
         this.hasChanged = false;
         this.saveInfo();
       } else {
-        this.players = this.clonePlayers(this.roundPlayers.get(this.roundCounter)!);
+        this.players.copyPlayers(this.roundCounter);
       }
     }
   }
 
-  //TEST IF ANY INFO CHANGE FROM THE CURRENT ROUND IN RELATION TO FUTURE STORED DATA
-  //IF SO, RESET THE HASCHANGED FLAG TO TRUE
   private testForChanges(): void {
-    if(!this.hasChanged){
-      let counter = 0;
-      Object.values(this.roundPlayers.get(this.roundCounter - 1)?.playerList!).forEach(p => {
-        if (!p.equals(this.players.playerList[counter])){
-          this.hasChanged = true;
-          return;
-        }
-        counter++;
-      })
-    }
+    this.hasChanged = this.players.testForChanges(this.hasChanged, this.roundCounter);
   }
 
   //ROLLBACK GAME DATA
@@ -240,45 +127,11 @@ export class GameLogic {
     this.wakeIndex = 0; //resets the wake index
     if (this.roundCounter > 0) {
       this.roundCounter--;
-      const snapshot = this.roundPlayers.get(this.roundCounter);
-      if (snapshot) {
-        // restore a fresh clone to avoid future mutations changing the stored snapshot
-        this.players = this.clonePlayers(snapshot);
-      }
+      this.players.copyPlayers(this.roundCounter);
     }
+    this.wakePlayerSequence();
   }
 
-  private clonePlayers(source: Players): Players {
-    const clone = new Players();
-    Object.values(source.playerList).forEach(p => {
-      const np = new Player(p.playerName);
-      // copy relevant state
-
-      //UPDATE EVERY TIME A NEW VALUE IS ADDED TO THE PLAYER CLASS
-      np.playerAlignment = p.playerAlignment;
-      np.registeredAs = new Role(p.registeredAs.roleName);
-      np.playerRole = new Role(p.playerRole.roleName);
-
-      np.canNominate = p.canNominate;
-      np.wasIndicated = p.wasIndicated;
-      np.comments = p.comments;
-
-      np.hasDeadVote = p.hasDeadVote;
-      np.hasAbility = p.hasAbility;
-      np.isDead = p.isDead;
-      np.scarletIsActive = p.scarletIsActive;
-      np.wasExecuted = p.wasExecuted;
-
-      np.isDrunk = p.isDrunk;
-      np.isPoisoned = p.isPoisoned;
-      np.isProtected = p.isProtected;
-      np.isRedHearing = p.isRedHearing;
-      np.isMarkedForDeath = p.isMarkedForDeath;
-
-      clone.playerList.push(np);
-    });
-    return clone;
-  }
 
   //GAME FUNCTIONS
 
@@ -319,7 +172,7 @@ export class GameLogic {
   wakePlayerSequence(): void {
     if (this.isDawn) return;
 
-    const list = this.roundCounter > 0 ? this.otherNightPlayers : this.firstNightPlayers;
+    const list = this.roundCounter > 0 ? this.players.otherNightPlayers : this.players.firstNightPlayers;
 
     if (this.wakeIndex >= list.length) {
       this.wakePlayer.playerRole = "";
@@ -346,17 +199,6 @@ export class GameLogic {
       }
     })
     player.isPoisoned = true;
-  }
-
-  registerAs(self: Player, role: Roles): void {
-
-    let selfRole: Role = new Role(self.playerRole.roleName);
-    let selectedRole: Role = new Role(role);
-
-    if(self.isPoisoned) self.registeredAs = selfRole;
-    else self.registeredAs = selectedRole;
-
-    console.log(self.playerRole.roleName);
   }
 
   markForDeath(self: Player, player: Player | null): void {
@@ -445,8 +287,6 @@ export class GameLogic {
     })
     this.protectedPlayer = null;
   }
-
-
 
   monkTarget(self: Player, player: Player): void {
     if(!self.isPoisoned && !self.isDrunk){

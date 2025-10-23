@@ -1,10 +1,18 @@
 import {Demons, Minions, Role, Roles} from './Role';
 
 export class Player {
+
+  //GETTERS AND SETTERS
+
+  get abilityComments(): string {
+    return this._abilityComments;
+  }
+  set abilityComments(value: string) {
+    this._abilityComments = value;
+  }
   get wasExecuted(): boolean {
     return this._wasExecuted;
   }
-
   set wasExecuted(value: boolean) {
     this._wasExecuted = value;
   }
@@ -20,7 +28,6 @@ export class Player {
   set wasIndicated(value: boolean) {
     this._wasIndicated = value;
   }
-  //GETTERS AND SETTERS
   get canNominate(): boolean {
     return this._canNominate;
   }
@@ -110,6 +117,7 @@ export class Player {
   private _playerName: string = "";
   private _playerAlignment: string = "neutral";
   private _comments: string = "";
+  private _abilityComments: string = "";
   private _registeredAs: Role | undefined;
   private _playerRole: Role | undefined;
   private _canNominate: boolean = true;
@@ -145,10 +153,8 @@ export class Player {
       default: this.playerAlignment = "good"; break;
     }
   }
-
   buildRole(role: Roles): void;
   buildRole(role: Roles, register: Roles): void;
-
   buildRole(role : Roles , register? : Roles) : void {
     this.playerRole = new Role(role);
     this.registeredAs = new Role(register ?? role);
@@ -172,7 +178,6 @@ export class Player {
     // Remove slashes to use as a plain name if needed, lower-case, strip all spaces
     return img.replace(/\//g, '').toLowerCase().replace(/\s+/g, '');
   }
-
   toString(): string {
     return [
       this.playerName,
@@ -192,7 +197,6 @@ export class Player {
       this.isMarkedForDeath,
     ].join('|');
   }
-
   equals(other: Player): boolean {
     return this.toString() === other.toString();
   }

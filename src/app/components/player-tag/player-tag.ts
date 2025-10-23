@@ -26,6 +26,8 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
   protected readonly Outsider = Outsiders;
   protected readonly Minion = Minions;
   protected readonly Outsiders = Outsiders;
+  protected readonly Demons = Demons;
+
 
   openedPlayer: any | null = null;
   closeTimer: ReturnType<typeof setTimeout> | null = null;
@@ -36,11 +38,12 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.buildWakePlayerSequence();
+    this.players.buildWakePlayerSequence(this.roundCounter);
+    this.wakePlayerSequence();
   }
 
   ngOnDestroy() {
-    this.roundPlayers = new Map();
+    this.players.resetMap();
   }
 
   toggleOptions(player: any) {
@@ -61,6 +64,4 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
       }, 5000);
     }
   }
-
-  protected readonly Demons = Demons;
 }

@@ -26,7 +26,6 @@ export class GatherPlayers implements AfterViewInit {
   constructor(protected players: Players, protected router: Router,
               protected edit : Edit, private cdr: ChangeDetectorRef
   ) {
-    this.players = players;
   }
 
   ngAfterViewInit(): void {
@@ -56,6 +55,7 @@ export class GatherPlayers implements AfterViewInit {
     this.edit.player = null;
     this.router.navigate(['/player-tag'])
   }
+
   add(): void {
     if(this.playerName == ""){
       alert("Please enter a name");
@@ -89,7 +89,6 @@ export class GatherPlayers implements AfterViewInit {
       this.activeMenu = PlayerMenu.MAIN_MENU;
     }
   }
-
 }
 
 export enum PlayerMenu {
