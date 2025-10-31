@@ -6,13 +6,15 @@ import {GameLogic} from '../../classes/GameLogic';
 import {CommentPlayer, Edit} from '../../classes/Edit';
 import {RoleSelection} from '../role-selection/role-selection';
 import {CommentBoard} from '../comment-board/comment-board';
+import {AbilityPage} from '../ability-page/ability-page';
 
 @Component({
   selector: 'app-player-tag',
   imports: [
     FormsModule,
     RoleSelection,
-    CommentBoard
+    CommentBoard,
+    AbilityPage
   ],
   templateUrl: './player-tag.html',
   styleUrl: './player-tag.css'

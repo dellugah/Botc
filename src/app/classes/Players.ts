@@ -19,6 +19,8 @@ export class Players {
 
   public otherNightPlayers: Player[] = []; //STORE ALL PLAYERS WHO WILL WAKE IN THE OTHER NIGHTS
 
+  public selectedPlayer : Player | null = null;
+
 
   //GETTERS & SETTERS
 

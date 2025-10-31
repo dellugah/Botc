@@ -37,6 +37,7 @@ export class GameLogic {
   isDawn: boolean = false;
 
   executeMode: boolean = false;
+  abilityMode: boolean = false;
 
   constructor(protected players: Players) {
     players.buildRoundPlayers(this.roundCounter);

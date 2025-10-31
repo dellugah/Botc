@@ -115,7 +115,6 @@
   font-size: .9cqw;
   margin-top: 1.3cqw;
 }
-
 .player_list{
   container-type: inline-size;
   height: 100%;
@@ -168,7 +167,6 @@
   height: 100%;
   justify-content: left;
 }
-
 .death_token{
   border-top-left-radius: .5cqw;
   border-top-right-radius: .5cqw;
@@ -183,7 +181,6 @@
   pointer-events: none;
   filter: drop-shadow(0px 1cqw .4cqw rgba(0, 0, 0, 0.82));
 }
-
 .active {
   visibility: visible;
   opacity: 1;
@@ -198,6 +195,13 @@
   justify-content: center;
   align-items: center;
   display: flex;
+}
+.ability_button{
+  position: absolute;
+  width: 20cqw;
+  left: 50%;
+  transform: translate(-50%, 0);
+
 }
 
 
@@ -217,6 +221,9 @@
 }
 
 /*BOTTOM OPTIONS*/
+.option_button{
+  margin-bottom: -3cqw;
+}
 .player_options{
   position: relative;
   top: -10.5cqw;
@@ -236,8 +243,6 @@
   transition: top 0.4s ease 0.07s, margin-bottom 0.4s ease 0.07s;
   z-index: 0;
 }
-
-
 .player_options.open {
   top: -4.5cqw;
   margin-bottom: -2.5cqw;
@@ -265,7 +270,6 @@
   right: 33%;
   filter: drop-shadow(0px 3px 3px #000000);
 }
-
 .center_base{
   position: absolute;
   height: 103%;
@@ -275,14 +279,12 @@
   transform: translate(-50%, 0);
   filter: drop-shadow(0px 3px 3px #000000);
 }
-
 .token{
   scale: .9;
   top: -15%;
   height: 140%;
   filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0));
 }
-
 .center_token{
   scale: .80;
   top: -22%;
@@ -291,7 +293,6 @@
   transform: translate(-50%, 0);
   filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0));
 }
-
 .token_image{
   left: 50%;
   top:0%;
@@ -302,7 +303,6 @@
   filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0));
   transform: translate(-50%, 0);
 }
-
 .right_option{
   pointer-events: none;
   height: 25%;
@@ -311,7 +311,6 @@
   bottom: 0;
   filter: drop-shadow(0px 0 10px rgb(0, 0, 0));
 }
-
 .left_option{
   pointer-events: none;
   transform: scaleX(-1);
@@ -321,23 +320,19 @@
   bottom: 0;
   filter: drop-shadow(0px 0 10px rgb(0, 0, 0));
 }
-
 .symbol_right{
   scale: .40;
   right: -6cqh;
   bottom: -6.5%;
   pointer-events: all;
 }
-
 .symbol_left{
   scale: .40;
   left: -6cqh;
   bottom: -6.5%;
   pointer-events: all;
 }
-
 .slide_options{
-  position: relative;
   width: 6%;
   margin-bottom: -2.5cqw;
   filter: drop-shadow(0px 0 5px rgb(0, 0, 0));
@@ -372,4 +367,8 @@ app-comment-board{
   backdrop-filter: blur(5px);   /* blur what's behind */
   -webkit-backdrop-filter: blur(8px); /* Safari */
 
+}
+
+#ability_page{
+  z-index: 11;
 }

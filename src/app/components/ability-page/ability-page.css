@@ -1,0 +1,37 @@
+#background {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  height: 80cqh;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  z-index: 2;
+  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.76));
+}
+
+#bottom_menu{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  height: 12.4cqh;
+  z-index: 1;
+}
+
+#player_tag{
+  right: 26%;
+  top: 14%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  rotate: 15deg;
+  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.76));
+  margin: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#paper_tag{
+  width: 11cqw;
+}

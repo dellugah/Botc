@@ -125,7 +125,7 @@ export class Player {
 
   //DEATH TRACKER
   private _hasDeadVote: boolean = true;
-  private _hasAbility: boolean = true;
+  private _hasAbility: boolean = false;
   private _isDead: boolean = false;
   private _scarletIsActive: boolean = false;
   private _wasExecuted: boolean = false;
@@ -169,6 +169,22 @@ export class Player {
     } else{
       // is townsfolk or outsider
       this.playerAlignment = "good";
+    }
+
+    switch (this.playerRole.roleName) {
+      case Roles.DRUNK:
+      case Roles.SOLDIER:
+      case Roles.BARON:
+      case Roles.RECLUSE:
+      case Roles.SAINT:
+      case Roles.MAYOR:
+      case Roles.NONE:
+      {
+        this.hasAbility = false;
+        break;
+      }
+      default: this.hasAbility = true;
+      break;
     }
 
   }
