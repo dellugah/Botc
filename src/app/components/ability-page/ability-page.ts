@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Players} from '../../classes/Players';
 
 @Component({
   selector: 'app-ability-page',
@@ -8,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AbilityPage {
 
+  constructor(protected players : Players) {
+
+  }
 }

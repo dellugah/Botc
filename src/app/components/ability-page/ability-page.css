@@ -35,3 +35,29 @@
 #paper_tag{
   width: 11cqw;
 }
+
+#player_list{
+  position: absolute;
+  left: 8cqh;
+  top: 17%;
+  z-index: 4;
+  height: 64.5cqh;
+  width: 25cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+}
+
+.background_paper{
+  height: 13cqh;
+}
+
+.player_name{
+  position: absolute;
+  left: 20%;
+}
+
+.player_paper{
+  margin: 1cqh;
+}

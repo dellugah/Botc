@@ -3,3 +3,11 @@
 </div>
 <img id="background" src="/ability_page/ability_menu.png" alt="">
 <img id="bottom_menu" src="/ability_page/bottom_menu.png" alt="">
+<div id="player_list">
+  @for (p of this.players.playerList; track p.playerName) {
+    <div class="player_paper">
+      <h2 class="player_name">{{p.playerName}}</h2>
+      <img class="background_paper" src="/ability_page/paper_tag.png" alt="">
+    </div>
+  }
+</div>
