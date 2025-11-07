@@ -50,15 +50,59 @@
   transform: translate(-75cqh, -50%);
 }
 
+#text_area{
+  position: absolute;
+  left: 50%;
+  top: 17cqh;
+  z-index: 5;
+  height: 64.4cqh;
+  width: 53cqh;
+  transform: translate(-50%, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#comments{
+  height: 100%;
+  width: 100%;
+  resize: none;
+  font-size: 3cqh;
+  padding: 1cqh;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  z-index: 5;
+}
+
 .background_paper{
   height: 13cqh;
 }
 
 .player_name{
+  margin-top: 6cqh;
+  font-size: 3cqh;
   position: absolute;
   left: 20%;
 }
 
 .player_paper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   margin: 1cqh;
+}
+
+.role_image{
+  right: 18%;
+  position: absolute;
+  height: 15cqh;
+  opacity: 40%;
+}
+
+.unselectable{
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE10+/Edge */
 }

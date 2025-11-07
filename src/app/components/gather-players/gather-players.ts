@@ -70,7 +70,7 @@ export class GatherPlayers implements AfterViewInit {
   }
 
   selectedRole(player: Player): void {
-    this.edit.player = player;
+    this.players.selectedPlayer = player;
     this.activeMenu = PlayerMenu.ASSIGNING_ROLE;
   }
 

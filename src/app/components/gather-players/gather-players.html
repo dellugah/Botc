@@ -85,7 +85,7 @@
 
     }
     @case(2){
-      @if(edit.player?.playerRole?.roleName == Roles.NONE){
+      @if(this.players.selectedPlayer?.playerRole?.roleName == Roles.NONE){
         <app-role-selection></app-role-selection>
       } @else {
         @if(edit.player?.playerAlignment == "good"){
@@ -101,8 +101,8 @@
         } @else {
           <div class="letter_role">
             <div class="role_letter_container" >
-              <img class="icon" src="{{edit.player?.normalizedRoleImageName}}" alt="">
-              <img class="seal" src="/main_menu/seal.png" alt="" (click)="resetRole(edit.player)">
+              <img class="icon" src="{{this.players.selectedPlayer?.normalizedRoleImageName}}" alt="">
+              <img class="seal" src="/main_menu/seal.png" alt="" (click)="resetRole(this.players.selectedPlayer)">
               <img class="role_letter" src="/main_menu/evil-letter-bottom.png" alt="">
               <img class="role_letter_token" src="/main_menu/register-token-evil.png" alt="">
               <img class="role_letter" src="/main_menu/evil-letter-top.png" alt="">
@@ -111,7 +111,7 @@
         }
         <img class="butler_item" src="/main_menu/role_signature/butler_img.png" alt="">
       }
-      <img class="left_button role_button" src="/main_menu/delete_player.png" alt="" (click)="deletePlayer(this.edit.player)">
+      <img class="left_button role_button" src="/main_menu/delete_player.png" alt="" (click)="deletePlayer(this.players.selectedPlayer)">
       <img class="done_button role_button" src="/main_menu/back.png" alt="" (click)="backToMenu()">
     }
     @default {

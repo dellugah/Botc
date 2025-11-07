@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {CommentPlayer} from '../../classes/Edit';
 import {FormsModule} from '@angular/forms';
+import {Players} from '../../classes/Players';
 
 @Component({
   selector: 'app-comment-board',
@@ -12,17 +13,17 @@ import {FormsModule} from '@angular/forms';
 })
 export class CommentBoard {
 
-  constructor(protected comment : CommentPlayer | null) {
+  constructor(protected players : Players) {
   }
 
   get playerComments(): string {
-    return this.comment?.player?.comments ?? '';
+    return this.players.selectedPlayer?.comments ?? '';
   }
 
 
   set playerComments(val: string) {
-    if (this.comment?.player) {
-      this.comment.player.comments = val;
+    if (this.players.selectedPlayer) {
+      this.players.selectedPlayer.comments = val;
     }
   }
 

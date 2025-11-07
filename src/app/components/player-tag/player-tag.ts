@@ -7,6 +7,7 @@ import {CommentPlayer, Edit} from '../../classes/Edit';
 import {RoleSelection} from '../role-selection/role-selection';
 import {CommentBoard} from '../comment-board/comment-board';
 import {AbilityPage} from '../ability-page/ability-page';
+import {MenuController} from '../../classes/MenuController';
 
 @Component({
   selector: 'app-player-tag',
@@ -35,7 +36,8 @@ export class PlayerTag extends GameLogic implements OnInit, OnDestroy {
   closeTimer: ReturnType<typeof setTimeout> | null = null;
 
 
-  constructor(protected playerList: Players, protected edit : Edit, protected comment : CommentPlayer ) {
+  constructor(protected playerList: Players,
+              protected menuController : MenuController) {
     super(playerList);
   }
 
