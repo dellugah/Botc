@@ -10,9 +10,10 @@
     @if(p != this.players.selectedPlayer){
       <div class="player_paper" (click)="this.insertString(p.playerName)">
         <h2 class="player_name unselectable">{{p.playerName}}</h2>
-        <img class="role_image unselectable" src="{{p.playerRole.roleImage.toLowerCase()}}" alt="">
+        <img class="background_paper unselectable" src="/main_menu/player.png" alt="">
+
         @if(p.playerRole.roleName != Roles.NONE){
-          <img class="background_paper unselectable" src="/main_menu/player.png" alt="">
+          <img class="role_image unselectable" src="{{p.playerRole.roleImage.toLowerCase()}}" alt="">
         }
       </div>
     }@else{
